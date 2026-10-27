@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the users page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Admin Users</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20261002d">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="admin-users-directory-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell admin-users-page">
+    <div class="admin-header"><div class="admin-badge">Users</div><h1>User management</h1><p>This page is ready for future role-based user oversight across job seekers, employers, and admins.</p></div>
+    <!-- Section for the admin grid area of this page. -->
+    <section class="admin-grid three">
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Job Seekers</span><strong id="admin-users-seeker-count">0</strong><p id="admin-users-seeker-note">No live count yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Employers</span><strong id="admin-users-employer-count">0</strong><p id="admin-users-employer-note">No live count yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Admins</span><strong id="admin-users-admin-count">0</strong><p id="admin-users-admin-note">No live count yet.</p></article>
+    </section>
+    <!-- Section for the admin card area of this page. -->
+    <section class="admin-card">
+      <!-- Container for the admin section head content and layout. -->
+      <div class="admin-section-head"><div><div class="admin-badge">Directory Preview</div><h2>User table area</h2><p>Later this can list user role, verification state, join date, and moderation controls.</p></div></div>
+      <!-- Container for the admin analytics toolbar content and layout. -->
+      <div class="admin-analytics-toolbar">
+        <label class="admin-analytics-filter">
+          <span>Role</span>
+          <select id="admin-users-role-filter">
+            <option value="all">All roles</option>
+            <option value="seeker">Job Seekers</option>
+            <option value="employer">Employers</option>
+            <option value="admin">Admins</option>
+          </select>
+        </label>
+        <label class="admin-analytics-filter">
+          <span>Account</span>
+          <select id="admin-users-status-filter">
+            <option value="all">All accounts</option>
+            <option value="active">Active</option>
+            <option value="under_review">Under Review</option>
+            <option value="suspended">Locked</option>
+          </select>
+        </label>
+        <label class="admin-analytics-filter admin-analytics-search">
+          <span>Search</span>
+          <input id="admin-users-search" type="search" placeholder="Search name, email, phone, or location">
+        </label>
+      </div>
+      <p id="admin-users-status" class="admin-inline-status">User directory will load here.</p>
+      <!-- Container for the admin list content and layout. -->
+      <div id="admin-users-list" class="admin-list"><article class="admin-item"><strong>No user records loaded yet</strong><p>Connect the users collection to populate this table-style area later.</p><div class="admin-item-meta"><span>Role: -</span><span>Status: Empty</span><span>Joined: -</span></div></article></div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>window.EASYEARN_BASE_PATH='../../';window.EASYEARN_HEADER_PATH='../../partials/header-admin.html';</script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script><script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/admin-users.js?v=20260429b. -->
+  <script type="module" src="../../js/admin-users.js?v=20260429b"></script>
+</body>
+</html>

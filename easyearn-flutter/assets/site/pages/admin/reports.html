@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the reports page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Admin Reports</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell">
+    <div class="admin-header"><div class="admin-badge">Reports</div><h1>Safety and report handling</h1><p>Moderate suspicious employers, fraudulent listings, and payment-related reports from one place.</p></div>
+    <!-- Section for the admin grid area of this page. -->
+    <section class="admin-grid three">
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Open</span><strong id="admin-reports-open-count">0</strong><p id="admin-reports-open-note">No open reports.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Escalated</span><strong id="admin-reports-escalated-count">0</strong><p id="admin-reports-escalated-note">No escalated reports yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Resolved</span><strong id="admin-reports-resolved-count">0</strong><p id="admin-reports-resolved-note">No resolved reports yet.</p></article>
+    </section>
+    <!-- Section for the admin card area of this page. -->
+    <section class="admin-card">
+      <!-- Container for the admin section head content and layout. -->
+      <div class="admin-section-head"><div><div class="admin-badge">Report Feed</div><h2>Review platform reports</h2><p>Triage suspicious cases and set a moderation state from one queue.</p></div></div>
+      <!-- Container for the admin analytics toolbar content and layout. -->
+      <div class="admin-analytics-toolbar">
+        <label class="admin-analytics-filter">
+          <span>Status</span>
+          <select id="admin-reports-filter-status">
+            <option value="all">All statuses</option>
+            <option value="open">Open</option>
+            <option value="escalated">Escalated</option>
+            <option value="resolved">Resolved</option>
+          </select>
+        </label>
+        <label class="admin-analytics-filter">
+          <span>Source</span>
+          <select id="admin-reports-filter-kind">
+            <option value="all">All sources</option>
+            <option value="report">Supabase reports</option>
+            <option value="payment">Payment disputes</option>
+          </select>
+        </label>
+        <label class="admin-analytics-filter admin-analytics-search">
+          <span>Search</span>
+          <input id="admin-reports-search" type="search" placeholder="Search type, description, reporter, employer, or status">
+        </label>
+      </div>
+      <p id="admin-reports-status" class="admin-inline-status">Report actions will update here.</p>
+      <!-- Container for the admin list content and layout. -->
+      <div id="admin-reports-list" class="admin-list"><article class="admin-item"><strong>No reports yet</strong><p>Future cases can include fake employer, non-payment, suspicious listing, or platform abuse.</p><div class="admin-item-meta"><span>Type: -</span><span>Priority: -</span><span>Status: Empty</span></div></article></div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>window.EASYEARN_BASE_PATH='../../';window.EASYEARN_HEADER_PATH='../../partials/header-admin.html';</script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script><script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/admin-reports.js?v=20260430c. -->
+  <script type="module" src="../../js/admin-reports.js?v=20260430c"></script>
+</body>
+</html>

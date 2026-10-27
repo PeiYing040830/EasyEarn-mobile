@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the profile page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Profile</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="jobseeker-profile-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="jobseeker-shell">
+    <!-- Container for the jobseeker header content and layout. -->
+    <div class="jobseeker-header">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Profile</div>
+      <h1>My Profile</h1>
+      <p>Complete your profile once, then reuse it across applications, recommendations, and resume generation.</p>
+    </div>
+
+    <!-- Section for the jobseeker grid area of this page. -->
+    <section class="jobseeker-grid profile-top-grid">
+      <article class="jobseeker-card profile-summary-card">
+        <!-- Container for the hero badge content and layout. -->
+        <div class="hero-badge">Preview</div>
+        <!-- Container for the profile summary head content and layout. -->
+        <div class="profile-summary-head">
+          <!-- Container for the profile avatar content and layout. -->
+          <div class="profile-avatar" id="profile-avatar">JS</div>
+          <div>
+            <h2 id="profile-preview-name">Job Seeker</h2>
+            <p id="profile-preview-headline">Add a short headline to introduce yourself to employers.</p>
+          </div>
+        </div>
+        <!-- Container for the application meta content and layout. -->
+        <div class="application-meta">
+          <span id="profile-preview-location">Location not set</span>
+          <span id="profile-preview-phone">Phone not set</span>
+          <span id="profile-preview-availability">Availability not set</span>
+        </div>
+        <!-- Container for the profile overview grid content and layout. -->
+        <div class="profile-overview-grid" aria-label="Profile activity overview">
+          <!-- Container for the profile overview metric content and layout. -->
+          <div class="profile-overview-metric">
+            <span>Rating</span>
+            <strong id="profile-rating-value">N/A</strong>
+            <small id="profile-rating-note">No reviews yet</small>
+          </div>
+          <!-- Container for the profile overview metric content and layout. -->
+          <div class="profile-overview-metric">
+            <span>Completed gigs</span>
+            <strong id="profile-completed-value">0</strong>
+            <small id="profile-completed-note">Build your record</small>
+          </div>
+          <!-- Container for the profile overview metric content and layout. -->
+          <div class="profile-overview-metric">
+            <span>Applications</span>
+            <strong id="profile-applications-value">0</strong>
+            <small id="profile-applications-note">No applications yet</small>
+          </div>
+          <!-- Container for the profile overview metric content and layout. -->
+          <div class="profile-overview-metric">
+            <span>Saved jobs</span>
+            <strong id="profile-saved-value">0</strong>
+            <small id="profile-saved-note">No saved jobs yet</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="jobseeker-card profile-completeness-card">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Completeness</div>
+            <h2>Profile strength</h2>
+            <p>Fill these essentials so dashboard recommendations can improve later.</p>
+          </div>
+        </div>
+        <!-- Container for the profile strength value content and layout. -->
+        <div class="profile-strength-value" id="profile-strength-value">0%</div>
+        <!-- Container for the distribution track content and layout. -->
+        <div class="distribution-track profile-strength-track">
+          <span id="profile-strength-bar" style="width: 0%;"></span>
+        </div>
+        <ul class="mini-checklist profile-checklist" id="profile-checklist">
+          <li>Add basic information</li>
+          <li>Add skills and categories</li>
+          <li>Set availability</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Form where users enter and submit profile details. -->
+    <form id="profile-form" class="profile-form">
+      <!-- Section for the jobseeker card area of this page. -->
+      <section class="jobseeker-card profile-section-card" id="basic-info-section">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Basic Information</div>
+            <h2>Edit Info</h2>
+            <p>Update the details employers should see first.</p>
+          </div>
+        </div>
+        <!-- Container for the profile form grid content and layout. -->
+        <div class="profile-form-grid">
+          <label class="profile-field">
+            <span>Full name</span>
+            <input id="full-name" name="name" type="text" placeholder="Your full name">
+          </label>
+          <label class="profile-field">
+            <span>Email</span>
+            <input id="email" name="email" type="email" placeholder="Your email" readonly>
+          </label>
+          <label class="profile-field">
+            <span>Phone number</span>
+            <input id="phone" name="phone" type="tel" placeholder="+60 12-345 6789">
+          </label>
+          <label class="profile-field">
+            <span>Location</span>
+            <input id="location" name="location" type="text" placeholder="City, State">
+          </label>
+          <label class="profile-field profile-field-full">
+            <span>Professional headline</span>
+            <input id="headline" name="headline" type="text" placeholder="Example: Part-time barista and event crew with customer service experience">
+          </label>
+          <label class="profile-field profile-field-full">
+            <span>Short bio</span>
+            <textarea id="bio" name="bio" rows="4" placeholder="Tell employers what you are good at, what kind of jobs you want, and when you are available."></textarea>
+          </label>
+          <!-- Container for the profile field content and layout. -->
+          <div class="profile-field">
+            <span>Profile photo</span>
+            <label for="photo-file" class="profile-upload-box">
+              <input id="photo-file" name="photoFile" type="file" accept="image/png,image/jpeg,image/webp">
+              <span class="profile-upload-title">Choose image</span>
+              <small>PNG, JPG, or WebP. Max 2MB.</small>
+            </label>
+            <small id="photo-upload-status" class="profile-upload-status">No photo selected.</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section for the jobseeker card area of this page. -->
+      <section class="jobseeker-card profile-section-card" id="skills-section">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Skills & Experience</div>
+            <h2>Add Skills</h2>
+            <p>These fields will later support recommendation matching and resume generation.</p>
+          </div>
+        </div>
+        <!-- Container for the profile form grid content and layout. -->
+        <div class="profile-form-grid">
+          <label class="profile-field profile-field-full">
+            <span>Skills <small id="skill-count" aria-live="polite">0/5 selected</small></span>
+            <input id="skills" name="skills" type="hidden">
+            <div id="skill-tag-picker" style="border:1px solid #d1d5db;border-radius:8px;padding:0.5rem;min-height:44px;background:#fff;cursor:text">
+              <div id="skill-chips" style="display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.35rem"></div>
+              <input id="skill-search" type="text" enterkeyhint="done" placeholder="Type a skill, press Enter or comma"
+                style="border:none;outline:none;width:100%;font-size:0.9rem;padding:0.2rem 0.25rem;background:transparent">
+            </div>
+            <div id="skill-suggestions" style="display:none;position:absolute;background:#fff;border:1px solid #d1d5db;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:200px;overflow-y:auto;z-index:100;width:280px"></div>
+            <small>Add up to five skills. Choose a suggestion, or type a skill and press Enter or comma to add it. Tap x to remove.</small>
+          </label>
+          <label class="profile-field profile-field-full">
+            <span>Preferred job categories</span>
+            <input id="preferred-categories" name="preferredCategories" type="text" placeholder="F&B, Events, Education">
+            <small>Separate categories with commas.</small>
+          </label>
+          <label class="profile-field">
+            <span>Years of experience</span>
+            <input id="experience-years" name="experienceYears" type="number" min="0" max="50" placeholder="0">
+          </label>
+          <label class="profile-field">
+            <span>Expected rate</span>
+            <input id="expected-rate" name="expectedRate" type="text" placeholder="RM15/hour">
+          </label>
+        </div>
+      </section>
+
+      <!-- Section for the jobseeker card area of this page. -->
+      <section class="jobseeker-card profile-section-card" id="education-section">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Education</div>
+            <h2>Education Background</h2>
+            <p>Add your qualifications so employers can see your academic background.</p>
+          </div>
+        </div>
+        <!-- Container for the profile form grid content and layout. -->
+        <div class="profile-form-grid" id="education-entries-container">
+          <!-- Education entries rendered by JS -->
+        </div>
+        <button type="button" class="btn-outline" id="add-education-btn" style="margin-top:12px">+ Add Qualification</button>
+      </section>
+
+      <!-- Section for the jobseeker card area of this page. -->
+      <section class="jobseeker-card profile-section-card" id="availability-section">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Availability</div>
+            <h2>Set Availability</h2>
+            <p>Let employers know when you can work and what type of schedule you prefer.</p>
+          </div>
+        </div>
+        <!-- Container for the profile form grid content and layout. -->
+        <div class="profile-form-grid">
+          <!-- Container for the profile field content and layout. -->
+          <div class="profile-field profile-field-full">
+            <span>Available days</span>
+            <!-- Container for the day checkbox grid content and layout. -->
+            <div class="day-checkbox-grid" id="availability-days">
+              <label class="day-checkbox"><input type="checkbox" value="Mon"> <span>Mon</span></label>
+              <label class="day-checkbox"><input type="checkbox" value="Tue"> <span>Tue</span></label>
+              <label class="day-checkbox"><input type="checkbox" value="Wed"> <span>Wed</span></label>
+              <label class="day-checkbox"><input type="checkbox" value="Thu"> <span>Thu</span></label>
+              <label class="day-checkbox"><input type="checkbox" value="Fri"> <span>Fri</span></label>
+              <label class="day-checkbox"><input type="checkbox" value="Sat"> <span>Sat</span></label>
+              <label class="day-checkbox"><input type="checkbox" value="Sun"> <span>Sun</span></label>
+            </div>
+            <small>Select all days you are available.</small>
+          </div>
+          <label class="profile-field">
+            <span>Preferred time</span>
+            <select id="availability-time" name="availabilityTime">
+              <option value="">Select one</option>
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+              <option value="Flexible">Flexible</option>
+            </select>
+          </label>
+          <label class="profile-field">
+            <span>Work mode</span>
+            <select id="work-mode" name="workMode">
+              <option value="">Select one</option>
+              <option value="On-site">On-site</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Flexible">Flexible</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <!-- Section for the jobseeker card area of this page. -->
+      <section class="jobseeker-card profile-actions-card">
+        <div>
+          <h3>Save Profile</h3>
+          <p>Changes will be saved to your user profile in Supabase.</p>
+        </div>
+        <!-- Container for the profile actions row content and layout. -->
+        <div class="profile-actions-row action-with-status">
+          <button type="submit" class="btn-primary" id="save-profile-btn">Save Profile</button>
+          <p id="profile-status-message" class="profile-inline-status action-status-message">Save result will appear here.</p>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-profile.js?v=20260802b. -->
+  <script type="module" src="../../js/jobseeker-profile.js?v=20261002j"></script>
+</body>
+</html>

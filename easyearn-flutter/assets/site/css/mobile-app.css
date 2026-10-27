@@ -1,0 +1,1611 @@
+/* Mobile layout refinements for the Flutter-bundled website copy only. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Employer and Jobseeker use the same stable single-row phone header as Admin. */
+@media (max-width: 768px) {
+  :is(.employer-navbar,.jobseeker-navbar) {
+    position: relative;
+    z-index: 1200;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    min-height: 60px;
+    height: 60px;
+  }
+
+  :is(.employer-navbar,.jobseeker-navbar) .nav-brand { flex: 1 1 auto !important; }
+  :is(.employer-navbar,.jobseeker-navbar) .nav-user-tools {
+    position: static !important;
+    transform: none !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    margin-left: 0 !important;
+  }
+
+  :is(.employer-navbar,.jobseeker-navbar) .nav-logout { display: none !important; }
+  :is(.employer-navbar,.jobseeker-navbar) .mobile-nav-logout { display: flex !important; }
+
+  :is(.employer-navbar,.jobseeker-navbar).nav-active .nav-links {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+    padding: 10px !important;
+    z-index: 1201;
+  }
+
+  :is(.employer-navbar,.jobseeker-navbar).nav-active .nav-links a {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px !important;
+    border: 1px solid transparent;
+    border-radius: 10px;
+  }
+}
+
+html,
+body {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+/* Keep the plain jobs page section in sync with the selected site theme. */
+body.theme-dark .section {
+  background: #0b1220;
+}
+
+/* Make card feedback visible on touch screens, which have no persistent hover. */
+.feat-card,
+.job-card,
+.role-card,
+.coverage-card,
+.module-card,
+.feature-item,
+.support-card,
+.split-card,
+.security-card,
+.step-card,
+.policy-card,
+.pub-section-card {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+  -webkit-tap-highlight-color: rgba(8, 145, 178, 0.14);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .feat-card:hover,
+  .job-card:hover,
+  .role-card:hover,
+  .coverage-card:hover,
+  .module-card:hover,
+  .feature-item:hover,
+  .support-card:hover,
+  .split-card:hover,
+  .security-card:hover,
+  .step-card:hover,
+  .policy-card:hover,
+  .pub-section-card:hover {
+    transform: translateY(-3px);
+    border-color: #0891b2;
+    box-shadow: 0 12px 28px rgba(8, 145, 178, 0.2);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .feat-card:active,
+  .job-card:active,
+  .role-card:active,
+  .coverage-card:active,
+  .module-card:active,
+  .feature-item:active,
+  .support-card:active,
+  .split-card:active,
+  .security-card:active,
+  .step-card:active,
+  .policy-card:active,
+  .pub-section-card:active {
+    transform: scale(0.985);
+    border-color: #0891b2;
+    box-shadow: 0 4px 16px rgba(8, 145, 178, 0.24);
+  }
+}
+
+/* Increase contrast for card feedback on dark backgrounds. */
+body.theme-dark .feat-card:hover,
+body.theme-dark .job-card:hover,
+body.theme-dark .role-card:hover,
+body.theme-dark .coverage-card:hover,
+body.theme-dark .module-card:hover,
+body.theme-dark .feature-item:hover,
+body.theme-dark .support-card:hover,
+body.theme-dark .split-card:hover,
+body.theme-dark .security-card:hover,
+body.theme-dark .step-card:hover,
+body.theme-dark .policy-card:hover,
+body.theme-dark .pub-section-card:hover,
+body.theme-dark .feat-card:active,
+body.theme-dark .job-card:active,
+body.theme-dark .role-card:active,
+body.theme-dark .coverage-card:active,
+body.theme-dark .module-card:active,
+body.theme-dark .feature-item:active,
+body.theme-dark .support-card:active,
+body.theme-dark .split-card:active,
+body.theme-dark .security-card:active,
+body.theme-dark .step-card:active,
+body.theme-dark .policy-card:active,
+body.theme-dark .pub-section-card:active {
+  background-color: #193047 !important;
+  border-color: #22d3ee !important;
+  box-shadow:
+    0 0 0 2px rgba(34, 211, 238, 0.42),
+    0 14px 32px rgba(34, 211, 238, 0.3) !important;
+}
+
+@media (max-width: 1024px) {
+  .navbar,
+  .marketing-navbar,
+  .app-navbar {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 64px;
+    height: auto;
+    padding: 8px 14px !important;
+    gap: 8px;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .nav-brand {
+    min-width: 0;
+    flex: 0 1 auto !important;
+    gap: 7px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .nav-logo {
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .nav-tools,
+  .nav-user-tools {
+    min-width: 0;
+    flex: 0 1 auto !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-end;
+    gap: 6px !important;
+    margin-left: auto !important;
+  }
+
+  .nav-user,
+  .nav-user-tools .nav-user {
+    display: none !important;
+  }
+
+  .theme-toggle,
+  .nav-translate {
+    flex: 0 0 32px;
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+  }
+
+  .nav-logout {
+    min-height: 32px;
+    padding: 5px 8px !important;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  #hamburger-btn {
+    display: flex !important;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 32px;
+    padding: 6px !important;
+  }
+
+  .nav-tools > *,
+  .nav-user-tools > * {
+    flex-shrink: 0;
+  }
+
+  .marketing-navbar .nav-links,
+  .app-navbar .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 10px;
+    left: auto;
+    width: min(310px, calc(100vw - 20px));
+    min-width: 0;
+    max-height: min(72vh, 560px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    flex: initial !important;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap;
+    gap: 2px !important;
+    padding: 8px !important;
+    border-radius: 14px;
+    background: var(--nav-bg, #ffffff);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+    z-index: 1100;
+  }
+
+  .marketing-navbar.nav-active .nav-links,
+  .app-navbar.nav-active .nav-links {
+    display: flex !important;
+  }
+
+  .jobseeker-navbar { position: relative; z-index: 1200; }
+  .jobseeker-navbar.nav-active .nav-links { display: flex !important; z-index: 1201; }
+  .jobseeker-navbar.nav-active .nav-links a { width: 100%; }
+
+  .marketing-navbar .nav-links a,
+  .app-navbar .nav-links a {
+    display: flex !important;
+    width: 100%;
+    min-height: 42px;
+    align-items: center;
+    padding: 10px 12px !important;
+    border-radius: 9px;
+    font-size: 14px;
+    line-height: 1.3;
+    white-space: normal;
+  }
+
+  .nav-notif-wrap #nav-notif-dropdown {
+    right: -42px !important;
+    width: min(300px, calc(100vw - 24px)) !important;
+  }
+
+  .jobseeker-header > *,
+  .employer-page-header > *,
+  .employer-header > *,
+  .admin-hero > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .jobseeker-header p,
+  .employer-page-header p,
+  .employer-header p,
+  .admin-hero p {
+    width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .jobseeker-shell,
+  .employer-shell,
+  .admin-shell {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .jobseeker-header {
+    padding: 32px 22px !important;
+    min-height: 0;
+    border-radius: 22px;
+  }
+
+  .jobseeker-header h1,
+  .employer-page-header h1,
+  .employer-header h1,
+  .admin-hero h1 {
+    font-size: clamp(26px, 7vw, 36px) !important;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .jobseeker-header p,
+  .employer-page-header p,
+  .employer-header p,
+  .admin-hero p {
+    max-width: 100% !important;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .jobseeker-shell > * + *,
+  .employer-shell > * + *,
+  .admin-shell > * + * {
+    margin-top: 20px !important;
+  }
+
+  .jobseeker-card,
+  .employer-card,
+  .admin-card,
+  .pub-section-card {
+    min-width: 0;
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .section-heading-row,
+  .admin-section-head,
+  .employer-section-head {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .section-heading-row > div {
+    min-width: 0;
+  }
+
+  .section-heading-row h2,
+  .admin-section-head h2,
+  .employer-section-head h2 {
+    font-size: clamp(20px, 5.5vw, 26px);
+    line-height: 1.2;
+  }
+
+  .jobseeker-grid:not(.application-stats-grid),
+  .employer-grid:not(.four),
+  .admin-grid:not(.four) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .jobseeker-grid,
+  .employer-grid.four,
+  .admin-grid.four {
+    gap: 14px;
+  }
+
+  .application-stats-grid,
+  .employer-grid.four,
+  .admin-grid.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .pub-page-body {
+    padding: 18px 12px;
+    gap: 14px;
+  }
+
+  .pub-section-card .section-title {
+    margin-bottom: 22px;
+  }
+
+  .page-hero-inner,
+  .hero-inner {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .page-hero h1,
+  .hero-inner h1 {
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  .page-hero p,
+  .hero-inner > p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar,
+  .marketing-navbar,
+  .app-navbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "brand tools";
+    min-height: 60px;
+    padding: 7px 10px !important;
+    gap: 5px;
+  }
+
+  .nav-brand {
+    grid-area: brand;
+  }
+
+  .nav-tools,
+  .nav-user-tools {
+    grid-area: tools;
+    position: absolute !important;
+    top: 50% !important;
+    right: 10px !important;
+    width: auto !important;
+    height: auto;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    transform: translateY(-50%) !important;
+    overflow: visible;
+    justify-self: end;
+  }
+
+  .marketing-navbar > .nav-links,
+  .app-navbar > .nav-links {
+    grid-area: menu;
+  }
+
+  .nav-brand {
+    font-size: 16px;
+    gap: 5px;
+  }
+
+  .nav-logo {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .nav-tools,
+  .nav-user-tools {
+    gap: 4px !important;
+  }
+
+  .nav-translate {
+    display: flex !important;
+    flex-basis: 30px;
+  }
+
+  .nav-notif-wrap {
+    display: inline-flex !important;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-notif-wrap > button {
+    display: grid !important;
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+    place-items: center;
+    font-size: 16px !important;
+  }
+
+  .nav-user-tools .theme-toggle,
+  .nav-user-tools .nav-logout,
+  .nav-user-tools #hamburger-btn {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    margin: 0 !important;
+  }
+
+  .theme-toggle,
+  .nav-translate {
+    flex-basis: 30px;
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+  }
+
+  .nav-logout {
+    min-height: 30px;
+    padding: 4px 6px !important;
+    font-size: 11px;
+  }
+
+  #hamburger-btn {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .jobseeker-shell,
+  .employer-shell,
+  .admin-shell {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    padding: 82px 12px 32px !important;
+  }
+
+  .jobseeker-shell > *,
+  .employer-shell > *,
+  .admin-shell > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .jobseeker-header {
+    padding: 26px 16px !important;
+    border-radius: 18px;
+  }
+
+  .jobseeker-header,
+  body:not(.theme-dark) .jobseeker-header,
+  body.theme-dark .jobseeker-header {
+    min-height: 290px !important;
+    padding: 30px 18px 92px !important;
+  }
+
+  body .jobseeker-shell .jobseeker-header p {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .jobseeker-card,
+  .employer-card,
+  .admin-card {
+    padding: 18px 15px;
+    border-radius: 14px;
+  }
+
+  .application-stats-grid,
+  .employer-grid.four,
+  .admin-grid.four {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .section-heading-row .btn-primary,
+  .section-heading-row .btn-outline,
+  .section-heading-row > a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pub-page-body {
+    padding: 14px 10px;
+    gap: 10px;
+  }
+
+  .section {
+    padding: 28px 12px !important;
+  }
+
+  .jobs-toolbar {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .jobs-search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .jobs-filters {
+    gap: 8px;
+  }
+
+  .filter-pill {
+    padding: 8px 12px;
+  }
+
+  .btn-locate {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .jobs-loading {
+    padding: 18px !important;
+  }
+
+  .pub-section-card {
+    padding: 20px 15px;
+    border-radius: 14px;
+  }
+
+  .hero-btns,
+  .admin-hero-actions,
+  .employer-hero-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hero-btns > *,
+  .admin-hero-actions > *,
+  .employer-hero-actions > * {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-brand span {
+    display: none;
+  }
+
+  .application-stats-grid,
+  .employer-grid.four,
+  .admin-grid.four {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Align login and registration panels at the same top position on phones. */
+@media (max-width: 768px) {
+  /* Shared 8px spacing rhythm for every authenticated phone workspace. */
+  :is(.employer-shell,.jobseeker-shell,.employer-dashboard,.jobseeker-dashboard-page,.inprogress-shell) {
+    gap: 8px !important;
+  }
+  :is(.employer-shell,.jobseeker-shell,.employer-dashboard,.jobseeker-dashboard-page,.inprogress-shell)
+    :is(.employer-grid,.jobseeker-grid,.dashboard-grid,.application-stats-grid,.split-section,.employer-dashboard-chart-stack,.messages-layout,.messages-thread-list,.verification-documents,.employer-location-controls) {
+    gap: 8px !important;
+  }
+  :is(.employer-shell,.jobseeker-shell,.employer-dashboard,.jobseeker-dashboard-page,.inprogress-shell)
+    :is(.employer-card,.jobseeker-card,.dashboard-card,.employer-item,.application-item,.history-item,.recommendation-card,.messages-sidebar,.messages-panel,.resume-paper,.inprogress-content) {
+    padding: 8px !important;
+  }
+  :is(.employer-shell,.jobseeker-shell,.employer-dashboard,.jobseeker-dashboard-page,.inprogress-shell)
+    :is(.employer-card,.jobseeker-card,.dashboard-card,.employer-item,.application-item,.history-item) > * + * {
+    margin-top: 8px !important;
+  }
+
+  .auth-container,
+  .auth-container:has(.auth-box.wide) {
+    min-height: auto !important;
+    align-items: flex-start !important;
+    padding: 40px 12px 32px !important;
+  }
+
+  .auth-box.wide {
+    display: flex;
+    flex-direction: column;
+    height: min(76vh, 640px);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Login has only two fields. Let the white card fit its content instead of
+     reserving the registration form's tall scroll area. */
+  .auth-box:not(.wide) {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 24px 20px;
+  }
+
+  /* Centre the short login form in the available phone viewport. The longer
+     registration form keeps the normal top-aligned scroll layout. */
+  .auth-container:has(.auth-box:not(.wide)) {
+    min-height: calc(100svh - 70px) !important;
+    align-items: center !important;
+    padding: 84px 12px 40px !important;
+  }
+
+  .auth-tabs {
+    flex: 0 0 auto;
+  }
+
+  .auth-panel.active {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Keep the home hero compact on the phone emulator while retaining its layout. */
+@media (max-width: 600px) {
+  .hero {
+    min-height: 0 !important;
+    padding: 18px 0 16px !important;
+  }
+
+  .hero-inner {
+    padding: 22px 16px 18px !important;
+  }
+
+  .hero-badge {
+    margin-bottom: 12px !important;
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+  }
+
+  .hero-inner h1 {
+    margin-bottom: 12px !important;
+    font-size: clamp(28px, 7.4vw, 34px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero-inner > p {
+    margin-bottom: 18px !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+  }
+
+  .hero-btns {
+    gap: 8px !important;
+    margin-bottom: 24px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .hero-btns > a {
+    min-width: 0;
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+  }
+
+  .hero-stats {
+    gap: 12px !important;
+  }
+
+  .hero-stats .stat-num {
+    font-size: 22px !important;
+  }
+
+  .hero-stats .stat-lbl {
+    font-size: 10px !important;
+    line-height: 1.25;
+  }
+}
+
+/* Employer dashboard: a contained, single-column phone workspace. */
+@media (max-width: 768px) {
+  .employer-dashboard,
+  .employer-dashboard * { min-width: 0; }
+  .employer-dashboard > *,
+  .employer-dashboard .employer-card,
+  .employer-dashboard .employer-item,
+  .employer-dashboard .employer-section-head > *,
+  .employer-dashboard .employer-chart {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+  .employer-dashboard .employer-grid.four,
+  .employer-dashboard .employer-grid.split,
+  .employer-dashboard .employer-timeline,
+  .employer-dashboard .employer-page-header--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px;
+  }
+  .employer-dashboard .employer-card { padding: 18px 16px; }
+  .employer-dashboard .employer-grid.four .employer-metric {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px 12px;
+    align-items: center;
+  }
+  .employer-dashboard .employer-metric > * + * { margin-top: 0; }
+  .employer-dashboard .employer-stat-label {
+    white-space: normal;
+    padding: 6px 8px;
+    justify-self: start;
+  }
+  .employer-dashboard .employer-metric strong {
+    font-size: clamp(18px, 5vw, 26px);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 140px;
+    text-align: right;
+  }
+  .employer-dashboard .employer-metric p { grid-column: 1 / -1; font-size: 13px; }
+  .employer-dashboard .employer-section-head {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .employer-dashboard .employer-section-head > div { gap: 8px; }
+  .employer-dashboard .employer-section-head h2 { font-size: 22px; }
+  .employer-dashboard .employer-card > .employer-section-head + * { margin-top: 18px; }
+  .employer-dashboard .employer-hero-actions,
+  .employer-dashboard .employer-card-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .employer-dashboard .btn-primary,
+  .employer-dashboard .btn-outline {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    min-height: 46px;
+  }
+  .employer-dashboard .employer-step { min-height: 0; padding: 16px; }
+  .employer-dashboard .employer-item { padding: 16px; }
+  .employer-dashboard .employer-dashboard-chart-stack { gap: 16px; width: 100%; }
+  .employer-dashboard .employer-dashboard-chart-stack .employer-chart {
+    width: 100%;
+    padding: 12px;
+  }
+  .employer-dashboard .employer-dashboard-chart-stack .employer-chart:first-child { min-height: 250px; }
+  .employer-dashboard #employer-dashboard-line-canvas { height: 230px !important; width: 100% !important; }
+  .employer-dashboard .employer-dashboard-donut-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .employer-dashboard .employer-pie-legend { width: 100%; }
+  .employer-dashboard .employer-card:hover,
+  .employer-dashboard .employer-card:focus-within { transform: none; }
+}
+
+/* Shared phone layout for all eight employer pages. */
+@media (max-width: 768px) {
+  .employer-shell *, .employer-shell *::before, .employer-shell *::after { min-width: 0; box-sizing: border-box; }
+  .employer-shell :is(h1,h2,h3,p,strong,span,a,label,small) { overflow-wrap: anywhere; }
+  .employer-shell :is(.employer-grid.four,.employer-grid.three,.employer-grid.split,
+    .employer-form-grid,.verification-grid,.verification-details,.verification-documents,
+    .verification-status-card,.employer-chart-duo,.employer-chart-duo-side,
+    .employer-pie-chart,.employer-timeline,.messages-layout) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .employer-shell :is(.employer-field.full,.verification-type-field,.verification-address-field) { grid-column: 1 / -1; }
+  .employer-shell :is(.employer-card,.employer-item,.employer-field,.employer-chart,.employer-upload-box) {
+    width: 100%; max-width: 100%;
+  }
+  .employer-shell .employer-card { padding: 18px 16px; border-radius: 16px; }
+  .employer-shell .employer-item { padding: 16px; }
+  .employer-shell :is(.employer-page-header,.employer-page-header-main,.employer-hero-side) { padding: 22px 16px; }
+  .employer-shell .employer-page-header h1 { font-size: 28px; line-height: 1.2; }
+  .employer-shell .employer-section-head {
+    display: flex; flex-direction: column; align-items: stretch;
+    gap: 14px; width: 100%; margin-bottom: 18px;
+  }
+  .employer-shell .employer-section-head > * { width: 100%; max-width: 100%; }
+  .employer-shell .employer-section-head > div { gap: 8px; }
+  .employer-shell .employer-section-head h2 { font-size: 22px; line-height: 1.25; }
+  .employer-shell .employer-card > .employer-section-head + * { margin-top: 18px; }
+  .employer-shell :is(.employer-card-actions,.employer-actions,.employer-form-actions,
+    .employer-hero-actions,.verification-actions,.jobs-card-actions) {
+    display: grid !important; grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px; width: 100%; max-width: 100%; align-items: stretch;
+  }
+  .employer-shell :is(.btn-primary,.btn-outline,.btn-disabled,.employer-action-btn) {
+    width: 100% !important; min-width: 0 !important; max-width: 100% !important;
+    min-height: 46px; white-space: normal; justify-content: center; text-align: center;
+    padding: 12px 14px;
+  }
+  .employer-shell .employer-field :is(input,select,textarea) {
+    width: 100%; min-width: 0 !important; max-width: 100%; font-size: 16px;
+  }
+  .employer-shell input[type=file] { overflow: hidden; }
+  .employer-shell .employer-upload-box { padding: 18px 12px; white-space: normal; }
+  .employer-shell .employer-item-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .employer-shell .employer-metric { min-height: 0 !important; }
+  .employer-shell .employer-metric > * + * { margin-top: 12px; }
+  .employer-shell .employer-metric strong { font-size: 26px; line-height: 1.2; }
+  .employer-shell .employer-stat-label { white-space: normal; }
+  .employer-shell .employer-status-row { grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+  .employer-shell .employer-status-row .employer-status-track { grid-row: 2; grid-column: 1 / -1; }
+  .employer-shell .employer-logo-preview { flex-wrap: wrap; gap: 12px; }
+  .employer-shell .employer-pie-wrap { width: 100%; display: flex; justify-content: center; }
+  .employer-shell .employer-pie-legend { width: 100%; }
+  .employer-shell .employer-chart { padding: 14px; }
+  .employer-shell canvas { max-width: 100% !important; }
+  .employer-shell .applicant-card { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+  .employer-shell .applicant-main { width: 100%; }
+  .employer-shell .employer-rating-row { flex-wrap: wrap; }
+  .employer-shell #skills-text-input { min-width: 0 !important; width: 100%; flex-basis: 100% !important; }
+  .employer-shell .skill-chip { max-width: 100%; white-space: normal; }
+  .employer-shell .employer-note-score { font-size: 28px; }
+  .employer-shell .employer-card:hover { transform: none; }
+  /* Conversation list above the active thread, with bounded inner scrolling. */
+  .messages-shell .messages-sidebar { height: auto; max-height: 340px; }
+  .messages-shell .messages-thread-list { max-height: 220px; overflow-y: auto; }
+  .messages-shell .messages-panel { height: auto; min-height: 0; }
+  .messages-shell .messages-thread-body { height: 48vh; min-height: 220px; max-height: 480px; overflow-y: auto; }
+  .messages-shell .messages-thread-btn { width: 100%; max-width: 100%; text-align: left; }
+  .messages-shell .messages-bubble { max-width: 92%; overflow-wrap: anywhere; }
+  .messages-shell .messages-bubble-image { max-width: 100%; }
+  .messages-shell .messages-form { width: 100%; padding: 14px 0 0; }
+  .messages-shell .messages-form-actions { flex-wrap: wrap; gap: 10px; }
+  .messages-shell .messages-form-actions .btn-primary { width: 100%; }
+  .messages-shell .messages-toolbar { flex-wrap: wrap; }
+  :is(#interview-modal,#complete-modal,#rate-seeker-modal) { padding: 16px; overflow-y: auto; }
+  :is(#interview-modal,#complete-modal,#rate-seeker-modal) > div {
+    width: 100% !important; max-width: 460px !important; max-height: 85dvh;
+    overflow-y: auto; padding: 20px 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .employer-shell .employer-location-controls { grid-template-columns: minmax(0,1fr) !important; gap: 10px; }
+  .employer-shell #btn-detect-location { width: 100%; }
+  .messages-shell .messages-sidebar { display: flex !important; }
+  .messages-shell .messages-form {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-areas: "toolbar" "preview" "label" "input" "send" "status";
+  }
+  .messages-shell .messages-form-actions { width: 100%; }
+  #verification-form .verification-documents { display: grid; grid-template-columns: minmax(0,1fr); gap: 18px; }
+}
+
+/* Jobseeker workspace: keep every phone page readable at narrow widths. */
+@media (max-width: 768px) {
+  .jobseeker-shell,
+  .jobseeker-shell *,
+  .jobseeker-dashboard-page,
+  .jobseeker-dashboard-page *,
+  .inprogress-shell,
+  .inprogress-shell * { min-width: 0; box-sizing: border-box; }
+
+  .jobseeker-shell :is(h1,h2,h3,h4,p,strong,span,a,label,small),
+  .jobseeker-dashboard-page :is(h1,h2,h3,h4,p,strong,span,a,label,small),
+  .inprogress-shell :is(h1,h2,h3,p,strong,span,a) { overflow-wrap: anywhere; }
+
+  .jobseeker-shell :is(.jobseeker-grid,.application-stats-grid,.profile-top-grid,
+    .history-summary-grid,.history-metric-grid,.history-layout-grid,.recommendation-grid,
+    .jobs-results-grid,.jobs-filter-grid,.resume-paper-grid,.resume-result-grid,
+    .messages-layout,.profile-form-grid,.profile-actions-grid),
+  .jobseeker-dashboard-page :is(.dashboard-hero-split,.stats-strip,.dashboard-grid,
+    .pipeline-grid,.jobs-grid,.actions-grid),
+  .inprogress-shell .inprogress-panel {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .jobseeker-shell { padding-left: 14px; padding-right: 14px; }
+  .jobseeker-shell .jobseeker-header { padding: 22px 16px; }
+  .jobseeker-shell .jobseeker-header h1 { font-size: 28px; line-height: 1.18; }
+  .jobseeker-shell :is(.jobseeker-card,.jobseeker-item,.resume-toolbar-card,.resume-paper,
+    .messages-sidebar,.messages-panel) { width: 100%; max-width: 100%; padding: 18px 16px; }
+
+  .jobseeker-shell :is(.section-heading-row,.jobseeker-section-head,.resume-toolbar-card,
+    .resume-toolbar-actions,.jobs-filter-actions,.application-actions,.profile-actions,
+    .history-actions,.inprogress-actions) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .jobseeker-shell :is(.btn-primary,.btn-outline,.btn-danger,.interview-action-btn,
+    button),
+  .inprogress-shell :is(.btn-primary,.btn-outline) {
+    width: 100%; min-width: 0; max-width: 100%; min-height: 46px;
+    white-space: normal; justify-content: center; text-align: center;
+  }
+
+  .jobseeker-shell :is(input,select,textarea) { width: 100%; min-width: 0; max-width: 100%; font-size: 16px; }
+  .jobseeker-shell .tab-bar { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; }
+  .jobseeker-shell .tab-btn { width: 100%; min-width: 0; padding: 11px 8px; white-space: normal; }
+  .jobseeker-shell .application-item,
+  .jobseeker-shell .recommendation-item,
+  .jobseeker-shell .history-item { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+  .jobseeker-shell :is(.application-item-actions,.recommendation-actions,.history-item-actions) { width: 100%; display: grid; gap: 10px; }
+
+  .jobseeker-shell .resume-paper-header,
+  .jobseeker-shell .resume-paper-identity { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .jobseeker-shell .resume-paper-contact { min-width: 0; width: 100%; }
+  .jobseeker-shell .resume-result-grid { grid-template-columns: minmax(0,1fr) !important; }
+  .jobseeker-shell .resume-entry-head { display: flex; flex-direction: column; gap: 6px; }
+
+  .jobseeker-shell.messages-shell .messages-sidebar { height: auto; max-height: 320px; overflow-y: auto; }
+  .jobseeker-shell.messages-shell .messages-panel { min-height: 0; }
+  .jobseeker-shell.messages-shell .messages-thread-body { height: 46vh; min-height: 220px; overflow-y: auto; }
+  .jobseeker-shell.messages-shell .messages-bubble { max-width: 92%; overflow-wrap: anywhere; }
+  .jobseeker-shell.messages-shell .messages-form { grid-template-columns: minmax(0,1fr); }
+
+  .jobseeker-dashboard-page .dashboard-hero { padding: 18px 14px; }
+  .jobseeker-dashboard-page .dashboard-hero-inner { padding: 22px 16px; }
+  .jobseeker-dashboard-page .dashboard-hero h1 { font-size: 29px; line-height: 1.15; }
+  .jobseeker-dashboard-page :is(.hero-actions,.split-section) { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; }
+  .jobseeker-dashboard-page :is(.hero-actions a,.split-section > a,.action-card a) { width: 100%; text-align: center; }
+  .jobseeker-dashboard-page .dashboard-card { padding: 18px 16px; }
+
+  /* Dashboard uses older desktop-first markup. Give it the same compact phone
+     rhythm as the rest of the Jobseeker workspace. */
+  body.jobseeker-dashboard-page .dashboard-hero {
+    margin-top: 78px;
+    padding: 14px 14px 0 !important;
+    min-height: 0;
+    background: var(--js-page-soft, #f8fafc);
+  }
+  body.jobseeker-dashboard-page .dashboard-hero-inner {
+    width: 100%; max-width: none; margin: 0; padding: 0 !important;
+  }
+  body.jobseeker-dashboard-page .dashboard-hero-copy,
+  body.jobseeker-dashboard-page .dashboard-hero-snapshot {
+    min-height: 0;
+    border-radius: 16px;
+    padding: 20px 16px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+  }
+  body.jobseeker-dashboard-page .dashboard-hero-copy { align-content: start; }
+  body.jobseeker-dashboard-page .dashboard-hero h1 { font-size: 28px; line-height: 1.18; margin-bottom: 10px; }
+  body.jobseeker-dashboard-page .dashboard-hero p { margin-bottom: 16px; font-size: 14px; line-height: 1.5; }
+  body.jobseeker-dashboard-page .dashboard-hero-snapshot .section-title h2 { font-size: 22px; line-height: 1.25; }
+  body.jobseeker-dashboard-page .dashboard-hero-mascot { display: none; }
+  body.jobseeker-dashboard-page main {
+    padding: 0 14px 14px !important;
+    gap: 0 !important;
+  }
+  body.jobseeker-dashboard-page .section { padding: 14px 0 !important; }
+  body.jobseeker-dashboard-page .section-inner { width: 100%; max-width: none; margin: 0; }
+  body.jobseeker-dashboard-page .section-panel { padding: 18px 16px !important; border-radius: 16px; }
+  body.jobseeker-dashboard-page .section-title h2 { font-size: 22px; line-height: 1.25; }
+  body.jobseeker-dashboard-page .section-title p { font-size: 14px; line-height: 1.5; }
+  body.jobseeker-dashboard-page .dashboard-card { min-height: 0; border-radius: 14px; padding: 16px; }
+  body.jobseeker-dashboard-page .stat-pill-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; }
+  body.jobseeker-dashboard-page .stat-pill-card > .card-kicker { grid-column: 1 / -1; }
+  body.jobseeker-dashboard-page .stat-inline { display: contents; }
+  body.jobseeker-dashboard-page .stat-inline strong { font-size: 28px; }
+  body.jobseeker-dashboard-page .stat-inline p { margin: 0; text-align: right; }
+
+  /* One spacing scale across every dashboard block on a phone. */
+  body.jobseeker-dashboard-page .dashboard-hero-split,
+  body.jobseeker-dashboard-page .dashboard-hero-snapshot,
+  body.jobseeker-dashboard-page .stats-strip,
+  body.jobseeker-dashboard-page .dashboard-grid { gap: 12px !important; }
+  body.jobseeker-dashboard-page .dashboard-hero-copy,
+  body.jobseeker-dashboard-page .dashboard-hero-snapshot { padding: 16px !important; }
+  body.jobseeker-dashboard-page .dashboard-hero p { margin: 0 0 12px !important; line-height: 1.45; }
+  body.jobseeker-dashboard-page .split-section { gap: 8px; margin-bottom: 12px !important; }
+  body.jobseeker-dashboard-page .dashboard-card { padding: 14px !important; min-height: 0 !important; }
+  body.jobseeker-dashboard-page .dashboard-card h3 { margin: 0 0 6px; }
+  body.jobseeker-dashboard-page .dashboard-card p { margin: 0 0 10px; line-height: 1.45; }
+  body.jobseeker-dashboard-page .dashboard-card p:last-child { margin-bottom: 0; }
+  body.jobseeker-dashboard-page .card-kicker { margin-bottom: 10px; }
+  body.jobseeker-dashboard-page .progress-track { margin: 10px 0; }
+  body.jobseeker-dashboard-page .mini-checklist { gap: 8px; }
+  body.jobseeker-dashboard-page .job-detail-stack { margin-bottom: 10px; }
+  body.jobseeker-dashboard-page .job-tags { margin-bottom: 10px; }
+  body.jobseeker-dashboard-page .action-card p { margin-bottom: 10px; }
+
+  .inprogress-shell { padding: 20px 14px; }
+  .inprogress-shell .inprogress-media img { width: min(220px, 100%); height: auto; }
+  .inprogress-shell .inprogress-content { padding: 20px 16px; }
+}
+
+/* Final header override: this appears after the generic phone grid rules. */
+@media (max-width: 768px) {
+  :is(.employer-navbar,.jobseeker-navbar) {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    min-height: 60px;
+    height: 60px;
+  }
+  :is(.employer-navbar,.jobseeker-navbar) .nav-brand { flex: 1 1 auto !important; }
+  :is(.employer-navbar,.jobseeker-navbar) .nav-user-tools {
+    position: static !important;
+    transform: none !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    margin-left: 0 !important;
+  }
+  :is(.employer-navbar,.jobseeker-navbar) .nav-logout { display: none !important; }
+  :is(.employer-navbar,.jobseeker-navbar) .mobile-nav-logout { display: flex !important; }
+  :is(.employer-navbar,.jobseeker-navbar).nav-active .nav-links {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+    padding: 10px !important;
+    z-index: 1201;
+  }
+  :is(.employer-navbar,.jobseeker-navbar).nav-active .nav-links a {
+    width: 100%; min-height: 42px; padding: 10px !important;
+    border: 1px solid transparent; border-radius: 10px;
+  }
+}
+
+/* Flutter Employer phone spacing and decorated title layout. */
+.employer-shell .messages-thread-select { display: none; }
+@media (max-width: 768px) {
+  .employer-shell { padding: 10px !important; gap: 10px !important; }
+  .employer-shell > * + * { margin-top: 10px !important; }
+  .employer-shell :is(.employer-grid,.employer-page-header--split,.employer-page-header-main,.employer-hero-side,.employer-form-grid,.verification-grid,.verification-details,.verification-documents,.verification-status-card,.employer-chart-duo,.employer-chart-duo-side,.employer-pie-chart,.employer-timeline,.messages-layout,.employer-list,.employer-section-head,.employer-section-head > div,.employer-item-meta,.employer-card-actions,.employer-actions,.employer-form-actions,.employer-hero-actions,.verification-actions,.jobs-card-actions,.employer-logo-preview,.employer-status-row,.employer-dashboard-chart-stack,.employer-dashboard-donut-row,.applicant-card,.messages-panel,.messages-form,.messages-form-actions) { gap: 10px !important; }
+  .employer-shell :is(.employer-card,.employer-item,.employer-chart,.employer-upload-box,.employer-page-header-main,.employer-hero-side,.employer-step) { padding: 10px !important; }
+  .employer-shell :is(.employer-card,.employer-item,.employer-metric,.employer-page-header-main,.employer-hero-side) > * + *,
+  .employer-shell .employer-card > .employer-section-head + * { margin-top: 10px !important; }
+  .employer-shell .employer-section-head { margin-bottom: 10px !important; }
+  .employer-shell:not(.employer-dashboard) > .employer-page-header:not(.employer-page-header--split) {
+    box-sizing: border-box;
+    min-height: 380px !important;
+    padding: 24px 20px 112px !important;
+    margin-bottom: 0 !important;
+    border-radius: 22px;
+    clip-path: inset(0 round 22px);
+  }
+  .employer-shell.messages-shell .messages-sidebar { display: flex !important; flex-direction: column; height: auto; max-height: none; gap: 10px; }
+  .employer-shell .messages-thread-list { display: none; }
+  .employer-shell .messages-thread-select {
+    display: block; width: 100%; min-height: 44px; padding: 10px;
+    border: 1px solid #d6bda5; border-radius: 10px;
+    background: #fff; color: #442b1d; font: inherit;
+  }
+  body.theme-dark .employer-shell .messages-thread-select { background: #241b16; color: #fff7ed; border-color: #78543a; }
+}
+
+/* Use one spacing source per container: grid gaps must not add to margins. */
+@media (max-width: 768px) {
+  .employer-shell { display: block; padding: 10px !important; }
+  .employer-shell > * { margin: 0 !important; }
+  .employer-shell > * + * { margin-top: 10px !important; }
+  .employer-shell :is(.employer-grid,.employer-form-grid,.employer-list,.employer-checklist,.employer-timeline,.employer-hero-actions,.employer-actions,.employer-card-actions,.employer-form-actions,.verification-grid,.verification-details,.verification-documents,.verification-actions,.jobs-card-actions,.messages-layout,.employer-section-head,.employer-section-head > div,.employer-page-header-main,.employer-hero-side) {
+    gap: 10px !important;
+  }
+  .employer-shell :is(.employer-card,.employer-item,.employer-step,.employer-page-header-main,.employer-hero-side) {
+    padding: 10px !important;
+    min-height: 0 !important;
+    align-content: start;
+  }
+  .employer-shell :is(h1,h2,h3,p,ul,.employer-badge,.employer-section-head,.employer-hero-actions,.employer-card-actions,.employer-form-actions) { margin: 0; }
+  .employer-shell :is(.employer-card,.employer-item,.employer-step) > * + * { margin-top: 10px !important; }
+  .employer-shell .employer-card > .employer-section-head { margin-bottom: 0 !important; }
+  .employer-shell :is(.employer-grid,.employer-form-grid,.employer-list,.employer-checklist,.employer-timeline,.employer-hero-actions,.employer-actions,.employer-card-actions,.employer-form-actions,.verification-grid,.verification-details,.verification-documents,.verification-actions,.jobs-card-actions,.messages-layout,.employer-section-head,.employer-section-head > div,.employer-page-header-main,.employer-hero-side) > * {
+    margin: 0 !important;
+  }
+  .employer-shell .employer-hero-side { display: grid; }
+  .employer-shell .employer-checklist { margin: 0 !important; padding: 0; }
+  .employer-shell.employer-dashboard > .employer-page-header--split {
+    padding: 0 !important;
+    min-height: 0 !important;
+    gap: 10px !important;
+    margin: 0 !important;
+  }
+}
+
+/* Keep the job form grid separate from its action buttons. */
+@media (max-width: 768px) {
+  .employer-shell #post-job-form {
+    display: grid;
+    gap: 10px;
+  }
+  .employer-shell #post-job-form > .employer-form-grid,
+  .employer-shell #post-job-form > .employer-form-actions {
+    margin: 0 !important;
+  }
+  .employer-shell #post-job-form .employer-field { gap: 10px; }
+  .employer-shell #post-job-form .employer-form-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px !important;
+  }
+  .employer-shell #post-job-form .employer-form-actions > * { margin: 0 !important; }
+}
+
+/* Flutter Jobseeker: 10px gutters, card padding and form/action spacing. */
+@media (max-width: 768px) {
+  .jobseeker-shell { --jobseeker-section-gap: 10px; --jobseeker-page-gutter: 10px; display: block; padding: 10px !important; }
+  .jobseeker-shell > * { margin: 0 !important; }
+  .jobseeker-shell > * + * { margin-top: 10px !important; }
+  .jobseeker-shell :is(.jobseeker-card,.jobseeker-item,.application-item,.history-item,.timeline-step,.profile-section-card,.messages-sidebar,.messages-panel) { padding: 10px !important; }
+  .jobseeker-shell :is(.jobseeker-card,.jobseeker-item,.application-item,.history-item,.timeline-step) > * + * { margin-top: 10px !important; }
+  .jobseeker-shell :is(h2,h3,p,.hero-badge,.application-stat-label,.section-heading-row) { margin: 0; }
+  .jobseeker-shell :is(.jobseeker-grid,.jobseeker-list,.application-timeline,.profile-form,.profile-form-grid,.profile-field,.profile-overview-grid,.profile-actions-row,.section-heading-row,.section-heading-row > div,.mini-checklist,.day-checkbox-grid,.distribution-list,.messages-layout,.messages-form,.messages-form-actions,.application-actions,.job-actions,.resume-actions) { gap: 10px !important; }
+  .jobseeker-shell :is(.jobseeker-grid,.jobseeker-list,.application-timeline,.profile-form,.profile-form-grid,.profile-field,.profile-overview-grid,.profile-actions-row,.section-heading-row,.section-heading-row > div,.mini-checklist,.day-checkbox-grid,.distribution-list,.messages-layout,.messages-form,.messages-form-actions,.application-actions,.job-actions,.resume-actions) > * { margin: 0 !important; }
+  .jobseeker-shell :is(.profile-form,.profile-actions-row) { display: grid; }
+  .jobseeker-shell .profile-actions-row { grid-template-columns: minmax(0, 1fr); }
+  .jobseeker-shell .section-heading-row { margin-bottom: 0 !important; }
+  .jobseeker-shell .tab-panel > * { margin: 0 !important; }
+  .jobseeker-shell .tab-panel > * + * { margin-top: 10px !important; }
+  .jobseeker-dashboard-page main { padding: 10px !important; }
+  .jobseeker-dashboard-page main > .section { padding: 0 !important; margin: 0 !important; }
+  .jobseeker-dashboard-page main > .section + .section { margin-top: 10px !important; }
+  .jobseeker-dashboard-page main :is(.section-inner,.section-panel) { padding: 0 !important; margin: 0 !important; }
+  .jobseeker-dashboard-page main :is(.stats-strip,.dashboard-grid,.split-section,.section-panel,.section-heading-row,.section-heading-row > div,.stat-inline) { gap: 10px !important; }
+  .jobseeker-dashboard-page main :is(.dashboard-card,.application-item,.recommendation-card) { padding: 10px !important; }
+  .jobseeker-dashboard-page main :is(.dashboard-card,.application-item,.recommendation-card) > * + * { margin-top: 10px !important; }
+  .jobseeker-dashboard-page main :is(.stats-strip,.dashboard-grid,.split-section,.section-heading-row,.section-heading-row > div,.stat-inline) > * { margin: 0 !important; }
+  .inprogress-shell { padding: 10px !important; }
+  .inprogress-shell :is(.inprogress-panel,.inprogress-content,.inprogress-actions) { gap: 10px !important; }
+  .inprogress-shell .inprogress-content { padding: 10px !important; }
+  .inprogress-shell :is(.inprogress-content,.inprogress-actions) > * { margin: 0 !important; }
+}
+
+/* Match the older dashboard selectors so their phone overrides cannot win. */
+@media (max-width: 768px) {
+  body.jobseeker-dashboard-page .dashboard-hero {
+    margin: 0 !important;
+    padding: 10px 10px 0 !important;
+  }
+  body.jobseeker-dashboard-page .dashboard-hero-inner {
+    padding: 0 !important; margin: 0 !important; width: 100%;
+  }
+  body.jobseeker-dashboard-page main { padding: 10px !important; }
+  body.jobseeker-dashboard-page main > .section { padding: 0 !important; margin: 0 !important; }
+  body.jobseeker-dashboard-page main > .section + .section { margin-top: 10px !important; }
+  body.jobseeker-dashboard-page main :is(.section-inner,.section-panel) { padding: 0 !important; margin: 0 !important; }
+  body.jobseeker-dashboard-page :is(.dashboard-hero-copy,.dashboard-hero-snapshot,.dashboard-card,.application-item,.recommendation-card) {
+    padding: 10px !important; min-height: 0 !important; align-content: start;
+  }
+  body.jobseeker-dashboard-page :is(.dashboard-hero-split,.dashboard-hero-copy,.dashboard-hero-snapshot,.dashboard-grid,.stats-strip,.hero-actions,.mini-checklist,.section-title,.split-section,.actions-grid,.jobs-grid,.pipeline-grid,.progress-heading) {
+    gap: 10px !important;
+  }
+  body.jobseeker-dashboard-page :is(.dashboard-hero-copy,.dashboard-hero-snapshot,.section-title) { display: grid; }
+  body.jobseeker-dashboard-page :is(.dashboard-hero,.dashboard-card) :is(h1,h2,h3,p,.hero-badge,.section-tag,.card-kicker) { margin: 0 !important; }
+  body.jobseeker-dashboard-page :is(.dashboard-hero-split,.dashboard-hero-copy,.dashboard-hero-snapshot,.dashboard-grid,.stats-strip,.hero-actions,.mini-checklist,.section-title,.split-section,.actions-grid,.jobs-grid,.pipeline-grid,.progress-heading) > * { margin: 0 !important; }
+  body.jobseeker-dashboard-page .split-section { margin-bottom: 10px !important; }
+  /* These cards already use flex gaps; remove the extra sibling margins. */
+  body .jobseeker-shell :is(.application-item,.history-item,.recommendation-item) { gap: 10px !important; padding: 10px !important; }
+  body .jobseeker-shell :is(.application-item,.history-item,.recommendation-item) > * { margin: 0 !important; }
+  body .jobseeker-shell :is(.jobs-results-grid,.jobs-filter-grid,.recommendation-grid,.resume-paper-grid,.resume-result-grid,.profile-actions-grid,.tab-bar,.resume-toolbar-actions,.jobs-filter-actions,.history-actions,.application-item-actions,.history-item-actions,.recommendation-actions) { gap: 10px !important; }
+  body .jobseeker-shell :is(.resume-toolbar-card,.resume-paper,.profile-upload-box) { padding: 10px !important; }
+}
+
+/* Apply the same gap to every Jobseeker layout container, including nested ones. */
+@media (max-width: 768px) {
+  body .jobseeker-shell *,
+  body.jobseeker-dashboard-page main *,
+  body.jobseeker-dashboard-page .dashboard-hero * { gap: 10px !important; }
+  body .jobseeker-shell :is([class*="-grid"],[class*="-list"],[class*="-actions"],.profile-form,.messages-layout,.messages-form,.section-heading-row > div) > * {
+    margin: 0 !important;
+  }
+  body .jobseeker-shell :is(.profile-form,.profile-actions-row) { gap: 10px !important; }
+  body .jobseeker-shell :is(.resume-toolbar-card,.profile-section-card,.profile-actions-card,.application-item,.recommendation-item,.history-item,.jobseeker-card,.jobseeker-item) { padding: 10px !important; }
+}
+
+/* Match the Jobseeker phone banner dimensions for Admin and Employer. */
+@media (max-width: 768px) {
+  .admin-shell.messages-shell > .admin-page-header,
+  .employer-shell:not(.employer-dashboard) > .employer-page-header:not(.employer-page-header--split) {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 290px !important;
+    padding: 30px 18px 92px !important;
+  }
+}
+
+/* Jobseeker hamburger: same full-width two-column phone menu as Admin. */
+@media (max-width: 768px) {
+  body .jobseeker-navbar { position: relative !important; overflow: visible; z-index: 1200; }
+  body .jobseeker-navbar #hamburger-btn { display: flex !important; flex: 0 0 40px; width: 40px; height: 40px; }
+  body .jobseeker-navbar .nav-links { display: none !important; }
+  body .jobseeker-navbar.nav-active .nav-links {
+    display: grid !important;
+    position: absolute !important;
+    top: calc(100% + 1px) !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    min-width: 0;
+    max-width: none;
+    max-height: min(70dvh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    padding: 10px !important;
+    margin: 0 !important;
+    border-radius: 0 0 14px 14px;
+    z-index: 1201;
+  }
+  body .jobseeker-navbar.nav-active .nav-links a {
+    box-sizing: border-box;
+    display: flex !important;
+    align-items: center;
+    width: 100%; min-width: 0; min-height: 42px;
+    padding: 10px !important;
+    margin: 0 !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    border: 1px solid transparent;
+    border-radius: 10px;
+  }
+}
+
+.jobseeker-shell .messages-thread-select { display: none; }
+@media (max-width: 768px) {
+  body .jobseeker-shell.messages-shell { padding: 10px !important; }
+  body .jobseeker-shell.messages-shell::after { display: none; }
+  body .jobseeker-shell.messages-shell > .jobseeker-header { margin: 0 !important; }
+  body .jobseeker-shell.messages-shell > .messages-layout {
+    margin: 10px 0 0 !important;
+    gap: 10px !important;
+  }
+  body .jobseeker-shell.messages-shell .messages-sidebar {
+    display: flex !important;
+    flex-direction: column;
+    height: auto; max-height: none;
+  }
+  body .jobseeker-shell.messages-shell :is(.messages-sidebar,.messages-panel) { padding: 10px !important; gap: 10px !important; }
+  body .jobseeker-shell.messages-shell :is(.messages-sidebar,.messages-panel,.section-heading-row,.section-heading-row > div,.messages-form,.messages-form-actions) > * { margin: 0 !important; }
+  body .jobseeker-shell.messages-shell .section-heading-row { margin: 0 !important; padding: 0; }
+  body .jobseeker-shell.messages-shell .messages-thread-list { display: none !important; }
+  body .jobseeker-shell.messages-shell .messages-thread-select {
+    display: block; box-sizing: border-box; width: 100%; min-height: 44px;
+    padding: 10px; border: 1px solid #bbd9c5; border-radius: 10px;
+    background: #fff; color: #14532d; font: inherit;
+  }
+  body.theme-dark .jobseeker-shell.messages-shell .messages-thread-select { background: #14251a; color: #dcfce7; border-color: #365941; }
+}
+
+/* Availability checkboxes must not inherit full-width text-input sizing. */
+@media (max-width: 768px) {
+  body.jobseeker-profile-page .jobseeker-shell #availability-days {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px !important;
+  }
+  body.jobseeker-profile-page .jobseeker-shell #availability-days .day-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px !important;
+    min-height: 40px;
+    padding: 8px !important;
+    margin: 0 !important;
+  }
+  body .jobseeker-shell input[type=checkbox],
+  body .jobseeker-shell input[type=radio] {
+    width: 18px !important; height: 18px !important;
+    min-width: 18px !important; min-height: 18px !important;
+    max-width: 18px; flex: 0 0 18px;
+    padding: 0 !important; margin: 0 !important;
+  }
+  body.jobseeker-profile-page .jobseeker-shell #availability-days .day-checkbox span {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+    font-size: 13px;
+  }
+}
+
+/* Keep Jobseeker's attachment control compact like the other chat roles. */
+@media (max-width: 768px) {
+  body .jobseeker-shell.messages-shell .messages-toolbar {
+    display: flex; justify-content: flex-start; gap: 10px !important;
+  }
+  body .jobseeker-shell.messages-shell .messages-toolbar .messages-tool-btn {
+    display: inline-flex;
+    width: auto !important;
+    min-width: 0;
+    min-height: 0 !important;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px !important;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap !important;
+  }
+}
+
+/* Flutter public pages linked from Home: one 10px spacing scale. */
+@media (max-width: 768px) {
+  body.flutter-public-page :is(.pub-page-body,.about-page-body) { padding: 10px !important; margin: 0 !important; gap: 10px !important; }
+  body.flutter-public-page :is(.pub-page-body,.about-page-body) > * { margin: 0 !important; }
+  body.flutter-public-page :is(.pub-page-body,.about-page-body) > * + * { margin-top: 10px !important; }
+  body.flutter-public-page :is(.pub-section-card,.about-section-card,.feature-card,.role-card,.coverage-card,.module-card,.support-card,.faq-item,.policy-card,.security-card) { padding: 10px !important; }
+  body.flutter-public-page :is([class*="-grid"],.hero-btns,.hero-stats,.section-title,.cta-section,.footer-top,.footer-col,.auth-tabs,.jobs-filter-actions) { gap: 10px !important; }
+  body.flutter-public-page :is(.pub-section-card,.about-section-card,.feature-card,.role-card,.coverage-card,.module-card,.support-card) > * + * { margin-top: 10px !important; }
+  body.flutter-public-page :is([class*="-grid"],.section-title,.hero-btns,.hero-stats) > * { margin: 0 !important; }
+  body.flutter-public-page .section-title { display: grid; margin: 0 0 10px !important; }
+  body.flutter-public-page .cta-section { display: grid; justify-items: center; margin: 0 10px 10px !important; padding: 10px !important; }
+  body.flutter-public-page .cta-section > * { margin: 0 !important; }
+  body.flutter-public-page .cta-section .btn-cta { display: inline-flex; align-items: center; justify-content: center; padding: 10px !important; background: #f8fdff; color: #0891b2; border: 2px solid #0891b2; border-radius: 10px; }
+  body.flutter-public-page .footer-top,
+  body.flutter-public-page .footer-bottom { padding: 10px !important; }
+  body.flutter-public-page .auth-container { padding: 10px !important; }
+  body.flutter-public-page .auth-box { padding: 10px !important; }
+  body.flutter-public-page .form-group { margin-bottom: 10px !important; }
+}
+@media (max-width: 768px) {
+  body.flutter-public-page :is(.report-form,.report-side,.form-row,.form-field,.support-grid,.faq-grid) { gap: 10px !important; }
+  body.flutter-public-page .report-form { display: grid; }
+  body.flutter-public-page :is(.report-form,.report-side,.form-row,.form-field) > * { margin: 0 !important; }
+  body.flutter-public-page :is(.report-info-card,.report-form,.jobs-filter-panel,.filter-panel,.job-card) { padding: 10px !important; }
+}
+
+/* Home CTA label above the heading. */
+body.flutter-public-page .cta-section .cta-badge {
+  display: inline-block;
+  justify-self: center;
+  width: fit-content;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Home hero's original blue label, above Find Jobs / Hire Talent. */
+body.flutter-public-page .hero.hero-photo .hero-inner > .hero-badge {
+  display: inline-flex !important;
+  position: relative;
+  z-index: 2;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 6px 12px !important;
+  border: 1px solid #7dd3fc;
+  border-radius: 999px;
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin: 0 0 10px !important;
+}
+@media (max-width: 768px) {
+  body.flutter-public-page .hero.hero-photo { height: auto !important; min-height: 0 !important; padding: 10px !important; }
+  body.flutter-public-page .hero.hero-photo .hero-inner { height: auto; padding: 10px !important; overflow: visible; }
+  body .footer .footer-top {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: start;
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+  body .footer .footer-col { min-width: 0; margin: 0; }
+  body .footer .footer-col :is(h4,p,a) { overflow-wrap: anywhere; font-size: 12px; line-height: 1.5; }
+  body .footer .footer-col h4 { margin: 0 0 10px; font-size: 13px; }
+  body .footer .footer-col p { margin: 0; }
+  body .footer .footer-col a { display: block; margin: 0 0 10px; }
+  body .footer .footer-bottom { padding: 10px !important; }
+}
+
+/* Home starts below the navbar; the badge must not sit under a fixed header. */
+@media (max-width: 768px) {
+  body.flutter-home-page #site-header { position: relative; z-index: 1200; }
+  body.flutter-home-page .marketing-navbar {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100%;
+  }
+  body.flutter-home-page .hero.hero-photo {
+    margin-top: 0 !important;
+    justify-content: flex-start;
+  }
+  body.flutter-home-page .hero.hero-photo .hero-inner {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
+
+/* Public-page labels fit their text instead of stretching across grid rows. */
+body.flutter-public-page :is(.hero-badge,.section-tag,.cta-badge,.card-kicker) {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  width: fit-content !important;
+  min-width: 0 !important;
+  max-width: 100%;
+  height: auto;
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  writing-mode: horizontal-tb;
+}
+body.flutter-public-page :is(.section-title,.page-hero-inner,.hero-inner,.cta-section) > :is(.hero-badge,.section-tag,.cta-badge) {
+  justify-self: center;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Final phone acceptance rules: consistent banner size and menu gutters. */
+@media (max-width: 768px) {
+  body.flutter-public-page .feat-card { padding: 10px !important; }
+  body .employer-navbar.nav-active .nav-links {
+    position: absolute !important;
+    top: calc(100% + 1px) !important;
+    left: 10px !important; right: 10px !important;
+    width: auto !important; min-width: 0 !important; max-width: none;
+    margin: 0 !important; padding: 10px !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    max-height: min(70dvh, 420px); overflow-y: auto;
+  }
+  body .admin-shell > .admin-header,
+  body .admin-shell.messages-shell > .admin-page-header,
+  body .employer-shell:not(.employer-dashboard) > .employer-page-header:not(.employer-page-header--split),
+  body .jobseeker-shell > .jobseeker-header {
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px !important;
+    height: 360px !important;
+    min-height: 360px !important;
+    max-height: 360px !important;
+    padding: 24px 18px 92px !important;
+  }
+  body .admin-shell > .admin-header > *,
+  body .admin-shell.messages-shell > .admin-page-header > *,
+  body .employer-shell:not(.employer-dashboard) > .employer-page-header:not(.employer-page-header--split) > *,
+  body .jobseeker-shell > .jobseeker-header > * { margin: 0 !important; flex-shrink: 0; }
+  body .admin-shell > .admin-header h1,
+  body .admin-shell.messages-shell .admin-page-header-left h1,
+  body .employer-shell:not(.employer-dashboard) > .employer-page-header h1,
+  body .jobseeker-shell > .jobseeker-header h1 {
+    font-size: 24px !important; line-height: 1.25 !important; margin: 0 !important;
+  }
+  body .admin-shell > .admin-header p,
+  body .admin-shell.messages-shell .admin-page-header-left p,
+  body .employer-shell:not(.employer-dashboard) > .employer-page-header p,
+  body .jobseeker-shell > .jobseeker-header p {
+    font-size: 14px !important; line-height: 1.5 !important; margin: 0 !important;
+  }
+  body .admin-shell.messages-shell .admin-page-header-left {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  body .admin-shell.messages-shell .admin-page-header-left > * { margin: 0 !important; }
+  body .admin-shell.messages-shell .admin-page-header-actions {
+    position: relative !important; inset: auto !important; transform: none !important;
+    width: auto; margin: 0 !important;
+  }
+}
+@media (max-width: 768px) {
+  body .jobseeker-shell .history-hero-panel > .jobseeker-header {
+    box-sizing: border-box; display: flex !important; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px !important;
+    height: 360px !important; min-height: 360px !important; max-height: 360px !important;
+    padding: 24px 18px 92px !important;
+  }
+  body .jobseeker-shell .history-hero-panel > .jobseeker-header > * { margin: 0 !important; flex-shrink: 0; }
+  body .jobseeker-shell .history-hero-panel > .jobseeker-header h1 { font-size: 24px !important; line-height: 1.25 !important; }
+  body .jobseeker-shell .history-hero-panel > .jobseeker-header p { font-size: 14px !important; line-height: 1.5 !important; }
+  body .messages-shell .messages-bubble [data-download-image] { width: auto !important; min-height: 36px; padding: 8px 12px; justify-self: start; }
+}

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the messages page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Messages</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002b">
+  <style>
+    html,
+    body {
+      background: #eefaf2 !important;
+    }
+
+    /* ── Header banner ── */
+    .messages-shell .messages-layout {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    /* ── Messages layout ── */
+    .messages-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .messages-sidebar,
+    .messages-panel {
+      height: 850px;
+      min-height: 0;
+      margin-bottom: 20px;
+    }
+
+    .messages-sidebar {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .messages-thread-list {
+      display: grid;
+      gap: 14px;
+      min-height: 0;
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding-right: 6px;
+      align-content: start;
+    }
+
+    .messages-thread-btn {
+      width: 100%;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+      background: #f1f5f9;
+      color: inherit;
+      text-align: left;
+      display: grid;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+    }
+
+    .messages-thread-btn:hover {
+      border-color: rgba(22, 163, 74, 0.45);
+      background: #f0fdf4;
+    }
+
+    .messages-thread-btn.is-active {
+      border-color: rgba(22, 163, 74, 0.55);
+      box-shadow: 0 2px 6px -3px rgba(15, 23, 42, 0.12);
+      background: #f0fdf4;
+    }
+
+    .messages-thread-btn strong,
+    .messages-thread-btn span,
+    .messages-thread-btn small,
+    .messages-thread-btn em {
+      display: block;
+    }
+
+    .messages-thread-btn small {
+      opacity: 0.82;
+    }
+
+    .messages-thread-btn em {
+      font-style: normal;
+      font-weight: 700;
+      color: #16a34a;
+    }
+
+    .messages-thread-rating {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(240, 253, 244, 0.9) !important;
+      border: 1.5px solid rgba(22, 163, 74, 0.35) !important;
+      color: #166534 !important;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .messages-thread-body {
+      display: grid;
+      gap: 14px;
+      min-height: 0;
+      height: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      padding-right: 6px;
+      align-content: start;
+    }
+
+    .messages-panel {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      row-gap: 18px;
+    }
+
+    .messages-bubble {
+      max-width: 80%;
+      border-radius: 20px;
+      padding: 14px 16px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .messages-bubble p,
+    .messages-bubble strong,
+    .messages-bubble small {
+      margin: 0;
+    }
+
+    /* My bubble — green */
+    .messages-bubble.is-mine {
+      justify-self: end;
+      background: rgba(240, 253, 244, 0.9) !important;
+      border: 1.5px solid rgba(22, 163, 74, 0.35) !important;
+      color: #15803d !important;
+    }
+
+    /* Their bubble — neutral */
+    .messages-bubble.is-theirs {
+      justify-self: start;
+      background: #f1f5f9;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .messages-form {
+      display: grid;
+      gap: 12px;
+      align-self: end;
+    }
+
+    .messages-form textarea {
+      resize: vertical;
+      min-height: 84px;
+    }
+
+    .messages-form-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .messages-status {
+      margin: 0;
+      opacity: 0.82;
+    }
+
+    .messages-status.is-error {
+      color: #fecaca;
+    }
+
+    /* ── Toolbar ── */
+    .messages-toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .messages-tool-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(22, 163, 74, 0.35);
+      background: rgba(240, 253, 244, 0.9);
+      color: #166534;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s, box-shadow 0.18s, transform 0.12s;
+      white-space: nowrap;
+    }
+
+    .messages-tool-btn:hover {
+      background: rgba(220, 252, 231, 1);
+      border-color: rgba(22, 163, 74, 0.6);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .messages-tool-btn:active {
+      transform: translateY(0);
+    }
+
+    .messages-tool-duitnow {
+      border-color: rgba(22, 163, 74, 0.5);
+      background: rgba(220, 252, 231, 0.95);
+      color: #14532d;
+    }
+
+    .messages-tool-duitnow:hover {
+      background: rgba(187, 247, 208, 0.9);
+      border-color: rgba(22, 163, 74, 0.7);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.22);
+    }
+
+    /* ── Image Preview ── */
+    .messages-image-preview {
+      position: relative;
+      display: inline-flex;
+      align-items: flex-start;
+      border-radius: 16px;
+      overflow: visible;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .messages-image-preview[hidden] {
+      display: none;
+    }
+
+    .messages-image-preview img {
+      display: block;
+      max-height: 180px;
+      max-width: 280px;
+      width: auto;
+      border-radius: 14px;
+      border: 2px solid rgba(22, 163, 74, 0.35);
+      object-fit: cover;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .messages-clear-img {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background: #ef4444;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+      transition: background 0.15s, transform 0.12s;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .messages-clear-img:hover {
+      background: #dc2626;
+      transform: scale(1.12);
+    }
+
+    /* ── Bubble Images ── */
+    .messages-bubble-image-link {
+      display: block;
+      text-decoration: none;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .messages-bubble-image {
+      display: block;
+      max-width: 260px;
+      max-height: 220px;
+      width: auto;
+      height: auto;
+      border-radius: 14px;
+      object-fit: cover;
+      transition: opacity 0.18s, transform 0.2s;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    }
+
+    .messages-bubble-image-link:hover .messages-bubble-image {
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .messages-duitnow-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #166534;
+      background: rgba(220, 252, 231, 0.9);
+      border-radius: 8px;
+      padding: 4px 10px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── DuitNow bubble — green ── */
+    .messages-bubble.is-duitnow.is-mine {
+      background: rgba(240, 253, 244, 0.9) !important;
+      border: 1.5px solid rgba(22, 163, 74, 0.35) !important;
+      color: #15803d !important;
+    }
+
+    .messages-bubble.is-duitnow.is-theirs {
+      background: rgba(240, 253, 244, 0.85);
+      border: 1.5px solid rgba(22, 163, 74, 0.22);
+    }
+
+    body.theme-dark .messages-thread-rating,
+    body.theme-dark .messages-bubble.is-mine,
+    body.theme-dark .messages-bubble.is-duitnow.is-mine {
+      background: rgba(20, 40, 25, 0.85) !important;
+      border-color: rgba(34, 197, 94, 0.28) !important;
+      color: #4ade80 !important;
+    }
+
+    @media (max-width: 768px) {
+      .messages-layout {
+        grid-template-columns: 1fr;
+      }
+      .messages-sidebar,
+      .messages-panel {
+        height: auto;
+        min-height: 400px;
+      }
+    }
+
+    /* Match employer messages layout while keeping the jobseeker green theme. */
+    .jobseeker-shell.messages-shell {
+      padding-bottom: 20px !important;
+    }
+
+    .jobseeker-shell.messages-shell::after {
+      content: "";
+      display: block;
+      height: 12px;
+    }
+
+    .jobseeker-shell.messages-shell .jobseeker-header {
+      margin-bottom: 32px !important;
+    }
+
+    .jobseeker-shell.messages-shell .messages-layout {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: 0;
+      margin: 0 0 16px;
+      display: grid;
+      grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .jobseeker-shell.messages-shell .messages-sidebar,
+    .jobseeker-shell.messages-shell .messages-panel {
+      height: 850px;
+      min-height: 0;
+      padding: 30px;
+      overflow: visible;
+      border-radius: 20px;
+      background: #fbfffc;
+      border: 1px solid rgba(22, 163, 74, 0.14);
+    }
+
+    .jobseeker-shell.messages-shell .messages-sidebar {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .jobseeker-shell.messages-shell .section-heading-row {
+      margin: 0 0 30px;
+      padding: 0;
+      gap: 24px;
+      border-bottom: 0;
+      background: transparent;
+    }
+
+    .jobseeker-shell.messages-shell .section-heading-row > div {
+      display: grid;
+      gap: 14px;
+    }
+
+    .jobseeker-shell.messages-shell .section-heading-row h2 {
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .jobseeker-shell.messages-shell .messages-thread-list {
+      height: auto;
+      min-height: 0;
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 0 6px 0 0;
+      display: grid;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-thread-btn {
+      gap: 8px;
+      padding: 16px;
+      border-radius: 18px;
+      box-shadow: none;
+    }
+
+    .jobseeker-shell.messages-shell .messages-thread-btn:hover,
+    .jobseeker-shell.messages-shell .messages-thread-btn:focus-visible,
+    .jobseeker-shell.messages-shell .messages-thread-btn.is-active {
+      box-shadow: 0 2px 6px -3px rgba(15, 23, 42, 0.12);
+    }
+
+    .jobseeker-shell.messages-shell .messages-thread-btn:focus-visible {
+      outline: 2px solid #16a34a;
+      outline-offset: -3px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-panel {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      row-gap: 18px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-thread-body {
+      height: 100%;
+      min-height: 0;
+      max-height: 100%;
+      overflow-y: auto;
+      padding: 0 6px 0 0;
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      background: transparent;
+    }
+
+    .jobseeker-shell.messages-shell .messages-bubble {
+      max-width: 80%;
+      padding: 14px 16px;
+      border-radius: 20px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-bubble.is-mine,
+    .jobseeker-shell.messages-shell .messages-bubble.is-duitnow.is-mine {
+      justify-self: end;
+      align-self: auto;
+      border-bottom-right-radius: 20px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-bubble.is-theirs,
+    .jobseeker-shell.messages-shell .messages-bubble.is-duitnow.is-theirs {
+      justify-self: start;
+      align-self: auto;
+      border-bottom-left-radius: 20px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-form {
+      height: auto;
+      min-height: 140px;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "toolbar toolbar"
+        "input send"
+        "status status";
+      gap: 12px;
+      align-self: end;
+      border-top: 0;
+      background: transparent;
+      overflow: visible;
+    }
+
+    .jobseeker-shell.messages-shell .messages-toolbar {
+      grid-area: toolbar;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .jobseeker-shell.messages-shell .messages-form textarea {
+      grid-area: input;
+      min-height: 160px;
+      max-height: 260px;
+      padding: 12px 14px;
+      resize: vertical;
+      border-radius: 8px;
+    }
+
+    .jobseeker-shell.messages-shell .messages-form-actions {
+      grid-area: send;
+      align-self: start;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .jobseeker-shell.messages-shell .messages-form-actions .btn-primary {
+      min-width: 0;
+      width: 100%;
+      min-height: 56px;
+      height: 56px;
+      padding: 0 22px;
+      border-radius: 10px;
+      justify-content: center;
+    }
+
+    .jobseeker-shell.messages-shell .messages-status {
+      grid-area: status;
+      align-self: start;
+      margin: 0;
+    }
+
+    @media (max-width: 980px) {
+      .jobseeker-shell.messages-shell .messages-layout {
+        height: auto;
+        grid-template-columns: 1fr;
+      }
+
+      .jobseeker-shell.messages-shell .messages-sidebar {
+        display: none !important;
+      }
+
+      .jobseeker-shell.messages-shell .messages-sidebar,
+      .jobseeker-shell.messages-shell .messages-panel {
+        height: auto;
+      }
+
+      .jobseeker-shell.messages-shell .messages-panel {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0;
+        width: 100%;
+      }
+
+      .jobseeker-shell.messages-shell .messages-thread-body {
+        height: auto;
+        max-height: none;
+      }
+
+      .jobseeker-shell.messages-shell .messages-bubble {
+        max-width: 100%;
+      }
+
+      .jobseeker-shell.messages-shell .messages-form {
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "toolbar"
+          "preview"
+          "input"
+          "send"
+          "status";
+      }
+
+      .jobseeker-shell.messages-shell .messages-form-actions .btn-primary {
+        width: 100%;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<body data-messages-role="jobseeker" data-header-path="../../partials/header-jobseeker.html">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="jobseeker-shell messages-shell">
+    <!-- Container for the jobseeker header content and layout. -->
+    <div class="jobseeker-header">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Messages</div>
+      <h1>My Messages</h1>
+      <p>Chat with employers, confirm job details, and keep your conversations organised.</p>
+    </div>
+
+    <!-- Section for the messages layout area of this page. -->
+    <section class="messages-layout">
+      <aside class="jobseeker-card messages-sidebar">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Inbox</div>
+            <h2>Your conversations</h2>
+          </div>
+        </div>
+        <!-- Container for the messages thread list content and layout. -->
+        <select id="messages-thread-select" class="messages-thread-select" aria-label="Your conversations" disabled>
+          <option value="">Loading conversations...</option>
+        </select>
+        <div id="messages-thread-list" class="messages-thread-list">
+          <article class="jobseeker-item">
+            <strong>Loading messages...</strong>
+            <p>Please wait while your conversations are loaded.</p>
+          </article>
+        </div>
+      </aside>
+
+      <!-- Section for the jobseeker card area of this page. -->
+      <section class="jobseeker-card messages-panel">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Thread</div>
+            <h2 id="messages-thread-title">Select a conversation</h2>
+            <p id="messages-thread-subtitle">Open a thread from the left to read or send messages.</p>
+          </div>
+        </div>
+        <!-- Container for the messages thread body content and layout. -->
+        <div id="messages-thread-body" class="messages-thread-body">
+          <article class="jobseeker-item">
+            <strong>No conversation selected</strong>
+            <p>Choose a thread from the inbox to start reading.</p>
+          </article>
+        </div>
+        <!-- Form where users enter and submit messages details. -->
+        <form id="messages-form" class="messages-form">
+          <label for="messages-input">Message</label>
+          <textarea id="messages-input" rows="4" placeholder="Type your message here..." disabled></textarea>
+          <!-- Container for the messages form actions content and layout. -->
+          <div class="messages-form-actions">
+            <button id="messages-send-btn" type="submit" class="btn-primary" disabled>Send Message</button>
+          </div>
+          <p id="messages-status" class="messages-status">Open a thread to start chatting.</p>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/messages-page.js?v=20260429c. -->
+  <script type="module" src="../../js/messages-page.js?v=20260429c"></script>
+</body>
+</html>

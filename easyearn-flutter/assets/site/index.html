@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the index page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn – Job Matching Portal</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="flutter-public-page flutter-home-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Section for the hero area of this page. -->
+  <section class="hero hero-photo">
+    <!-- Container for the hero bg content and layout. -->
+    <div class="hero-bg" aria-hidden="true">
+      <!-- Container for the hero slide content and layout. -->
+      <div class="hero-slide active" style="background-image: url('images/barista.png');"></div>
+      <!-- Container for the hero slide content and layout. -->
+      <div class="hero-slide" style="background-image: url('images/grab.jpg');"></div>
+      <!-- Container for the hero slide content and layout. -->
+      <div class="hero-slide" style="background-image: url('images/tutor.jpeg');"></div>
+      <!-- Container for the hero slide content and layout. -->
+      <div class="hero-slide" style="background-image: url('images/eventcrew.jpeg');"></div>
+    </div>
+    <!-- Container for the hero overlay content and layout. -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <!-- Container for the hero inner content and layout. -->
+    <div class="hero-inner">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">EasyEarn Job Matching Portal</div>
+      <h1>Find Jobs.<br>Hire Talent.<br><span class="highlight">EasyEarn.</span></h1>
+      <p>Work your way, earn your day. Connecting job seekers and employers across Malaysia — for every city, every role, and every schedule.</p>
+      <!-- Container for the hero btns content and layout. -->
+      <div class="hero-btns">
+        <a href="login.html?tab=register" class="btn-primary">🔍 Find a Job</a>
+        <a href="login.html?tab=register" class="btn-outline">🏢 Post a Job</a>
+      </div>
+      <!-- Container for the hero stats content and layout. -->
+      <div class="hero-stats">
+        <!-- Container for the stat num content and layout. -->
+        <div><div class="stat-num">New</div><div class="stat-lbl">Early Access Platform</div></div>
+        <!-- Container for the stat num content and layout. -->
+        <div><div class="stat-num">100%</div><div class="stat-lbl">Verified Employers</div></div>
+        <!-- Container for the stat num content and layout. -->
+        <div><div class="stat-num">Free</div><div class="stat-lbl">To Join</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pub-page-body">
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="features">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <h2>Why EasyEarn?</h2>
+        <p>Built for Malaysia's growing gig economy</p>
+      </div>
+      <!-- Container for the features grid content and layout. -->
+      <div class="features-grid">
+        <!-- Container for the feat card content and layout. -->
+        <div class="feat-card"><div class="feat-icon">✅</div><h3>Verified Employers</h3><p>Every employer gets a verification badge. No more job scams from Facebook groups.</p></div>
+        <!-- Container for the feat card content and layout. -->
+        <div class="feat-card"><div class="feat-icon">📄</div><h3>Auto Resume</h3><p>Your work history automatically generates a downloadable PDF resume.</p></div>
+        <!-- Container for the feat card content and layout. -->
+        <div class="feat-card"><div class="feat-icon">📍</div><h3>Location Filter</h3><p>Find jobs near you — even in smaller towns across Malaysia.</p></div>
+        <!-- Container for the feat card content and layout. -->
+        <div class="feat-card"><div class="feat-icon">⭐</div><h3>Rating System</h3><p>Both job seekers and employers rate each other for a trusted community.</p></div>
+        <!-- Container for the feat card content and layout. -->
+        <div class="feat-card"><div class="feat-icon">🌐</div><h3>Multilingual</h3><p>Available in Bahasa Malaysia, English, Mandarin and Tamil via Google Translate.</p></div>
+        <!-- Container for the feat card content and layout. -->
+        <div class="feat-card"><div class="feat-icon">🤖</div><h3>24/7 Chatbot</h3><p>Get help anytime with our rule-based chatbot support system.</p></div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="jobs">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <h2>Browse Jobs</h2>
+        <p>Explore short-term and part-time opportunities across Malaysia.</p>
+      </div>
+      <div class="view-more">
+        <a href="jobs.html" class="btn-view-more">Browse Jobs</a>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="roles">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <h2>Who We Serve</h2>
+        <p>EasyEarn is built for everyone in Malaysia's gig economy</p>
+      </div>
+      <!-- Container for the roles grid content and layout. -->
+      <div class="roles-grid">
+        <!-- Container for the role card content and layout. -->
+        <div class="role-card">
+          <div class="role-icon">🔍</div>
+          <h3>Job Seekers</h3>
+          <ul><li>University students</li><li>Housewives</li><li>Unemployed individuals</li><li>Anyone needing flexible income</li></ul>
+          <a href="login.html?tab=register" class="btn-role">Join as Job Seeker</a>
+        </div>
+        <!-- Container for the role card content and layout. -->
+        <div class="role-card featured">
+          <div class="role-icon">🏢</div>
+          <h3>Employers</h3>
+          <ul><li>Small & medium businesses</li><li>Event organisers</li><li>F&B outlets</li><li>Individual hirers</li></ul>
+          <a href="login.html?tab=register" class="btn-role">Join as Employer</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="coverage">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Project Coverage</div>
+        <h2>EasyEarn Coverage & User Types</h2>
+        <p>Multi-user web portal with role-based access and tailored functionality.</p>
+      </div>
+      <!-- Container for the coverage grid content and layout. -->
+      <div class="coverage-grid">
+        <!-- Container for the coverage card content and layout. -->
+        <div class="coverage-card">
+          <h3>Job Seekers</h3>
+          <ul class="clean-list">
+            <li>Register and build profiles with skill tags</li>
+            <li>Browse and filter jobs by category and location</li>
+            <li>Apply to jobs and track application status</li>
+            <li>Save jobs to wishlist and view work history</li>
+            <li>Auto-generate PDF resume from work history</li>
+            <li>Use chatbot for 24/7 support</li>
+          </ul>
+        </div>
+        <!-- Container for the coverage card content and layout. -->
+        <div class="coverage-card">
+          <h3>Employers</h3>
+          <ul class="clean-list">
+            <li>Register and obtain verification badge</li>
+            <li>Create and manage job listings with expiry dates</li>
+            <li>Review applications and approve or reject candidates</li>
+            <li>Rate job seekers after completion</li>
+          </ul>
+        </div>
+        <!-- Container for the coverage card content and layout. -->
+        <div class="coverage-card">
+          <h3>Administrators</h3>
+          <ul class="clean-list">
+            <li>User account control and role management</li>
+            <li>Job listing moderation and enforcement</li>
+            <li>Report and flag resolution</li>
+            <li>Platform analytics and monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="modules">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">System Modules</div>
+        <h2>Core Modules of EasyEarn</h2>
+        <p>Each module supports a critical step in the job matching lifecycle.</p>
+      </div>
+      <!-- Container for the module grid content and layout. -->
+      <div class="module-grid">
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>1. User Management</h3><p>Registration, login, and role-based access control for Job Seekers, Employers, and Administrators.</p></div>
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>2. Job Posting & Application</h3><p>Employers post jobs with category, location, salary, and expiry; seekers apply and track status.</p></div>
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>3. Safety & Trust</h3><p>Employer verification badges, report and flag system, and bidirectional ratings.</p></div>
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>4. Work History & Resume</h3><p>Track completed jobs, earnings, job type distribution, and auto-generate PDF resumes.</p></div>
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>5. Chatbot & Support</h3><p>Rule-based 24/7 assistance with FAQ guidance and application help.</p></div>
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>6. Admin & Analytics</h3><p>Admin dashboard for platform control and analytics powered by Chart.js.</p></div>
+        <!-- Container for the module card content and layout. -->
+        <div class="module-card"><h3>7. Google Translate Integration</h3><p>Language support through Google Translate redirection for Bahasa Malaysia, Mandarin, and Tamil.</p></div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="features-list">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Features</div>
+        <h2>Complete Features List</h2>
+        <p>Core features are essential; optional features enhance the experience.</p>
+      </div>
+      <div class="feature-block">
+        <h3>Core Features</h3>
+        <!-- Container for the feature grid content and layout. -->
+        <div class="feature-grid">
+          <div class="feature-item">User Registration & Login (Role-based)</div>
+          <div class="feature-item">Job Posting & Application</div>
+          <div class="feature-item">Job Category & Filter</div>
+          <div class="feature-item">Location Filter</div>
+          <div class="feature-item">Application Status Timeline</div>
+          <div class="feature-item">Employer Verification Badge</div>
+          <div class="feature-item">Report / Flag System</div>
+          <div class="feature-item">Rating & Review System</div>
+          <div class="feature-item">Work History Dashboard</div>
+          <div class="feature-item">Auto-Generate Resume (PDF)</div>
+          <div class="feature-item">Google Translate Integration</div>
+          <div class="feature-item">Rule-Based Chatbot</div>
+        </div>
+      </div>
+      <div class="feature-block">
+        <h3>Optional Features</h3>
+        <!-- Container for the feature grid content and layout. -->
+        <div class="feature-grid optional">
+          <div class="feature-item">Quick Apply</div>
+          <div class="feature-item">Saved Jobs / Wishlist</div>
+          <div class="feature-item">Job Expiry Date</div>
+          <div class="feature-item">Skills Tag</div>
+          <div class="feature-item">Profile Completeness</div>
+          <div class="feature-item">Analytics Dashboard</div>
+          <div class="feature-item">Payment Confirmation & Dispute</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="excluded">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Excluded</div>
+        <h2>Excluded Features (Current Phase)</h2>
+        <p>Items not included due to scope, time, or technical constraints.</p>
+      </div>
+      <!-- Container for the excluded grid content and layout. -->
+      <div class="excluded-grid">
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">Online Payment Gateway (DuitNow, Touch'n Go, cards)</div>
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">Real-Time Chat Messaging</div>
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">Native Mobile Application</div>
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">Email Verification</div>
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">Government Database Integration (SOCSO, EPF, MySejahtera)</div>
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">AI Job Matching Algorithm</div>
+        <!-- Container for the excluded card content and layout. -->
+        <div class="excluded-card">Push Notifications (Real-time)</div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="security">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Security</div>
+        <h2>Information Security & Policies</h2>
+        <p>Aligned with Malaysian regulations and technical safeguards.</p>
+      </div>
+      <!-- Container for the security grid content and layout. -->
+      <div class="security-grid">
+        <!-- Container for the security card content and layout. -->
+        <div class="security-card">
+          <h3>Regulatory Framework</h3>
+          <ul class="clean-list">
+            <li>Personal Data Protection Act (PDPA) 2010</li>
+            <li>Computer Crimes Act 1997</li>
+            <li>Consumer Protection Act 1999</li>
+            <li>Employment Act 1955 (Reference Only)</li>
+          </ul>
+        </div>
+        <!-- Container for the security card content and layout. -->
+        <div class="security-card">
+          <h3>Technical Security Measures</h3>
+          <ul class="clean-list">
+            <li>Supabase authentication with secure session handling</li>
+            <li>Role-Based Access Control (RBAC)</li>
+            <li>HTTPS encryption for all data transmission</li>
+            <li>Row Level Security (RLS) policies to enforce access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end pub-page-body -->
+
+  <!-- Section for the cta section area of this page. -->
+  <section class="cta-section">
+    <h2>Ready to EasyEarn?</h2>
+    <p>Join thousands of Malaysians finding flexible work opportunities</p>
+    <a href="login.html?tab=register" class="btn-cta">Create Free Account</a>
+  </section>
+  <!-- Shared footer is injected here by includes.js. -->
+  <div id="site-footer"></div>
+
+  <!-- Loads translation support for multilingual users. -->
+  <script src="js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+</body>
+</html>

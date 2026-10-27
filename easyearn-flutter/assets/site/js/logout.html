@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the logout page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goodbye – EasyEarn</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+  <link rel="preload" as="image" href="../images/logo.png">
+  <link rel="preload" as="image" href="../images/waving.gif">
+  <link rel="preload" as="image" href="../images/hand.gif">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-900: #0c2a38;
+      --teal-800: #0e4963;
+      --teal-700: #0e7490;
+      --teal-600: #0891b2;
+      --teal-500: #06b6d4;
+      --teal-400: #22d3ee;
+      --teal-300: #67e8f9;
+      --teal-100: #cffafe;
+      --teal-50:  #ecfeff;
+      --white: #ffffff;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(rgba(238,249,252,0.92), rgba(238,249,252,0.92));
+      overflow: hidden;
+    }
+
+    /* Page-level loading.gif pattern. It sits above the flat background. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: url('../images/loading.gif') center / 432px 240px repeat;
+      opacity: .72;
+    }
+
+    /* ── animated background ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 18% 82%, rgba(8,145,178,.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 82% 18%, rgba(34,211,238,.10) 0%, transparent 55%);
+      z-index: 0;
+    }
+
+    /* floating bubbles */
+    .bubbles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .bubble {
+      display: none;
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(45,212,191,.35), rgba(20,184,166,.08));
+      border: 1px solid rgba(94,234,212,.18);
+      animation: floatUp linear infinite;
+    }
+    .bubble:nth-child(1)  { width:60px;  height:60px;  left:8%;   animation-duration:12s; animation-delay:0s; }
+    .bubble:nth-child(2)  { width:30px;  height:30px;  left:22%;  animation-duration:9s;  animation-delay:2s; }
+    .bubble:nth-child(3)  { width:80px;  height:80px;  left:38%;  animation-duration:15s; animation-delay:1s; }
+    .bubble:nth-child(4)  { width:20px;  height:20px;  left:55%;  animation-duration:8s;  animation-delay:4s; }
+    .bubble:nth-child(5)  { width:50px;  height:50px;  left:70%;  animation-duration:11s; animation-delay:0.5s; }
+    .bubble:nth-child(6)  { width:35px;  height:35px;  left:85%;  animation-duration:10s; animation-delay:3s; }
+    .bubble:nth-child(7)  { width:70px;  height:70px;  left:12%;  animation-duration:14s; animation-delay:5s; }
+    .bubble:nth-child(8)  { width:25px;  height:25px;  left:62%;  animation-duration:7s;  animation-delay:6s; }
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) scale(.8); opacity:0; }
+      10%  { opacity:.7; }
+      90%  { opacity:.4; }
+      100% { transform: translateY(-20vh) scale(1.1); opacity:0; }
+    }
+
+    /* ── card ── */
+    .card {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 20px;
+      gap: 0;
+    }
+
+    .card-box {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.62);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 40px 32px 36px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 20px 60px rgba(14,116,144,.18),
+        inset 0 1px 0 rgba(255,255,255,.55);
+      animation: cardIn .7s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* Card-level pattern. Content uses z-index:1 so the pattern never covers text. */
+    .card-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('../images/loading.gif') center / 360px 214px repeat;
+      opacity: .22;
+    }
+
+    .card-box > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.theme-dark {
+      background: linear-gradient(rgba(11, 18, 32, 0.90), rgba(11, 18, 32, 0.90));
+    }
+
+    body.theme-dark::before { opacity: .34; }
+
+    /* Match the login page dark mode: dark glass card with cyan accents. */
+    body.theme-dark .card-box {
+      background: rgba(17,24,39,.92);
+      border-color: rgba(51,65,85,.86);
+      box-shadow:
+        0 26px 76px rgba(2,6,23,.58),
+        inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    body.theme-dark .card-box::before { opacity: .18; }
+
+    @keyframes cardIn {
+      from { opacity:0; transform: translateY(40px) scale(.96); }
+      to   { opacity:1; transform: translateY(0)   scale(1); }
+    }
+
+    /* ── bye-bye scene ── */
+    /* Logout bye scene: one centered stage holds the plant, hand, and profile photo. */
+    .bye-scene {
+      display: block;
+      margin: 0 auto 28px;
+      position: relative;
+      width: 390px;
+      max-width: 100%;
+      height: 216px;
+    }
+
+    /* ── mascot ── */
+    /* Plant mascot is lifted so the hand feels like waving near the profile photo. */
+    .logout-mascot-wrap {
+      position: absolute;
+      left: 8px;
+      bottom: 26px;
+      width: 214px;
+      height: 190px;
+      flex-shrink: 0;
+      display: block;
+      z-index: 2;
+      animation: mascotBob 2.6s ease-in-out infinite;
+    }
+    @keyframes mascotBob {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .bye-plant-gif {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 192px;
+      height: 192px;
+      object-fit: contain;
+      display: block;
+      background: url("../images/logo.png") center / contain no-repeat;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.26));
+      z-index: 1;
+    }
+    .bye-hand-gif {
+      position: absolute;
+      right: -2px;
+      top: 8px;
+      width: 96px;
+      height: 92px;
+      overflow: hidden;
+      border-radius: 18px;
+      transform-origin: 24px 48px;
+      filter: drop-shadow(0 5px 10px rgba(245,158,11,.22));
+      z-index: 3;
+      animation: handQuickWave .72s ease-in-out infinite;
+    }
+    /* The visible hand comes from hand.gif, clipped inside this small hand box. */
+    .bye-hand-gif::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("../images/hand.gif");
+      background-repeat: no-repeat;
+      background-position: center 16%;
+      background-size: 235px 235px;
+      transform: scale(1.1);
+    }
+    @keyframes handQuickWave {
+      0%, 100% { transform: rotate(-10deg) translateY(0); }
+      50% { transform: rotate(18deg) translateY(-2px); }
+    }
+
+    /* ── gif container ── */
+    /* Profile circle is positioned manually so it lines up with the waving hand. */
+    .gif-wrap {
+      position: absolute;
+      right: 72px;
+      bottom: 24px;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+    .gif-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--teal-400), var(--teal-600)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: spinRing 4s linear infinite;
+    }
+    .gif-ring-2 {
+      position: absolute;
+      inset: -13px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(94,234,212,.35);
+      animation: spinRing 9s linear infinite reverse;
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+    .gif-inner {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(45,212,191,.3);
+      box-shadow: 0 0 32px rgba(8,145,178,.18), 0 8px 24px rgba(14,116,144,.14);
+      background: #cffafe;
+    }
+    .gif-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── text ── */
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--teal-400);
+      margin-bottom: 10px;
+      animation: fadeSlide .6s .2s both;
+    }
+    .title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(18px, 5vw, 28px);
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      white-space: nowrap;
+      animation: fadeSlide .6s .3s both;
+    }
+    .title span {
+      color: var(--teal-400);
+    }
+    .subtitle {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 36px;
+      animation: fadeSlide .6s .4s both;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity:0; transform: translateY(16px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* ── divider ── */
+    .divider {
+      width: 56px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--teal-500), transparent);
+      margin: 0 auto 28px;
+      border-radius: 99px;
+      animation: fadeSlide .6s .35s both;
+    }
+
+    /* ── buttons ── */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: fadeSlide .6s .5s both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .22s cubic-bezier(.22,1,.36,1);
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal-500) 0%, var(--teal-700) 100%);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(20,184,166,.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(20,184,166,.55);
+      background: linear-gradient(135deg, var(--teal-400) 0%, var(--teal-600) 100%);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.07);
+      color: rgba(204,251,241,.8);
+      border: 1px solid rgba(94,234,212,.2);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.12);
+      color: var(--teal-300);
+      border-color: rgba(94,234,212,.4);
+      transform: translateY(-1px);
+    }
+
+    /* ── footer note ── */
+    .footer-note {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #94a3b8;
+      animation: fadeSlide .6s .6s both;
+    }
+    .footer-note a {
+      color: var(--teal-400);
+      text-decoration: none;
+    }
+    .footer-note a:hover { text-decoration: underline; }
+
+    /* ── logo ── */
+    body.theme-dark .title {
+      color: #f8fafc;
+    }
+
+    body.theme-dark .subtitle,
+    body.theme-dark .footer-note {
+      color: #cbd5e1;
+    }
+
+    body.theme-dark .btn-ghost {
+      background: transparent;
+      color: #67e8f9;
+      border-color: rgba(34, 211, 238, 0.55);
+    }
+
+    body.theme-dark .btn-primary:hover,
+    body.theme-dark .btn-primary:focus-visible {
+      background: linear-gradient(135deg, var(--teal-400) 0%, var(--teal-600) 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 28px rgba(34, 211, 238, 0.34);
+    }
+
+    body.theme-dark .btn-ghost:hover,
+    body.theme-dark .btn-ghost:focus-visible {
+      background: rgba(8, 145, 178, 0.18);
+      color: #a5f3fc;
+      border-color: rgba(34, 211, 238, 0.72);
+      box-shadow: 0 8px 22px rgba(34, 211, 238, 0.18);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 36px;
+      animation: fadeSlide .6s .1s both;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--teal-400);
+    }
+
+    /* sparkles */
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--teal-400);
+      animation: sparkle ease-in-out infinite;
+      opacity: 0;
+    }
+    @keyframes sparkle {
+      0%,100% { opacity:0; transform:scale(0); }
+      50%      { opacity:.9; transform:scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      .card-box { padding: 28px 18px 26px; border-radius: 20px; }
+      .title { font-size: clamp(22px, 8vw, 28px); }
+      .bye-scene { width: 300px; height: 164px; margin-bottom: 24px; }
+      .logout-mascot-wrap { width: 156px; height: 138px; left: 4px; bottom: 20px; }
+      .bye-plant-gif { width: 144px; height: 144px; }
+      .gif-wrap { width: 78px; height: 78px; right: 58px; bottom: 18px; }
+      .gif-inner { width: 78px; height: 78px; }
+      .bye-hand-gif { width: 68px; height: 64px; top: 8px; right: -2px; }
+    }
+  </style>
+  <link rel="stylesheet" href="../css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+
+<!-- Inline script runs page-specific JavaScript behavior. -->
+<script>
+  try {
+    const savedTheme = localStorage.getItem('easyearn_theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.body.classList.toggle('theme-dark', savedTheme ? savedTheme === 'dark' : prefersDark);
+  } catch (e) {}
+</script>
+
+<div class="bg"></div>
+
+<div class="bubbles">
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+</div>
+
+<div class="sparkles" id="sparkles"></div>
+
+<!-- Container for the card content and layout. -->
+<div class="card">
+  <!-- Container for the card box content and layout. -->
+  <div class="card-box">
+
+    <a href="index.html" class="logo">
+      <img src="../images/logo.png" alt="EasyEarn" class="logo-img" onerror="this.style.display='none'">
+      <span class="logo-text">EasyEarn</span>
+    </a>
+
+    <!-- Logout scene: EasyEarn mascot beside profile -->
+    <div class="bye-scene">
+      <div class="logout-mascot-wrap">
+        <img class="bye-plant-gif" src="../images/waving.gif" alt="EasyEarn waving mascot">
+        <span class="bye-hand-gif" aria-hidden="true"></span>
+      </div>
+
+      <!-- Profile circle -->
+      <div class="gif-wrap">
+        <div class="gif-ring"></div>
+        <div class="gif-ring-2"></div>
+        <div class="gif-inner">
+          <img id="profile-photo" src="" alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:none;">
+          <div id="profile-initials" style="
+            width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+            font-family:'Syne',sans-serif;font-size:36px;font-weight:800;
+            color:var(--teal-300);background:var(--teal-800);
+            letter-spacing:-1px;
+          ">?</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="eyebrow">Session Ended</p>
+    <h1 class="title">See You <span>Soon!</span></h1>
+    <div class="divider"></div>
+    <p class="subtitle">
+      You've been safely logged out of EasyEarn.<br>
+      Your progress has been saved.
+    </p>
+
+    <div class="btn-group">
+      <a href="index.html" class="btn btn-primary">
+        Back to Home
+      </a>
+      <a href="login.html" class="btn btn-ghost">
+        Log Back In
+      </a>
+    </div>
+
+    <p class="footer-note">
+      Need help? <a href="help.html">Visit our Help Centre</a>
+    </p>
+
+  </div>
+</div>
+
+<!-- Inline script runs page-specific JavaScript behavior. -->
+<script type="module">
+  // Safety net: sign out via Supabase in case user navigated here directly
+  try {
+    const { createClient } = await import('./js/supabase-config.js').catch(() => ({}));
+    if (typeof createClient === 'undefined') {
+      // Try importing signOutUser directly
+      const { signOutUser } = await import('./js/supabase-data.js');
+      await signOutUser();
+    }
+  } catch (e) {
+    // Already signed out or config unavailable — safe to ignore
+  }
+</script>
+
+<!-- Inline script runs page-specific JavaScript behavior. -->
+<script>
+  // ── Sparkles ──
+  const container = document.getElementById('sparkles');
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement('div');
+    s.className = 'spark';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top  = Math.random() * 100 + '%';
+    s.style.animationDuration  = (2 + Math.random() * 4) + 's';
+    s.style.animationDelay     = (Math.random() * 5) + 's';
+    s.style.width = s.style.height = (2 + Math.random() * 4) + 'px';
+    container.appendChild(s);
+  }
+
+  // ── Load Profile Photo ──
+  (function loadProfilePhoto() {
+    const keys = ['profilePhoto', 'profile_photo', 'profilePic', 'profile_pic', 'photoURL', 'photo_url', 'avatar'];
+    let photoSrc = null;
+    let userName = null;
+
+    // Try sessionStorage first, then localStorage
+    for (const storage of [sessionStorage, localStorage]) {
+      // Check direct photo keys
+      for (const key of keys) {
+        try {
+          const val = storage.getItem(key);
+          if (val && val.length > 10) { photoSrc = val; break; }
+        } catch(e) {}
+      }
+      if (photoSrc) break;
+
+      // Check if there's a user object stored as JSON
+      for (const key of ['user', 'currentUser', 'userProfile', 'userData', 'profile']) {
+        try {
+          const raw = storage.getItem(key);
+          if (raw) {
+            const obj = JSON.parse(raw);
+            const src = obj.photoURL || obj.photo_url || obj.profilePhoto || obj.avatar || obj.profile_pic;
+            if (src) { photoSrc = src; }
+            const name = obj.name || obj.displayName || obj.username || obj.fullName || obj.firstName;
+            if (name) { userName = name; }
+            if (photoSrc) break;
+          }
+        } catch(e) {}
+      }
+      if (photoSrc) break;
+    }
+
+    const imgEl = document.getElementById('profile-photo');
+    const initialsEl = document.getElementById('profile-initials');
+
+    if (photoSrc) {
+      imgEl.onload = () => {
+        initialsEl.style.display = 'none';
+        imgEl.style.display = 'block';
+      };
+      imgEl.onerror = () => showInitials(userName);
+      imgEl.src = photoSrc;
+    } else {
+      showInitials(userName);
+    }
+
+    function showInitials(name) {
+      if (name) {
+        const parts = name.trim().split(/\s+/);
+        const initials = parts.length >= 2
+          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+          : parts[0].slice(0, 2).toUpperCase();
+        initialsEl.textContent = initials;
+      }
+      initialsEl.style.display = 'flex';
+      imgEl.style.display = 'none';
+    }
+  })();
+</script>
+
+</body>
+</html>
+
+

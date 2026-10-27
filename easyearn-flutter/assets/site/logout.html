@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the logout page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goodbye – EasyEarn</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+  <link rel="preload" as="image" href="images/logo.png">
+  <link rel="preload" as="image" href="images/waving.gif">
+  <link rel="preload" as="image" href="images/hand.gif">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    #0891b2;
+      --primary-dk: #0e7490;
+      --primary-lt: #cffafe;
+      --accent:     #a5f3fc;
+      --bg:         #eef9fc;
+      --bg-hero:    linear-gradient(160deg, #dff7fb 0%, #eef9fc 58%, #f6fcfd 100%);
+      --card:       #ffffff;
+      --ink:        #0d1b2a;
+      --ink-soft:   #475569;
+      --ink-muted:  #94a3b8;
+      --shadow-md:  0 12px 28px rgba(15, 23, 42, 0.10);
+      --shadow-lg:  0 20px 48px rgba(14, 116, 144, 0.14);
+      --radius:     20px;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: "Manrope", "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(rgba(238,249,252,0.92), rgba(238,249,252,0.92));
+      color: var(--ink);
+    }
+
+    /* Page-level loading.gif pattern. It sits above the flat background. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: url('images/loading.gif') center / 432px 240px repeat;
+      opacity: .72;
+    }
+
+    body.theme-dark {
+      --card: #111827;
+      --ink: #f8fafc;
+      --ink-soft: #cbd5e1;
+      --ink-muted: #94a3b8;
+      background: linear-gradient(rgba(11, 18, 32, 0.90), rgba(11, 18, 32, 0.90));
+    }
+
+    body.theme-dark::before { opacity: .22; }
+
+    /* ── background accents ── */
+    .bg-blob { display: none; }
+
+    /* ── card ── */
+    .card {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 20px;
+    }
+
+    .card-box {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 24px;
+      padding: 44px 36px 40px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(14, 116, 144, 0.18), 0 2px 8px rgba(255,255,255,0.5) inset;
+      animation: cardIn .6s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* Card-level pattern. Content uses z-index:1 so the pattern never covers text. */
+    .card-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('images/loading.gif') center / 360px 214px repeat;
+      opacity: .22;
+    }
+
+    .card-box > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.theme-dark .card-box {
+      background: rgba(17, 24, 39, 0.92);
+      border-color: rgba(51, 65, 85, 0.86);
+      box-shadow: 0 26px 76px rgba(2, 6, 23, 0.58), 0 1px 0 rgba(255,255,255,0.05) inset;
+    }
+
+    body.theme-dark .card-box::before { opacity: .18; }
+    @keyframes cardIn {
+      from { opacity:0; transform: translateY(32px) scale(.97); }
+      to   { opacity:1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── logo ── */
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      text-decoration: none;
+      animation: fadeSlide .5s .05s both;
+    }
+    .logo-img {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -.3px;
+    }
+
+    /* ── bye scene ── */
+    /* Logout bye scene: one centered stage holds the plant, hand, and profile photo. */
+    .bye-scene {
+      display: block;
+      margin: 0 auto 28px;
+      position: relative;
+      width: 390px;
+      max-width: 100%;
+      height: 216px;
+    }
+
+    /* Plant mascot is lifted so the hand feels like waving near the profile photo. */
+    .logout-mascot-wrap {
+      position: absolute;
+      left: 8px;
+      bottom: 26px;
+      width: 214px;
+      height: 190px;
+      flex-shrink: 0;
+      display: block;
+      z-index: 2;
+      animation: mascotBob 2.6s ease-in-out infinite;
+    }
+    @keyframes mascotBob {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .bye-plant-gif {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 192px;
+      height: 192px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 8px 16px rgba(8,145,178,.16));
+      z-index: 1;
+    }
+    .bye-hand-gif {
+      position: absolute;
+      right: -2px;
+      top: 8px;
+      width: 96px;
+      height: 92px;
+      overflow: hidden;
+      border-radius: 18px;
+      transform-origin: 24px 48px;
+      filter: drop-shadow(0 5px 10px rgba(245,158,11,.22));
+      z-index: 3;
+      animation: handQuickWave .72s ease-in-out infinite;
+    }
+    /* The visible hand comes from hand.gif, clipped inside this small hand box. */
+    .bye-hand-gif::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("images/hand.gif");
+      background-repeat: no-repeat;
+      background-position: center 16%;
+      background-size: 235px 235px;
+      transform: scale(1.1);
+    }
+    @keyframes handQuickWave {
+      0%, 100% { transform: rotate(-10deg) translateY(0); }
+      50% { transform: rotate(18deg) translateY(-2px); }
+    }
+
+    /* ── profile circle ── */
+    /* Profile circle is positioned manually so it lines up with the waving hand. */
+    .gif-wrap {
+      position: absolute;
+      right: 72px;
+      bottom: 24px;
+      width: 96px; height: 96px;
+      flex-shrink: 0;
+    }
+    .gif-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--primary), var(--primary-lt)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: spinRing 4s linear infinite;
+    }
+    .gif-ring-2 {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(8,145,178,.28);
+      animation: spinRing 9s linear infinite reverse;
+    }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
+
+    .gif-inner {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(8,145,178,.22);
+      box-shadow: 0 4px 18px rgba(8,145,178,.18);
+      background: var(--primary-lt);
+    }
+    .gif-inner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── text ── */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+      animation: fadeSlide .5s .15s both;
+    }
+    .title {
+      font-size: clamp(24px, 6vw, 34px);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      animation: fadeSlide .5s .2s both;
+    }
+    .title span { color: var(--primary); }
+
+    .divider {
+      width: 48px; height: 2.5px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      margin: 0 auto 22px;
+      border-radius: 99px;
+      animation: fadeSlide .5s .25s both;
+    }
+
+    .subtitle {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 32px;
+      animation: fadeSlide .5s .3s both;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity:0; transform: translateY(14px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* ── buttons ── */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      animation: fadeSlide .5s .38s both;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s, transform .2s, box-shadow .2s;
+      border: 2px solid var(--primary);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(8,145,178,.30);
+    }
+    .btn-primary:hover {
+      background: #f8fdff;
+      color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(8,145,178,.22);
+    }
+    .btn-ghost {
+      background: #fff;
+      color: var(--primary);
+    }
+    .btn-ghost:hover {
+      background: var(--primary-lt);
+      transform: translateY(-1px);
+    }
+
+    body.theme-dark .btn-primary:hover,
+    body.theme-dark .btn-primary:focus-visible {
+      background: #164e63;
+      color: #e0faff;
+      border-color: #22d3ee;
+      box-shadow: 0 8px 24px rgba(34, 211, 238, 0.26);
+    }
+
+    body.theme-dark .btn-ghost {
+      background: transparent;
+      color: #67e8f9;
+      border-color: #22d3ee;
+    }
+
+    body.theme-dark .btn-ghost:hover,
+    body.theme-dark .btn-ghost:focus-visible {
+      background: rgba(8, 145, 178, 0.18);
+      color: #a5f3fc;
+      box-shadow: 0 8px 22px rgba(34, 211, 238, 0.18);
+    }
+
+    /* ── footer note ── */
+    .footer-note {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      animation: fadeSlide .5s .44s both;
+    }
+    .footer-note a { color: var(--primary); text-decoration: none; }
+    .footer-note a:hover { text-decoration: underline; }
+
+    /* ── sparkles ── */
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .spark {
+      position: absolute;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: sparkle ease-in-out infinite;
+      opacity: 0;
+    }
+    @keyframes sparkle {
+      0%,100% { opacity:0; transform:scale(0); }
+      50%      { opacity:.55; transform:scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      .card-box { padding: 28px 18px 26px; border-radius: 20px; }
+      .title    { font-size: clamp(22px, 8vw, 28px); }
+      .bye-scene { width: 300px; height: 164px; margin-bottom: 24px; }
+      .logout-mascot-wrap { width: 156px; height: 138px; left: 4px; bottom: 20px; }
+      .bye-plant-gif { width: 144px; height: 144px; }
+      .gif-wrap { width: 78px; height: 78px; right: 58px; bottom: 18px; }
+      .gif-inner { width: 78px; height: 78px; }
+      .bye-hand-gif { width: 68px; height: 64px; top: 8px; right: -2px; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+
+<!-- Inline script runs page-specific JavaScript behavior. -->
+<script>
+  try {
+    const savedTheme = localStorage.getItem('easyearn_theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.body.classList.toggle('theme-dark', savedTheme ? savedTheme === 'dark' : prefersDark);
+  } catch (e) {}
+</script>
+
+<div class="bg-blob bg-blob-1"></div>
+<div class="bg-blob bg-blob-2"></div>
+
+<div class="sparkles" id="sparkles"></div>
+
+<!-- Container for the card content and layout. -->
+<div class="card">
+  <!-- Container for the card box content and layout. -->
+  <div class="card-box">
+
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="EasyEarn" class="logo-img" onerror="this.style.display='none'">
+      <span class="logo-text">EasyEarn</span>
+    </a>
+
+    <!-- Logout scene: EasyEarn mascot beside profile -->
+    <div class="bye-scene">
+      <div class="logout-mascot-wrap">
+        <img class="bye-plant-gif" src="images/waving.gif" alt="EasyEarn waving mascot" loading="eager" decoding="async" fetchpriority="high">
+        <span class="bye-hand-gif" aria-hidden="true"></span>
+      </div>
+
+      <!-- Profile circle -->
+      <div class="gif-wrap">
+        <div class="gif-ring"></div>
+        <div class="gif-ring-2"></div>
+        <div class="gif-inner">
+          <img id="profile-photo" src="" alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;display:none;">
+          <div id="profile-initials" style="
+            width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+            font-family:'Manrope',sans-serif;font-size:32px;font-weight:800;
+            color:#0891b2;background:#cffafe;
+            letter-spacing:-1px;
+          ">?</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="eyebrow">Session Ended</p>
+    <h1 class="title">See You <span>Soon!</span></h1>
+    <div class="divider"></div>
+    <p class="subtitle">
+      You've been safely logged out of EasyEarn.<br>
+      Your progress has been saved.
+    </p>
+
+    <div class="btn-group">
+      <a href="index.html" class="btn btn-primary">
+        Back to Home
+      </a>
+      <a href="login.html" class="btn btn-ghost">
+        Log Back In
+      </a>
+    </div>
+
+    <p class="footer-note">
+      Need help? <a href="help.html">Visit our Help Centre</a>
+    </p>
+
+  </div>
+</div>
+
+<!-- Inline script runs page-specific JavaScript behavior. -->
+<script type="module">
+  // Direct visits also clear an existing session, without navigating here again.
+  try {
+    const { supabase } = await import('./js/supabase-config.js');
+    const { data, error } = await supabase.auth.getSession();
+    if (error) throw error;
+    if (data.session) {
+      const { error: signOutError } = await supabase.auth.signOut({ scope: 'local' });
+      if (signOutError) throw signOutError;
+    }
+  } catch (error) {
+    console.error('Unable to finish signing out:', error);
+    document.querySelector('.subtitle').textContent =
+      'Unable to confirm logout. Please reconnect and try signing out again.';
+  }
+</script>
+
+<!-- Inline script runs page-specific JavaScript behavior. -->
+<script>
+  // ── Sparkles ──
+  const container = document.getElementById('sparkles');
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement('div');
+    s.className = 'spark';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top  = Math.random() * 100 + '%';
+    s.style.animationDuration  = (2 + Math.random() * 4) + 's';
+    s.style.animationDelay     = (Math.random() * 5) + 's';
+    s.style.width = s.style.height = (2 + Math.random() * 4) + 'px';
+    container.appendChild(s);
+  }
+
+  // ── Load Profile Photo ──
+  (function loadProfilePhoto() {
+    let photoSrc = null;
+    let userName = null;
+
+    // First: read keys saved by header JS right before logout
+    try {
+      photoSrc = sessionStorage.getItem('ee_logout_photo') || null;
+      userName = sessionStorage.getItem('ee_logout_name') || null;
+      // Keep the snapshot for refreshes of this goodbye page.
+      // The next signed-in header replaces it with that user's profile.
+    } catch(e) {}
+
+    // Fallback: scan common storage patterns
+    if (!photoSrc && !userName) {
+      const photoKeys = ['profilePhoto', 'profile_photo', 'profilePic', 'profile_pic', 'photoURL', 'photo_url', 'avatar'];
+      for (const storage of [sessionStorage, localStorage]) {
+        for (const key of photoKeys) {
+          try {
+            const val = storage.getItem(key);
+            if (val && val.length > 10) { photoSrc = val; break; }
+          } catch(e) {}
+        }
+        if (photoSrc) break;
+        for (const key of ['user', 'currentUser', 'userProfile', 'userData', 'profile']) {
+          try {
+            const raw = storage.getItem(key);
+            if (raw) {
+              const obj = JSON.parse(raw);
+              const src = obj.photoURL || obj.photo_url || obj.profilePhoto || obj.avatar || obj.profile_pic;
+              if (src) { photoSrc = src; }
+              const name = obj.name || obj.displayName || obj.username || obj.fullName || obj.firstName;
+              if (name) { userName = name; }
+              if (photoSrc) break;
+            }
+          } catch(e) {}
+        }
+        if (photoSrc) break;
+      }
+    }
+
+    const imgEl = document.getElementById('profile-photo');
+    const initialsEl = document.getElementById('profile-initials');
+
+    if (photoSrc) {
+      imgEl.onload = () => {
+        initialsEl.style.display = 'none';
+        imgEl.style.display = 'block';
+      };
+      imgEl.onerror = () => showInitials(userName);
+      imgEl.src = photoSrc;
+    } else {
+      showInitials(userName);
+    }
+
+    function showInitials(name) {
+      if (name) {
+        const parts = name.trim().split(/\s+/);
+        const initials = parts.length >= 2
+          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+          : parts[0].slice(0, 2).toUpperCase();
+        initialsEl.textContent = initials;
+      }
+      initialsEl.style.display = 'flex';
+      imgEl.style.display = 'none';
+    }
+  })();
+</script>
+
+</body>
+</html>

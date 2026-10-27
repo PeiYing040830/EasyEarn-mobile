@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the dashboard page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Job Seeker Dashboard</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002b">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="jobseeker-dashboard-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Header area introduces the page and usually contains the main page title. -->
+  <header class="dashboard-hero">
+    <!-- Container for the dashboard hero inner content and layout. -->
+    <div class="dashboard-hero-inner dashboard-hero-split">
+      <!-- Container for the dashboard hero copy content and layout. -->
+      <div class="dashboard-hero-copy">
+        <!-- Container for the hero badge content and layout. -->
+        <div class="hero-badge">Job Seeker Dashboard</div>
+        <h1>Welcome back, <span id="welcome-name">Job Seeker</span></h1>
+        <p id="welcome-subtitle">Track your progress, strengthen your profile, and keep your account ready for future employer activity.</p>
+        <!-- Container for the hero actions content and layout. -->
+        <div class="hero-actions">
+          <a href="jobs.html" class="btn-primary">Open Jobs</a>
+          <a href="profile.html" class="btn-outline">Edit Profile</a>
+        </div>
+      </div>
+      <aside class="dashboard-hero-snapshot">
+        <!-- Container for the section title content and layout. -->
+        <div class="section-title left-aligned compact overview-copy">
+          <!-- Container for the section tag content and layout. -->
+          <div class="section-tag">Snapshot</div>
+          <h2>Your job search at a glance</h2>
+          <p>Key numbers stay visible, but the real focus is what needs your action next.</p>
+        </div>
+        <article class="dashboard-card progress-card overview-progress">
+          <!-- Container for the card kicker content and layout. -->
+          <div class="card-kicker">Profile completeness</div>
+          <div class="progress-heading">
+            <h3 id="profile-completeness-value">0%</h3>
+            <a href="profile.html" class="text-link">Complete profile</a>
+          </div>
+          <div class="progress-track" aria-label="Profile completeness progress">
+            <span class="progress-fill" id="profile-completeness-bar" style="width: 0%;"></span>
+          </div>
+          <ul class="mini-checklist" id="profile-completeness-list">
+            <li>Complete basic info</li>
+            <li>Add skills</li>
+            <li>Add work history</li>
+          </ul>
+        </article>
+      </aside>
+    </div>
+  </header>
+
+  <!-- Main area contains the primary page content. -->
+  <main>
+    <!-- Main content section that groups related page information. -->
+    <section class="section">
+      <!-- Inner wrapper that keeps this content aligned with the page width. -->
+      <div class="section-inner">
+        <!-- Container for the section panel content and layout. -->
+        <div class="section-panel">
+          <!-- Container for the stats strip content and layout. -->
+          <div class="stats-strip">
+            <article class="dashboard-card stat-pill-card">
+              <span class="card-kicker">Applications</span>
+              <!-- Container for the stat inline content and layout. -->
+              <div class="stat-inline">
+                <strong id="applications-total">0</strong>
+                <p id="applications-summary">No applications yet</p>
+              </div>
+            </article>
+            <article class="dashboard-card stat-pill-card">
+              <span class="card-kicker">Interviews</span>
+              <!-- Container for the stat inline content and layout. -->
+              <div class="stat-inline">
+                <strong id="interviews-total">0</strong>
+                <p id="interviews-summary">No interviews scheduled</p>
+              </div>
+            </article>
+            <article class="dashboard-card stat-pill-card">
+              <span class="card-kicker">Saved jobs</span>
+              <!-- Container for the stat inline content and layout. -->
+              <div class="stat-inline">
+                <strong id="saved-jobs-total">0</strong>
+                <p id="saved-jobs-summary">No saved jobs yet</p>
+              </div>
+            </article>
+            <article class="dashboard-card stat-pill-card">
+              <span class="card-kicker">Pending review</span>
+              <!-- Container for the stat inline content and layout. -->
+              <div class="stat-inline">
+                <strong id="pending-review-total">0</strong>
+                <p id="pending-review-summary">Waiting for activity</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content section that groups related page information. -->
+    <section class="section gray">
+      <!-- Inner wrapper that keeps this content aligned with the page width. -->
+      <div class="section-inner">
+        <!-- Container for the section panel content and layout. -->
+        <div class="section-panel">
+          <!-- Container for the split section content and layout. -->
+          <div class="split-section">
+            <!-- Container for the section title content and layout. -->
+            <div class="section-title left-aligned compact">
+              <!-- Container for the section tag content and layout. -->
+              <div class="section-tag">Status Overview</div>
+              <h2>Application pipeline</h2>
+              <p>See how many opportunities are moving forward and which ones need attention.</p>
+            </div>
+            <a href="applications.html" class="text-link">View all applications</a>
+          </div>
+          <!-- Container for the dashboard grid content and layout. -->
+          <div class="dashboard-grid pipeline-grid">
+            <article class="dashboard-card pipeline-card pending">
+              <div class="pipeline-count" id="pipeline-pending">0</div>
+              <h3>Pending</h3>
+              <p>Waiting for employer review.</p>
+            </article>
+            <article class="dashboard-card pipeline-card reviewed">
+              <div class="pipeline-count" id="pipeline-reviewed">0</div>
+              <h3>Reviewed</h3>
+              <p>These employers opened your application.</p>
+            </article>
+            <article class="dashboard-card pipeline-card accepted">
+              <div class="pipeline-count" id="pipeline-accepted">0</div>
+              <h3>Accepted</h3>
+              <p>Move these into work history after completion.</p>
+            </article>
+            <article class="dashboard-card pipeline-card rejected">
+              <div class="pipeline-count" id="pipeline-rejected">0</div>
+              <h3>Rejected</h3>
+              <p>Use feedback to improve your next application.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content section that groups related page information. -->
+    <section class="section">
+      <!-- Inner wrapper that keeps this content aligned with the page width. -->
+      <div class="section-inner">
+        <!-- Container for the section panel content and layout. -->
+        <div class="section-panel">
+          <!-- Container for the split section content and layout. -->
+          <div class="split-section">
+            <!-- Container for the section title content and layout. -->
+            <div class="section-title left-aligned compact">
+              <!-- Container for the section tag content and layout. -->
+              <div class="section-tag">Recommended Jobs</div>
+              <h2>Approved roles matched to your profile</h2>
+              <p>This section shows employer-posted jobs that are already approved and ready for job seeker viewing.</p>
+            </div>
+            <a href="jobs.html" class="text-link">Open jobs page</a>
+          </div>
+          <!-- Container for the dashboard grid content and layout. -->
+          <div class="dashboard-grid jobs-grid" id="recommended-jobs-grid">
+            <article class="dashboard-card dashboard-empty-card">
+              <h3>No approved jobs yet</h3>
+              <p>Approved employer listings will appear here once admin review is completed.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content section that groups related page information. -->
+    <section class="section gray">
+      <!-- Inner wrapper that keeps this content aligned with the page width. -->
+      <div class="section-inner">
+        <!-- Container for the section panel content and layout. -->
+        <div class="section-panel">
+          <!-- Container for the section title content and layout. -->
+          <div class="section-title left-aligned">
+            <!-- Container for the section tag content and layout. -->
+            <div class="section-tag">Quick Actions</div>
+            <h2>Keep your account job-ready</h2>
+            <p>Small updates here can improve matching and increase employer trust.</p>
+          </div>
+          <!-- Container for the dashboard grid content and layout. -->
+          <div class="dashboard-grid actions-grid">
+            <article class="dashboard-card action-card">
+              <h3>Update profile</h3>
+              <p>Add a better headline, work preferences, and more skills so you are ready once live job posts arrive.</p>
+              <a href="profile.html" class="btn-outline">Open Profile</a>
+            </article>
+            <article class="dashboard-card action-card">
+              <h3>Review applications</h3>
+              <p>Follow your latest applications and track movement from pending to accepted.</p>
+              <a href="applications.html" class="btn-outline">See Status</a>
+            </article>
+            <article class="dashboard-card action-card">
+              <h3>Build resume</h3>
+              <p>Generate a clean resume from your completed jobs and profile details.</p>
+              <a href="resume.html" class="btn-outline">Create Resume</a>
+            </article>
+            <article class="dashboard-card action-card">
+              <h3>Check work history</h3>
+              <p>Review finished gigs, income summary, and progress toward your earning goals.</p>
+              <a href="work-history.html" class="btn-outline">Open History</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-dashboard.js?v=20260611a. -->
+  <script type="module" src="../../js/jobseeker-dashboard.js?v=20260611a"></script>
+</body>
+</html>

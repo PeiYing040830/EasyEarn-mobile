@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the post job page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=manage-jobs.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Post Job</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="employer-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="employer-shell employer-redirect-shell">
+    <!-- Section for the employer page header area of this page. -->
+    <section class="employer-page-header">
+      <div class="employer-badge">Redirecting</div>
+      <h1>Post Job moved into Manage Jobs</h1>
+      <p>You will be taken to the combined job management workspace now.</p>
+      <a href="manage-jobs.html" class="btn-primary">Open Manage Jobs</a>
+    </section>
+
+    <!-- Section for the employer card area of this page. -->
+    <section class="employer-card">
+      <!-- Container for the employer section head content and layout. -->
+      <div class="employer-section-head employer-section-head-stack">
+        <div>
+          <div class="employer-badge">Update</div>
+          <h2>Manage Jobs is now the single workspace</h2>
+          <p>Create, edit, and review listings from one page, so the employer flow stays consistent.</p>
+        </div>
+      </div>
+      <a href="manage-jobs.html" class="btn-outline">Open Manage Jobs</a>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-employer.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261002d" defer></script>
+</body>
+</html>

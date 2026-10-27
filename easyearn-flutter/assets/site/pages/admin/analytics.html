@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the analytics page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Admin Analytics</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20260930c">
+  <link rel="stylesheet" href="../../css/charts-mobile.css?v=20260930a">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell analytics-shell">
+    <div class="admin-header"><div class="admin-badge">Analytics</div><h1>Platform analytics overview</h1><p>Watch growth, moderation workload, and system activity once the main collections are fully connected.</p></div>
+    <!-- Section for the admin grid area of this page. -->
+    <section class="admin-grid three">
+      <article class="admin-card admin-metric"><span class="admin-stat-label">User Growth</span><strong id="admin-analytics-users-count">0</strong><p id="admin-analytics-users-note">No analytics data yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Job Volume</span><strong id="admin-analytics-jobs-count">0</strong><p id="admin-analytics-jobs-note">No analytics data yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Report Load</span><strong id="admin-analytics-reports-count">0</strong><p id="admin-analytics-reports-note">No analytics data yet.</p></article>
+    </section>
+    <!-- Section for the admin grid area of this page. -->
+    <section class="admin-grid two analytics-top-row">
+      <article class="admin-card">
+        <!-- Container for the admin section head content and layout. -->
+        <div class="admin-section-head"><div><div class="admin-badge">Trend View</div><h2>Analytics chart area</h2><p>This chart can later show new users, jobs, and reports over time.</p></div><a href="dashboard.html" class="btn-outline">Back to Dashboard</a></div>
+        <div class="admin-chart-duo admin-chart-duo-side">
+          <div class="admin-chart">
+            <canvas id="admin-analytics-line-canvas" style="width:100%;max-height:220px;"></canvas>
+          </div>
+
+          <div class="admin-chart admin-pie-chart">
+            <div class="admin-pie-wrap">
+              <canvas id="admin-analytics-donut-canvas" style="max-width:180px;max-height:180px;"></canvas>
+            </div>
+            <div class="admin-pie-legend">
+              <span><span class="admin-legend-label"><i class="admin-legend-dot users"></i>User Growth</span><strong id="admin-analytics-users-share">0%</strong></span>
+              <span><span class="admin-legend-label"><i class="admin-legend-dot jobs"></i>Job Volume</span><strong id="admin-analytics-jobs-share">0%</strong></span>
+              <span><span class="admin-legend-label"><i class="admin-legend-dot reports"></i>Report Load</span><strong id="admin-analytics-reports-share">0%</strong></span>
+              <span><span class="admin-legend-label"><i class="admin-legend-dot verifications"></i>Verification Load</span><strong id="admin-analytics-verifications-share">0%</strong></span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="admin-card">
+        <!-- Container for the admin section head content and layout. -->
+        <div class="admin-section-head">
+          <div>
+            <div class="admin-badge">Compliance Awareness</div>
+            <h2>Gig Workers Act 2025 Compliance Awareness</h2>
+            <p>Help admins monitor platform activity with gig worker protection, transparent job terms, payment clarity, and dispute follow-up in mind.</p>
+          </div>
+        </div>
+        <!-- Container for the admin trust checklist content and layout. -->
+        <div class="admin-trust-checklist">
+          <strong>Admin awareness points</strong>
+          <ul>
+            <li>Review job listings for clear work scope, schedule, location, and pay information.</li>
+            <li>Monitor reports and payment disputes so worker complaints receive proper follow-up.</li>
+            <li>Use verification and moderation records to support safer employer accountability.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+	    <!-- Section for the admin card area of this page. -->
+	    <section class="admin-card">
+	      <!-- Container for the admin section head content and layout. -->
+	      <div class="admin-section-head">
+	        <div>
+	          <div class="admin-badge">Data Explorer</div>
+	          <h2>All analytics records</h2>
+	          <p>Inspect full details instead of summary charts, then filter by module, status, or keyword.</p>
+	        </div>
+	      </div>
+	      <!-- Container for the admin analytics toolbar content and layout. -->
+	      <div class="admin-analytics-toolbar">
+	        <label class="admin-analytics-filter">
+	          <span>Type</span>
+		          <select id="admin-analytics-type-filter">
+		            <option value="all">All records</option>
+		            <option value="user">Users</option>
+		            <option value="job">Jobs</option>
+		            <option value="report">Reports</option>
+		            <option value="verification">Verifications</option>
+		          </select>
+		        </label>
+	        <label class="admin-analytics-filter">
+	          <span>Status</span>
+	          <select id="admin-analytics-status-filter">
+	            <option value="all">All statuses</option>
+	          </select>
+	        </label>
+	        <label class="admin-analytics-filter admin-analytics-search">
+	          <span>Search</span>
+	          <input id="admin-analytics-search" type="search" placeholder="Search name, title, role, category, or details">
+	        </label>
+	      </div>
+	      <!-- Container for the admin analytics summary content and layout. -->
+	      <div class="admin-analytics-summary" id="admin-analytics-table-summary">Loading records...</div>
+	      <!-- Container for the admin table wrap content and layout. -->
+	      <div class="admin-table-wrap">
+	        <!-- Table displays multiple records in rows and columns. -->
+	        <table class="admin-data-table">
+	          <thead>
+	            <tr>
+	              <th>Type</th>
+	              <th>Name / Title</th>
+	              <th>Status</th>
+	              <th>Date</th>
+	              <th>Details</th>
+	            </tr>
+	          </thead>
+	          <tbody id="admin-analytics-table-body">
+	            <tr><td colspan="5">Loading records...</td></tr>
+	          </tbody>
+	        </table>
+	      </div>
+	    </section>
+	  </main>
+	  
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>window.EASYEARN_BASE_PATH='../../';window.EASYEARN_HEADER_PATH='../../partials/header-admin.html';</script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script><script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: https://cdn.jsdelivr.net/npm/chart.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/admin-analytics.js?v=20260930d -->
+  <script type="module" src="../../js/admin-analytics.js?v=20260930d"></script>
+</body>
+</html>

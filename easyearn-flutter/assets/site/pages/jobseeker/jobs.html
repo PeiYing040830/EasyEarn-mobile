@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the jobs page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Jobs</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002b">
+  <style>
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border-color, #e5e7eb);
+      margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      padding: 0.65rem 1.5rem;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted, #6b7280);
+      transition: color .15s, border-color .15s;
+    }
+    .tab-btn.active {
+      color: #16a34a;
+      border-bottom-color: #16a34a;
+    }
+    body.theme-dark .tab-bar {
+      border-bottom-color: rgba(148, 163, 184, 0.55);
+    }
+    body.theme-dark .tab-btn {
+      color: #cbd5e1;
+    }
+    body.theme-dark .tab-btn:hover,
+    body.theme-dark .tab-btn:focus-visible {
+      color: #bbf7d0;
+    }
+    body.theme-dark .tab-btn.active {
+      color: #4ade80;
+      border-bottom-color: #22c55e;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+  </style>
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Main area contains the primary page content. -->
+  <main class="jobseeker-shell">
+    <!-- Container for the jobseeker header content and layout. -->
+    <div class="jobseeker-header jobs-browse-hero">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Jobs</div>
+      <h1>Browse &amp; manage your jobs</h1>
+      <p>Find new gigs, save favourites, and track everything in one place.</p>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="browse">🔍 Browse Jobs</button>
+      <button class="tab-btn" data-tab="saved">🔖 Saved Jobs <span id="saved-tab-count" style="background:#16a34a;color:#fff;border-radius:99px;font-size:.72rem;padding:1px 7px;margin-left:4px;display:none"></span></button>
+    </div>
+
+    <!-- ══ TAB: BROWSE JOBS ══════════════════════════════════════════════ -->
+    <div class="tab-panel active" id="tab-browse">
+
+      <!-- Stats -->
+      <section class="jobseeker-card">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Overview</div>
+            <h2>Your job activity</h2>
+          </div>
+          <a href="applications.html" class="btn-outline interview-action-btn">My Applications</a>
+        </div>
+        <!-- Container for the jobseeker grid content and layout. -->
+        <div class="jobseeker-grid application-stats-grid">
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #6366f1;">
+            <span class="application-stat-label">Saved</span>
+            <h3 id="jobs-saved-count">0</h3>
+            <p id="jobs-saved-note">No saved jobs yet.</p>
+          </article>
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #3b82f6;">
+            <span class="application-stat-label">Applied</span>
+            <h3 id="jobs-applied-count">0</h3>
+            <p id="jobs-applied-note">No submitted applications yet.</p>
+          </article>
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #22c55e;">
+            <span class="application-stat-label">Skill Match</span>
+            <h3 id="jobs-matched-count">0</h3>
+            <p id="jobs-matched-note">No matching jobs found yet.</p>
+          </article>
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #f59e0b;">
+            <span class="application-stat-label">Available Jobs</span>
+            <h3 id="jobs-approved-count">0</h3>
+            <p id="jobs-approved-note">No available jobs yet.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Search / Filter -->
+      <section class="jobseeker-card jobs-search-panel">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Search</div>
+            <h2>Filter listings</h2>
+          </div>
+        </div>
+        <!-- Container for the jobs filter grid content and layout. -->
+        <div class="jobs-filter-grid">
+          <label class="jobseeker-field">
+            <span>Keyword</span>
+            <input id="jobs-keyword" type="text" placeholder="Search title, company, or skill">
+          </label>
+          <label class="jobseeker-field">
+            <span>Category</span>
+            <select id="jobs-category"><option value="">All categories</option></select>
+          </label>
+          <label class="jobseeker-field">
+            <span>Location</span>
+            <select id="jobs-location"><option value="">All locations</option></select>
+          </label>
+          <label class="jobseeker-field">
+            <span>Job type</span>
+            <select id="jobs-type">
+              <option value="">All types</option>
+              <option value="part-time">Part-time</option>
+              <option value="full-time">Full-time</option>
+              <option value="freelance">Freelance</option>
+            </select>
+          </label>
+        </div>
+        <!-- Container for the jobs filter actions content and layout. -->
+        <div class="jobs-filter-actions">
+          <button type="button" id="jobs-search-btn" class="btn-primary">Search Jobs</button>
+          <button type="button" id="jobs-reset-btn" class="btn-outline">Reset Filters</button>
+          <button type="button" id="jobs-locate-btn" class="btn-outline" style="display:flex;align-items:center;gap:6px;">
+            📍 Near Me
+          </button>
+        </div>
+        <!-- Location status bar -->
+        <div id="jobs-location-bar" style="display:none;margin-top:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 16px;font-size:13px;color:#166534;display:none;align-items:center;flex-wrap:wrap;gap:10px;">
+          <span>📍 Showing jobs near <strong id="jobs-location-name"></strong></span>
+          <label style="font-size:13px;">
+            Radius:
+            <select id="jobs-radius-select" style="margin-left:4px;padding:3px 8px;border-radius:6px;border:1px solid #bbf7d0;font-size:13px;">
+              <option value="5">5 km</option>
+              <option value="10" selected>10 km</option>
+              <option value="25">25 km</option>
+              <option value="50">50 km</option>
+            </select>
+          </label>
+          <button id="jobs-clear-location" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:13px;">✕ Clear location</button>
+        </div>
+      </section>
+
+      <!-- Live Listings -->
+      <section class="jobseeker-card recommendations-board">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Live Listings</div>
+            <h2>Approved jobs available now</h2>
+            <p>Save or apply directly.</p>
+          </div>
+        </div>
+        <!-- Container for the jobseeker grid content and layout. -->
+        <div id="jobs-live-results" class="jobseeker-grid recommendation-grid jobs-results-grid">
+          <article class="jobseeker-item recommendation-item jobs-result-card">
+            <strong>Loading jobs...</strong>
+            <p class="application-company">Please wait while available jobs are loaded.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Already Applied -->
+      <section class="jobseeker-card recommendations-board">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Already Applied</div>
+            <h2>Jobs you've applied to</h2>
+          </div>
+          <a href="applications.html" class="btn-outline interview-action-btn">Track Applications</a>
+        </div>
+        <!-- Container for the jobseeker grid content and layout. -->
+        <div id="jobs-applied-results" class="jobseeker-grid recommendation-grid jobs-results-grid">
+          <article class="jobseeker-item recommendation-item jobs-result-card">
+            <strong>Loading...</strong>
+            <p class="application-company">Your applied listings will appear here.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- ══ TAB: SAVED JOBS ════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-saved">
+
+      <!-- Stats -->
+      <section class="jobseeker-card">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Overview</div>
+            <h2>Saved jobs summary</h2>
+          </div>
+        </div>
+        <!-- Container for the jobseeker grid content and layout. -->
+        <div class="jobseeker-grid application-stats-grid">
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #6366f1;">
+            <span class="application-stat-label">Total Saved</span>
+            <h3 id="saved-jobs-total">0</h3>
+            <p id="saved-jobs-total-note">No saved jobs yet.</p>
+          </article>
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #22c55e;">
+            <span class="application-stat-label">Still Live</span>
+            <h3 id="saved-jobs-live">0</h3>
+            <p id="saved-jobs-live-note">No live saved jobs right now.</p>
+          </article>
+          <article class="jobseeker-card application-stat-card" style="border-top:3px solid #3b82f6;">
+            <span class="application-stat-label">Already Applied</span>
+            <h3 id="saved-jobs-applied">0</h3>
+            <p id="saved-jobs-applied-note">No saved job applications yet.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Saved List -->
+      <section class="jobseeker-card">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Bookmarked</div>
+            <h2>Your saved listings</h2>
+            <p>Apply or remove jobs you're no longer interested in.</p>
+          </div>
+        </div>
+        <!-- Container for the jobseeker list content and layout. -->
+        <div id="saved-jobs-list" class="jobseeker-list saved-jobs-list">
+          <article class="jobseeker-item saved-job-item">
+            <strong>Loading saved jobs...</strong>
+            <p class="application-company">Please wait while your saved list is loaded.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+
+    // Tab switching logic
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+
+      function switchTab(tabName) {
+        tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
+        tabPanels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + tabName));
+        history.replaceState(null, '', '?tab=' + tabName);
+      }
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      });
+
+      // Check URL param on load
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('tab') === 'saved') switchTab('saved');
+    });
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-jobs.js?v=20261007a. -->
+  <script type="module" src="../../js/jobseeker-jobs.js?v=20261007a"></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-saved-jobs.js?v=20261007a. -->
+  <script type="module" src="../../js/jobseeker-saved-jobs.js?v=20261007a"></script>
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script type="module">
+    // Update saved tab badge count after saved-jobs loads
+    const observer = new MutationObserver(() => {
+      const totalEl = document.getElementById('saved-jobs-total');
+      const badge = document.getElementById('saved-tab-count');
+      if (totalEl && badge) {
+        const n = parseInt(totalEl.textContent) || 0;
+        badge.textContent = n;
+        badge.style.display = n > 0 ? 'inline' : 'none';
+      }
+    });
+    const totalEl = document.getElementById('saved-jobs-total');
+    if (totalEl) observer.observe(totalEl, { childList: true, characterData: true, subtree: true });
+  </script>
+</body>
+</html>

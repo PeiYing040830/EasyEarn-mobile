@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the resume page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Resume</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002c">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="jobseeker-shell resume-shell">
+    <!-- Container for the jobseeker header content and layout. -->
+    <div class="jobseeker-header">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Resume</div>
+      <h1>Resume Builder</h1>
+      <p>Turn your work history into a clean, employer-ready resume preview.</p>
+    </div>
+
+    <!-- Section for the resume toolbar card area of this page. -->
+    <section class="resume-toolbar-card">
+      <!-- Container for the resume toolbar copy content and layout. -->
+      <div class="resume-toolbar-copy">
+        <!-- Container for the hero badge content and layout. -->
+        <div class="hero-badge">Preview</div>
+        <h2>Professional one-page layout</h2>
+        <p>This preview is styled to look like an actual printable resume instead of a dashboard widget.</p>
+      </div>
+      <!-- Container for the resume toolbar actions content and layout. -->
+      <div class="resume-toolbar-actions">
+        <button class="btn-outline" id="resume-refresh-btn" type="button">Refresh from Profile</button>
+        <button class="btn-primary" id="resume-download-btn" type="button">Download PDF</button>
+      </div>
+    </section>
+
+    <!-- Section for the resume paper wrap area of this page. -->
+    <section class="resume-paper-wrap">
+      <article class="resume-paper">
+        <!-- Header area introduces the page and usually contains the main page title. -->
+        <header class="resume-paper-header">
+          <!-- Container for the resume paper identity content and layout. -->
+          <div class="resume-paper-identity">
+            <!-- Container for the resume photo content and layout. -->
+            <div class="resume-photo" id="resume-photo">JS</div>
+            <div>
+              <p class="resume-eyebrow">Job Seeker Resume</p>
+              <h2 id="resume-name">Job Seeker</h2>
+              <p class="resume-role" id="resume-role">Add your professional headline in profile.</p>
+            </div>
+          </div>
+          <!-- Container for the resume paper contact content and layout. -->
+          <div class="resume-paper-contact" id="resume-contact">
+            <p id="resume-email">Email not set</p>
+            <p id="resume-phone">Phone not set</p>
+            <p id="resume-location">Location not set</p>
+          </div>
+        </header>
+
+        <!-- Container for the resume paper grid content and layout. -->
+        <div class="resume-paper-grid">
+          <aside class="resume-paper-sidebar">
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>Profile</h3>
+              <p id="resume-profile-text">Add a short bio in your profile so employers can quickly understand your strengths.</p>
+            </section>
+
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>Skills</h3>
+              <ul class="resume-skill-list" id="resume-skills-list">
+                <li>Add skills in your profile to populate this section.</li>
+              </ul>
+            </section>
+
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>Education</h3>
+              <ul class="resume-education-list" id="resume-education-list">
+                <li>Add your qualifications in profile.</li>
+              </ul>
+            </section>
+
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>Availability</h3>
+              <ul class="resume-meta-list" id="resume-availability-list">
+                <li>Set your available days and work preferences in profile.</li>
+              </ul>
+            </section>
+          </aside>
+
+          <!-- Container for the resume paper main content and layout. -->
+          <div class="resume-paper-main">
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>Work Experience</h3>
+              <div id="resume-work-list">
+                <article class="resume-entry resume-empty-entry">
+                  <!-- Container for the resume entry head content and layout. -->
+                  <div class="resume-entry-head">
+                    <div>
+                      <h4>No work history yet</h4>
+                      <p>Completed jobs will appear here.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>Highlighted Results</h3>
+              <!-- Container for the resume result grid content and layout. -->
+              <div class="resume-result-grid">
+                <!-- Container for the resume result card content and layout. -->
+                <div class="resume-result-card">
+                  <strong id="resume-stat-gigs">0</strong>
+                  <span>Completed gigs</span>
+                </div>
+                <!-- Container for the resume result card content and layout. -->
+                <div class="resume-result-card">
+                  <strong id="resume-stat-rating">N/A</strong>
+                  <span>Average rating</span>
+                </div>
+                <!-- Container for the resume result card content and layout. -->
+                <div class="resume-result-card">
+                  <strong id="resume-stat-recent-review" class="resume-result-summary">No review yet</strong>
+                  <span>Recent review</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section for the resume section area of this page. -->
+            <section class="resume-section">
+              <h3>References</h3>
+              <div id="resume-references-list">
+                <p>Complete jobs to generate references from employers.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads the JavaScript file that controls this page: https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <!-- Loads the JavaScript file that controls this page: https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-resume.js. -->
+  <script type="module" src="../../js/jobseeker-resume.js?v=20261002a"></script>
+</body>
+</html>

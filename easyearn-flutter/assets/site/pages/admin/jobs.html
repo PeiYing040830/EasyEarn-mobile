@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the jobs page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Admin Jobs</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell">
+    <div class="admin-header"><div class="admin-badge">Jobs</div><h1>Job listing moderation</h1><p>Review platform listings, flagged posts, and future quality controls for employer-uploaded jobs.</p></div>
+    <!-- Section for the admin grid area of this page. -->
+    <section class="admin-grid three">
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Live Jobs</span><strong id="admin-jobs-live-count">0</strong><p id="admin-jobs-live-note">No listings connected yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Flagged Jobs</span><strong id="admin-jobs-flagged-count">0</strong><p id="admin-jobs-flagged-note">No flags yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Removed</span><strong id="admin-jobs-removed-count">0</strong><p id="admin-jobs-removed-note">No removals yet.</p></article>
+    </section>
+    <!-- Section for the admin card area of this page. -->
+    <section class="admin-card">
+      <!-- Container for the admin section head content and layout. -->
+      <div class="admin-section-head"><div><div class="admin-badge">Queue</div><h2>Job review queue</h2><p>Review employer listings and set a moderation state for demo purposes here.</p></div></div>
+      <!-- Container for the admin analytics toolbar content and layout. -->
+      <div class="admin-analytics-toolbar">
+        <label class="admin-analytics-filter">
+          <span>Status</span>
+          <select id="admin-jobs-status-filter">
+            <option value="pending">Pending Review</option>
+            <option value="approved">Approved</option>
+            <option value="flagged">Flagged</option>
+            <option value="removed">Removed</option>
+            <option value="closed">Closed</option>
+            <option value="expired">Expired</option>
+            <option value="all">All Jobs</option>
+          </select>
+        </label>
+        <label class="admin-analytics-filter admin-analytics-search">
+          <span>Search</span>
+          <input id="admin-jobs-search" type="search" placeholder="Search title, employer, category, pay, or description">
+        </label>
+      </div>
+      <p id="admin-jobs-status" class="admin-inline-status">Job moderation actions will update here.</p>
+      <!-- Container for the admin list content and layout. -->
+      <div id="admin-jobs-queue" class="admin-list"><article class="admin-item"><strong>No job moderation cases yet</strong><p>Flagged or reported listings can appear here once reports and job collections are connected.</p><div class="admin-item-meta"><span>Employer: -</span><span>Reason: -</span><span>Status: Empty</span></div></article></div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>window.EASYEARN_BASE_PATH='../../';window.EASYEARN_HEADER_PATH='../../partials/header-admin.html';</script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script><script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/admin-jobs.js?v=20261002a. -->
+  <script type="module" src="../../js/admin-jobs.js?v=20261002a"></script>
+</body>
+</html>

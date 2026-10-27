@@ -1,0 +1,217 @@
+/* Android Admin workspace: scoped phone layout. */
+@media (max-width: 768px) {
+  /* Keep the long Admin menu usable on every phone page, including Users. */
+  #site-header { position: relative; z-index: 10050; }
+  .admin-navbar {
+    position: relative;
+    z-index: 10051;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    min-height: 60px;
+    height: 60px;
+  }
+  .admin-navbar .nav-brand { flex: 1 1 auto !important; }
+  .admin-navbar .nav-user-tools {
+    position: static !important;
+    transform: none !important;
+    grid-area: auto;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    margin-left: 0 !important;
+  }
+  .admin-navbar .nav-logout { display: none !important; }
+  .admin-navbar .mobile-nav-logout { display: flex !important; }
+  .admin-navbar #hamburger-btn { display: flex !important; flex: 0 0 40px; }
+  .admin-navbar.nav-active .nav-links {
+    display: grid !important;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-height: min(70dvh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 10px !important;
+    padding: 10px !important;
+    border-radius: 0 0 14px 14px;
+    z-index: 10052;
+  }
+  .admin-navbar.nav-active .nav-links a {
+    display: flex !important;
+    width: 100%;
+    min-height: 42px;
+    align-items: center;
+    padding: 10px !important;
+    border: 1px solid transparent;
+    border-radius: 10px;
+  }
+  .admin-shell *, .admin-shell *::before, .admin-shell *::after { box-sizing: border-box; min-width: 0; }
+  .admin-shell :is(h1,h2,h3,p,strong,span,a,label,small) { overflow-wrap: anywhere; }
+  .admin-shell :is(.admin-grid.two,.admin-grid.three,.admin-grid.four,.admin-hero,
+    .admin-form-grid,.admin-chart-duo,.admin-chart-duo-side,.admin-pie-chart,
+    .admin-profile-grid,.chatbot-knowledge-workspace,.chatbot-knowledge-toolbar,
+    .admin-analytics-toolbar,.messages-layout) {
+    display: grid; grid-template-columns: minmax(0,1fr) !important;
+    gap: 16px; width: 100%; max-width: 100%;
+  }
+  .admin-shell > *, .admin-shell :is(.admin-card,.admin-item,.admin-field,.admin-chart,.admin-section-head > *) {
+    min-width: 0 !important; max-width: 100%;
+  }
+  .admin-shell :is(.admin-header,.admin-hero-copy,.admin-hero-side) { min-height: 0 !important; height: auto; }
+  .admin-shell .admin-card { padding: 18px 16px; border-radius: 16px; }
+  .admin-shell .admin-item { padding: 16px; width: 100%; }
+  .admin-shell :is(.admin-header,.admin-hero-copy,.admin-hero-side) { padding: 24px 16px; }
+  .admin-shell :is(.admin-header,.admin-hero-copy) h1 { font-size: 28px; line-height: 1.2; }
+  .admin-shell .admin-metric { min-height: 0; }
+  .admin-shell .admin-metric strong { font-size: 28px; line-height: 1.2; }
+  .admin-shell :is(.admin-stat-label,.admin-badge,.admin-status-pill) { white-space: normal; max-width: 100%; }
+  .admin-shell .admin-section-head { display: flex; flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 18px; }
+  .admin-shell .admin-section-head > div { width: 100%; }
+  .admin-shell .admin-section-head h2 { font-size: 22px; line-height: 1.25; }
+  .admin-shell :is(.admin-action-row,.admin-card-actions,.admin-header-actions,.admin-hero-actions,.chatbot-knowledge-actions) {
+    display: grid; grid-template-columns: minmax(0,1fr) !important;
+    width: 100%; min-width: 0; gap: 10px;
+  }
+  .admin-shell :is(.admin-action-row,.admin-card-actions,.admin-header-actions,.admin-hero-actions,.admin-section-head,.chatbot-knowledge-actions) :is(.btn-primary,.btn-outline,button) {
+    width: 100%; min-width: 0 !important; max-width: 100%; min-height: 46px;
+    white-space: normal; justify-content: center; text-align: center;
+  }
+  .admin-shell .admin-request-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .admin-shell .admin-request-head > div { width: 100%; }
+  .admin-shell .admin-item-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+  .admin-shell .admin-analytics-filter { width: 100%; min-width: 0; max-width: 100%; }
+  .admin-shell :is(.admin-field,.admin-analytics-filter) :is(input,select,textarea) { width: 100%; max-width: 100%; min-width: 0 !important; font-size: 16px; }
+  .admin-shell .admin-field.full { grid-column: 1 / -1; }
+  .admin-shell .admin-upload-box { width: 100%; max-width: 100%; padding: 18px 12px; }
+  .admin-shell .admin-profile-preview { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .admin-shell .admin-status-row { grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+  .admin-shell .admin-status-track { grid-row: 2; grid-column: 1 / -1; }
+  .admin-shell .admin-chart { padding: 14px; }
+  .admin-shell .admin-pie-wrap { width: 100%; display: flex; justify-content: center; }
+  .admin-shell .admin-pie-legend { width: 100%; }
+  .admin-shell canvas { max-width: 100% !important; }
+  .admin-shell .admin-table-wrap { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .admin-shell .admin-data-table { display: table; width: 100%; min-width: 620px; }
+  .admin-shell .chatbot-knowledge-item-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .admin-shell .chatbot-knowledge-keywords { flex-wrap: wrap; }
+  .admin-shell .chatbot-knowledge-count { min-width: 0; max-width: 100%; }
+  .admin-shell .chatbot-knowledge-manage-card { height: auto; }
+  .admin-shell .chatbot-knowledge-list { max-height: 60vh; overflow-y: auto; }
+  .admin-shell .admin-card:hover { transform: none; }
+  .admin-shell.messages-shell .messages-sidebar { display: flex !important; height: auto; max-height: 340px; }
+  .admin-shell.messages-shell .messages-thread-list { max-height: 220px; overflow-y: auto; }
+  .admin-shell.messages-shell .messages-panel { height: auto; min-height: 0; }
+  .admin-shell.messages-shell .messages-thread-body { height: 48vh; min-height: 220px; max-height: 480px; overflow-y: auto; }
+  .admin-shell.messages-shell .messages-thread-btn { width: 100%; max-width: 100%; }
+  .admin-shell.messages-shell .messages-bubble { max-width: 92%; overflow-wrap: anywhere; }
+  .admin-shell.messages-shell .messages-bubble-image { max-width: 100%; }
+  .admin-shell.messages-shell .messages-form { width: 100%; grid-template-columns: minmax(0,1fr); grid-template-areas: "toolbar" "preview" "label" "input" "send" "status"; }
+  .admin-shell.messages-shell .messages-form-actions { width: 100%; flex-wrap: wrap; }
+  .admin-shell.messages-shell .messages-form-actions .btn-primary { width: 100%; min-width: 0; }
+  .admin-shell.messages-shell .messages-toolbar { flex-wrap: wrap; }
+
+  /* One 8px rhythm across every Admin phone page. */
+  .admin-shell { padding: 8px !important; gap: 8px !important; }
+  .admin-shell > * + * { margin-top: 8px !important; }
+  .admin-shell :is(.admin-grid,.admin-hero,.admin-form-grid,.admin-chart-duo,.admin-chart-duo-side,.admin-pie-chart,.admin-profile-grid,.chatbot-knowledge-workspace,.chatbot-knowledge-toolbar,.admin-analytics-toolbar,.messages-layout,.admin-list,.admin-checklist) { gap: 8px !important; }
+  .admin-shell :is(.admin-card,.admin-item,.admin-field,.admin-chart,.admin-upload-box) { padding: 8px !important; }
+  .admin-shell :is(.admin-section-head,.admin-request-head) { gap: 8px !important; margin-bottom: 8px !important; }
+  .admin-shell :is(.admin-card,.admin-item,.admin-metric) > * + *,
+  .admin-shell .admin-card > .admin-section-head + * { margin-top: 8px !important; }
+  .admin-shell .admin-section-head > div,
+  .admin-shell .admin-item-meta,
+  .admin-shell .admin-card-actions { gap: 8px !important; }
+
+  /* Dashboard has several stacked cards, so keep it as compact as the other
+     phone pages without changing their shared spacing. */
+  .admin-dashboard-shell { padding: 8px !important; gap: 8px !important; }
+  .admin-dashboard-shell > :is(.admin-hero,.admin-grid) { margin: 0 !important; gap: 8px !important; }
+  .admin-dashboard-shell :is(.admin-hero-copy,.admin-hero-side) { padding: 8px !important; }
+  .admin-dashboard-shell .admin-card,
+  .admin-dashboard-shell .admin-item,
+  .admin-dashboard-shell .admin-metric { padding: 8px !important; }
+  .admin-dashboard-shell .admin-section-head { gap: 6px; margin-bottom: 8px; }
+  .admin-dashboard-shell .admin-section-head > div { gap: 8px; }
+  .admin-dashboard-shell .admin-section-head h2 { margin: 0 0 2px; }
+  .admin-dashboard-shell .admin-section-head p { margin: 0; line-height: 1.45; }
+  .admin-dashboard-shell .admin-hero-actions { gap: 6px; }
+  .admin-dashboard-shell .admin-hero-copy > * + *,
+  .admin-dashboard-shell .admin-hero-side > * + * { margin-top: 7px; }
+  .admin-dashboard-shell .admin-hero-copy h1,
+  .admin-dashboard-shell .admin-hero-side h2 { margin: 7px 0 4px; }
+  .admin-dashboard-shell .admin-hero :is(p, ul) { margin-top: 6px; margin-bottom: 0; }
+  .admin-dashboard-shell .admin-checklist { padding-left: 18px; }
+  .admin-dashboard-shell .admin-checklist li + li { margin-top: 3px; }
+  .admin-dashboard-shell :is(.admin-list,.admin-checklist) { gap: 8px; }
+  .admin-dashboard-shell .admin-item-meta { gap: 8px; }
+  .admin-dashboard-shell .admin-metric > * + *,
+  .admin-dashboard-shell .admin-item > * + *,
+  .admin-dashboard-shell .admin-card > * + *,
+  .admin-dashboard-shell .admin-card > .admin-section-head + * { margin-top: 8px; }
+  .admin-dashboard-shell .admin-hero-actions { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .admin-dashboard-shell .admin-hero-actions :is(.btn-primary,.btn-outline) { min-height: 40px; padding: 8px 6px; font-size: 12px; }
+  .admin-dashboard-shell .admin-chart { padding: 10px; }
+
+  /* One 10px spacing scale across all Admin phone pages. */
+  .admin-shell { padding: 10px !important; gap: 10px !important; }
+  .admin-shell > * + * { margin-top: 10px !important; }
+  .admin-shell :is(.admin-grid,.admin-hero,.admin-form-grid,.admin-chart-duo,.admin-chart-duo-side,.admin-pie-chart,.admin-profile-grid,.chatbot-knowledge-workspace,.chatbot-knowledge-toolbar,.admin-analytics-toolbar,.messages-layout,.admin-list,.admin-checklist,.admin-trust-checklist,.admin-trust-checklist ul) { gap: 10px !important; }
+  .admin-shell :is(.admin-card,.admin-item,.admin-field,.admin-chart,.admin-upload-box,.admin-trust-checklist) { padding: 10px !important; }
+  .admin-shell :is(.admin-section-head,.admin-request-head) { gap: 10px !important; margin-bottom: 10px !important; }
+  .admin-shell :is(.admin-card,.admin-item,.admin-metric) > * + *,
+  .admin-shell .admin-card > .admin-section-head + * { margin-top: 10px !important; }
+  .admin-shell .admin-section-head > div,
+  .admin-shell .admin-item-meta,
+  .admin-shell .admin-card-actions { gap: 10px !important; }
+  .admin-shell :is(.admin-header,.admin-hero-copy,.admin-hero-side) { padding: 10px !important; }
+  .admin-shell .admin-hero-actions { gap: 10px !important; }
+  .admin-shell .admin-hero-copy > * + *,
+  .admin-shell .admin-hero-side > * + * { margin-top: 10px !important; }
+  .admin-shell .admin-hero :is(p,ul) { margin-top: 10px !important; }
+  .admin-shell .admin-checklist li + li { margin-top: 10px !important; }
+  .admin-dashboard-shell > :is(.admin-hero,.admin-grid,.admin-card) + :is(.admin-grid,.admin-card) { margin-top: 10px !important; }
+
+  /* Keep every page title readable and exactly 10px above its first content block. */
+  .admin-shell > .admin-header {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 290px !important;
+    margin-bottom: 0 !important;
+    padding: 30px 18px 92px !important;
+    overflow: hidden !important;
+    border-radius: 22px;
+    clip-path: inset(0 round 22px);
+  }
+  .admin-shell > .admin-header::before,
+  .admin-shell > .admin-header::after { z-index: 1 !important; pointer-events: none; }
+  .admin-shell > .admin-header > * { position: relative; z-index: 2; }
+  .admin-shell > .admin-header::before {
+    height: 72px;
+    background-size: auto 72px;
+  }
+  .admin-shell > .admin-header p { color: #0f172a !important; text-shadow: none !important; }
+  body.theme-dark .admin-shell > .admin-header p { color: #f8fafc !important; }
+  .admin-shell > .admin-header + :is(.admin-grid,.admin-card,.chatbot-knowledge-workspace) { margin-top: 10px !important; }
+
+  .messages-shell .messages-sidebar { max-height: none !important; }
+  .messages-shell .messages-thread-select { display: block; width: 100%; min-height: 44px; padding: 10px; border: 1px solid #d8d0fb; border-radius: 10px; background: #fff; color: #312e81; font: inherit; }
+  .messages-shell .messages-thread-list { display: none !important; }
+
+  /* Analytics becomes one predictable vertical phone flow. */
+  .analytics-shell .analytics-top-row,
+  .analytics-shell .admin-chart-duo-side,
+  .analytics-shell .admin-analytics-toolbar { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; }
+  .analytics-shell .admin-chart { min-height: 0; padding: 10px !important; }
+  .analytics-shell .admin-chart canvas { width: 100% !important; height: auto !important; max-height: 210px !important; }
+  .analytics-shell .admin-pie-chart { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .analytics-shell .admin-pie-legend { width: 100%; display: grid; gap: 8px; }
+  .analytics-shell .admin-analytics-filter { gap: 6px !important; }
+  .analytics-shell .admin-table-wrap { margin: 0 -2px; border-radius: 10px; }
+}

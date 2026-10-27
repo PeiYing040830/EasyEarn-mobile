@@ -1,0 +1,105 @@
+@import url("landing.css");
+
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #f8fafc;
+}
+
+.help-hero .page-hero-inner {
+  position: relative;
+  z-index: 2;
+  color: #f8fafc;
+}
+
+.help-hero .page-hero-inner h1 {
+  color: #ffffff;
+}
+
+.help-hero .page-hero-inner p {
+  color: rgba(248, 250, 252, 0.9);
+}
+
+body.theme-dark .section-title p {
+  color: #cbd5e1;
+}
+
+body.theme-dark .faq-item summary {
+  color: #f8fafc;
+}
+
+body.theme-dark .faq-item p {
+  color: #cbd5e1;
+}
+
+body.theme-dark .support-card h3 {
+  color: #f8fafc;
+}
+
+body.theme-dark .support-card p {
+  color: #cbd5e1;
+}
+
+.support-section {
+  padding-bottom: 120px;
+}
+
+body.theme-dark .support-section {
+  background: #131b2f;
+  border-top: 1px solid #1f2937;
+  border-bottom: 1px solid #1f2937;
+}
+
+.support-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.support-card a {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../images/waitress.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+  animation: helpHeroSlides 18s infinite;
+  z-index: -2;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(6, 18, 32, 0.78), rgba(6, 18, 32, 0.45));
+  z-index: -1;
+}
+
+.page-hero .hero-badge {
+  background: rgba(8, 145, 178, 0.2);
+  border-color: rgba(8, 145, 178, 0.35);
+  color: #eafff1;
+}
+
+@keyframes helpHeroSlides {
+  0%,
+  33% {
+    background-image: url("../images/waitress.jpeg");
+  }
+  34%,
+  66% {
+    background-image: url("../images/promoter.jpeg");
+  }
+  67%,
+  100% {
+    background-image: url("../images/photographer.jpg");
+  }
+}

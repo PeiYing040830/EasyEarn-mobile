@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the help page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Help Center</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="css/help.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="flutter-public-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Header area introduces the page and usually contains the main page title. -->
+  <header class="page-hero help-hero">
+    <!-- Container for the page hero inner content and layout. -->
+    <div class="page-hero-inner">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Help Center</div>
+      <h1>We are here to help</h1>
+      <p>Find answers to common questions or report issues with job listings.</p>
+    </div>
+  </header>
+
+  <div class="pub-page-body">
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="faq">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">FAQ</div>
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick guidance for job seekers and employers.</p>
+      </div>
+      <!-- Container for the faq grid content and layout. -->
+      <div class="faq-grid">
+        <details class="faq-item"><summary>How do I create a Job Seeker account?</summary><p>Go to Register, select Job Seeker, and complete your profile with skills and location.</p></details>
+        <details class="faq-item"><summary>How do employers get verified?</summary><p>Employers can request verification after registration. Verified badges are shown on profiles.</p></details>
+        <details class="faq-item"><summary>Can I track my application status?</summary><p>Yes. Each application has a timeline showing Pending, Reviewed, Accepted, and Rejected.</p></details>
+        <details class="faq-item"><summary>What if I see a suspicious job posting?</summary><p>Use the Report page to flag suspicious listings or employers for admin review.</p></details>
+        <details class="faq-item"><summary>Is my data protected?</summary><p>We follow PDPA 2010 with role-based access control, HTTPS, and Supabase Row Level Security policies.</p></details>
+        <details class="faq-item"><summary>How can I generate a resume?</summary><p>The Work History Dashboard auto-generates a PDF resume from completed jobs.</p></details>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Support</div>
+        <h2>Need More Help?</h2>
+        <p>Reach out to our support team or use the chatbot for 24/7 assistance.</p>
+      </div>
+      <!-- Container for the support grid content and layout. -->
+      <div class="support-grid">
+        <!-- Container for the support card content and layout. -->
+        <div class="support-card">
+          <h3>Chatbot Support</h3>
+          <p>Ask questions anytime. The rule-based chatbot guides you through features.</p>
+          <a href="#" class="btn-outline open-floating-chat">Open Chatbot</a>
+        </div>
+        <!-- Container for the support card content and layout. -->
+        <div class="support-card">
+          <h3>Contact Us</h3>
+          <p>Email: support@easyearn.my<br>Hours: 9am - 6pm (Mon to Fri)</p>
+          <a href="report.html" class="btn-primary">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end pub-page-body -->
+
+  <!-- Shared footer is injected here by includes.js. -->
+  <div id="site-footer"></div>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+  <!-- Loads the JavaScript file that controls this page: js/help.js. -->
+  <script src="js/help.js" defer></script>
+  <!-- Loads the JavaScript file that controls this page: js/floating-chatbot.js?v=20260505a. -->
+  <script src="js/floating-chatbot.js?v=20260505a" type="module" defer></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the chatbot knowledge page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Chatbot Knowledge</title>
+  <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+  <link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20260829j">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell chatbot-knowledge-shell">
+    <div class="admin-header">
+      <div class="admin-badge">Chatbot</div>
+      <h1>Chatbot knowledge management</h1>
+      <p>Create, review, update, and remove approved EasyEarn chatbot FAQ entries.</p>
+      <div class="admin-header-actions">
+        <a class="btn-outline" href="../../chatbot.html">Open Chatbot</a>
+      </div>
+    </div>
+
+    <!-- Container for the chatbot knowledge workspace content and layout. -->
+    <div class="chatbot-knowledge-workspace">
+      <!-- Section for the admin card area of this page. -->
+      <section class="admin-card chatbot-knowledge-card chatbot-knowledge-manage-card">
+        <!-- Container for the admin section head content and layout. -->
+        <div class="admin-section-head">
+          <div>
+            <div class="admin-badge">Manage</div>
+            <h2>Add or edit chatbot Q&amp;A</h2>
+            <p>Create or update approved chatbot answers for future user questions.</p>
+          </div>
+        </div>
+        <!-- Form where users enter and submit knowledge insert details. -->
+        <form class="admin-form-grid chatbot-knowledge-form" id="knowledge-insert-form">
+          <label class="admin-field">
+            <span>Question</span>
+            <input id="knowledge-question" type="text" placeholder="Example: How do I apply?" required>
+          </label>
+          <label class="admin-field">
+            <span>Category</span>
+            <input id="knowledge-category" type="text" placeholder="Example: applications">
+          </label>
+          <label class="admin-field full">
+            <span>Keywords</span>
+            <input id="knowledge-keywords" type="text" placeholder="Separate keywords with commas, example: apply, application, resume" required>
+          </label>
+          <label class="admin-field full">
+            <span>Answer</span>
+            <textarea id="knowledge-answer" placeholder="Answer shown by the chatbot" required></textarea>
+          </label>
+          <div class="admin-action-row full">
+            <button class="btn-primary" id="knowledge-save-btn" type="submit">Save Q&amp;A</button>
+            <button class="btn-outline" id="knowledge-clear-btn" type="button">Clear</button>
+          </div>
+        </form>
+        <!-- Container for the admin inline status content and layout. -->
+        <div class="admin-inline-status" id="knowledge-insert-status">Ready to add a new entry.</div>
+      </section>
+
+      <!-- Section for the admin card area of this page. -->
+      <section class="admin-card chatbot-knowledge-card">
+        <!-- Container for the admin section head content and layout. -->
+        <div class="admin-section-head">
+          <div>
+            <div class="admin-badge">Knowledge Base</div>
+            <h2>All chatbot Q&amp;A</h2>
+            <p>Review stored chatbot answers and search by question, keyword, answer, or category.</p>
+          </div>
+          <button class="btn-outline" id="knowledge-refresh-btn" type="button">Refresh</button>
+        </div>
+        <!-- Container for the chatbot knowledge toolbar content and layout. -->
+        <div class="chatbot-knowledge-toolbar">
+          <label class="admin-field" for="knowledge-search">
+            <span>Search</span>
+            <input id="knowledge-search" type="search" placeholder="Search question, keyword, answer, or category">
+          </label>
+          <!-- Container for the chatbot knowledge count content and layout. -->
+          <div class="chatbot-knowledge-count" id="knowledge-count">Loading...</div>
+        </div>
+        <!-- Container for the chatbot knowledge list content and layout. -->
+        <div class="chatbot-knowledge-list" id="knowledge-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>window.EASYEARN_BASE_PATH='../../';window.EASYEARN_HEADER_PATH='../../partials/header-admin.html';</script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/seed-chatbot.js?v=20260829d. -->
+  <script type="module" src="../../js/seed-chatbot.js?v=20260829d"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the interviews page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Interviews</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002b">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="jobseeker-shell">
+    <!-- Container for the jobseeker header content and layout. -->
+    <div class="jobseeker-header">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Interviews</div>
+      <h1>Your Interview Schedule</h1>
+      <p>Employers who accepted your application can schedule interview details here. Check your date, time, and location below.</p>
+    </div>
+
+    <!-- Stats -->
+    <section class="jobseeker-card">
+      <!-- Container for the section heading row content and layout. -->
+      <div class="section-heading-row">
+        <div>
+          <!-- Container for the hero badge content and layout. -->
+          <div class="hero-badge">Overview</div>
+          <h2>Interview summary</h2>
+        </div>
+        <a href="applications.html" class="btn-outline interview-action-btn">My Applications</a>
+      </div>
+      <!-- Container for the jobseeker grid content and layout. -->
+      <div class="jobseeker-grid application-stats-grid">
+        <article class="jobseeker-card application-stat-card" style="border-top:3px solid #3b82f6;">
+          <span class="application-stat-label">Confirmed</span>
+          <h3 id="int-scheduled-count">0</h3>
+          <p id="int-scheduled-note">No confirmed interviews yet.</p>
+        </article>
+        <article class="jobseeker-card application-stat-card" style="border-top:3px solid #22c55e;">
+          <span class="application-stat-label">Upcoming</span>
+          <h3 id="int-upcoming-count">0</h3>
+          <p id="int-upcoming-note">No upcoming interviews.</p>
+        </article>
+        <article class="jobseeker-card application-stat-card" style="border-top:3px solid #94a3b8;">
+          <span class="application-stat-label">Completed</span>
+          <h3 id="int-past-count">0</h3>
+          <p id="int-past-note">No completed interviews yet.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Upcoming Interviews -->
+    <section class="jobseeker-card">
+      <!-- Container for the section heading row content and layout. -->
+      <div class="section-heading-row">
+        <div>
+          <!-- Container for the hero badge content and layout. -->
+          <div class="hero-badge">Upcoming</div>
+          <h2>Interviews coming up</h2>
+          <p>Sorted by soonest first. Make sure you're prepared!</p>
+        </div>
+      </div>
+      <!-- Container for the jobseeker list content and layout. -->
+      <div id="int-upcoming-list" class="jobseeker-list application-list">
+        <article class="jobseeker-item application-item">
+          <!-- Container for the application main content and layout. -->
+          <div class="application-main">
+            <!-- Container for the application title row content and layout. -->
+            <div class="application-title-row">
+              <h3>Loading...</h3>
+              <span class="status-pill pending">Loading</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Completed Interviews -->
+    <section class="jobseeker-card">
+      <!-- Container for the section heading row content and layout. -->
+      <div class="section-heading-row">
+        <div>
+          <!-- Container for the hero badge content and layout. -->
+          <div class="hero-badge">History</div>
+          <h2>Completed interviews</h2>
+          <p>Interviews you have already attended or that already passed.</p>
+        </div>
+      </div>
+      <!-- Container for the jobseeker list content and layout. -->
+      <div id="int-past-list" class="jobseeker-list application-list">
+        <article class="jobseeker-item application-item">
+          <!-- Container for the application main content and layout. -->
+          <div class="application-main">
+            <!-- Container for the application title row content and layout. -->
+            <div class="application-title-row">
+              <h3>No completed interviews yet</h3>
+              <span class="status-pill reviewed">Empty</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- No interviews at all -->
+    <section class="jobseeker-card" id="int-empty-section" style="display:none;">
+      <!-- Container for the section heading row content and layout. -->
+      <div class="section-heading-row">
+        <div>
+          <!-- Container for the hero badge content and layout. -->
+          <div class="hero-badge">No Interviews Yet</div>
+          <h2>No confirmed interviews found</h2>
+          <p>Once an employer accepts your application and sets an interview date, it will appear here automatically.</p>
+        </div>
+        <a href="jobs.html" class="btn-outline interview-action-btn">Browse Jobs</a>
+      </div>
+      <!-- Container for the jobseeker list content and layout. -->
+      <div class="jobseeker-list">
+        <article class="jobseeker-item application-item">
+          <!-- Container for the application main content and layout. -->
+          <div class="application-main">
+            <!-- Container for the application title row content and layout. -->
+            <div class="application-title-row">
+              <h3>Keep applying to get interview invitations</h3>
+              <span class="status-pill pending">Waiting</span>
+            </div>
+            <!-- Container for the application summary content and layout. -->
+            <div class="application-summary">
+              <p class="application-company">Tip</p>
+              <p>Make sure your profile is complete with skills and a bio — this helps employers feel confident accepting you.</p>
+            </div>
+            <!-- Container for the application meta content and layout. -->
+            <div class="application-meta">
+              <span><a href="profile.html">Update Profile</a></span>
+              <span><a href="applications.html">Track Applications</a></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-interviews.js?v=20260429a. -->
+  <script type="module" src="../../js/jobseeker-interviews.js?v=20260429a"></script>
+</body>
+</html>

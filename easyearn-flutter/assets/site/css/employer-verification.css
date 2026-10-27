@@ -1,0 +1,97 @@
+/* Verification uses independent rows so hidden fields cannot shift uploads. */
+#verification-form {
+  width: 100%;
+}
+#verification-form .verification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
+}
+#verification-form .verification-type-field {
+  grid-column: 1 / -1;
+}
+#verification-form .verification-type-field select {
+  width: 100%;
+  max-width: 100%;
+}
+#verification-form .verification-details {
+  display: grid;
+  gap: 20px;
+}
+#verification-form .verification-documents {
+  display: contents;
+}
+#verification-form .employer-field {
+  min-width: 0;
+  margin: 0;
+  gap: 10px;
+  align-content: start;
+}
+#verification-form .employer-field > span {
+  line-height: 1.5;
+  min-height: 40px;
+}
+#verification-form .employer-field > small {
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+#verification-form .employer-field > input,
+#verification-form .employer-field > select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  margin: 0;
+}
+#verification-type-help {
+  padding: 12px 16px;
+  border-left: 3px solid #d5ac76;
+  background: rgba(213, 172, 118, 0.08);
+  border-radius: 0 8px 8px 0;
+}
+#verification-form .employer-upload-box {
+  box-sizing: border-box;
+  min-height: 144px;
+  padding: 20px;
+  margin: 0;
+  align-content: center;
+  gap: 8px;
+}
+#verification-form .employer-upload-box small {
+  font-size: 13px;
+  line-height: 1.6;
+}
+#verification-form .verification-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(160, 120, 80, 0.22);
+}
+#verification-submit-btn {
+  width: 320px;
+  max-width: 100%;
+  min-height: 50px;
+}
+#verification-submit-status {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+}
+@media (max-width: 760px) {
+  #verification-form .verification-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  #verification-form .employer-field > span {
+    min-height: 0;
+  }
+  #verification-form .verification-type-field select,
+  #verification-submit-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the verifications page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Admin Verifications</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell">
+    <div class="admin-header"><div class="admin-badge">Verifications</div><h1>Employer verification review</h1><p>Approve, reject, or revisit employer verification requests once document flow is connected.</p></div>
+    <!-- Section for the admin grid area of this page. -->
+    <section class="admin-grid three">
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Pending</span><strong id="verification-pending-count">0</strong><p id="verification-pending-note">No pending requests yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Approved</span><strong id="verification-approved-count">0</strong><p id="verification-approved-note">No approved requests yet.</p></article>
+      <article class="admin-card admin-metric"><span class="admin-stat-label">Rejected</span><strong id="verification-rejected-count">0</strong><p id="verification-rejected-note">No rejected requests yet.</p></article>
+    </section>
+    <!-- Section for the admin card area of this page. -->
+    <section class="admin-card">
+      <!-- Container for the admin section head content and layout. -->
+      <div class="admin-section-head">
+        <div>
+          <div class="admin-badge">Verification Queue</div>
+          <h2>Review employer requests</h2>
+          <p>Submitted employer verification packages from this browser demo will appear here for admin review.</p>
+        </div>
+      </div>
+      <!-- Container for the admin analytics toolbar content and layout. -->
+      <div class="admin-analytics-toolbar">
+        <label class="admin-analytics-filter">
+          <span>Status</span>
+          <select id="verification-status-filter">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="submitted">Pending Review</option>
+            <option value="recheck">Needs Recheck</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </label>
+        <label class="admin-analytics-filter admin-analytics-search">
+          <span>Search</span>
+          <input id="verification-search" type="search" placeholder="Search employer, email, registration, type, or address">
+        </label>
+      </div>
+      <p id="verification-review-status" class="admin-inline-status">Review actions will update the request status here.</p>
+      <!-- Container for the admin list content and layout. -->
+      <div id="verification-queue" class="admin-list">
+        <article class="admin-item">
+          <strong>No employer verification requests yet</strong>
+          <p>Once employer-side verification is submitted, admin can review trust badge eligibility here.</p>
+          <div class="admin-item-meta"><span>Business: -</span><span>Documents: 0</span><span>Status: Empty</span></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>window.EASYEARN_BASE_PATH='../../';window.EASYEARN_HEADER_PATH='../../partials/header-admin.html';</script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script><script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/admin-verifications.js?v=20261001b. -->
+  <script type="module" src="../../js/admin-verifications.js?v=20261001b"></script>
+</body>
+</html>

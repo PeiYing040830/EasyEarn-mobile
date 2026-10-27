@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the jobs page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Browse Jobs</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="css/jobs.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="flutter-public-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Header area introduces the page and usually contains the main page title. -->
+  <header class="page-hero jobs-hero">
+    <!-- Container for the page hero inner content and layout. -->
+    <div class="page-hero-inner">
+      <!-- Container for the section tag content and layout. -->
+      <div class="section-tag">Browse Jobs</div>
+      <h1>Find the right gig for today</h1>
+      <p>Explore short‑term, part‑time, and flexible jobs across Malaysia. Filter by category, location, and schedule.</p>
+    </div>
+  </header>
+
+  <!-- Main content section that groups related page information. -->
+  <section class="section">
+    <!-- Inner wrapper that keeps this content aligned with the page width. -->
+    <div class="section-inner">
+      <!-- Container for the jobs toolbar content and layout. -->
+      <div class="jobs-toolbar">
+        <input class="jobs-search" id="jobs-search" type="text" placeholder="Search by role, location, or keyword">
+        <!-- Container for the jobs filters content and layout. -->
+        <div class="jobs-filters" id="jobs-filters">
+          <button class="filter-pill is-active" data-filter="all" type="button">All</button>
+          <button class="filter-pill" data-filter="events" type="button">Events</button>
+          <button class="filter-pill" data-filter="fnb" type="button">F&amp;B</button>
+          <button class="filter-pill" data-filter="education" type="button">Education</button>
+          <button class="filter-pill" data-filter="delivery" type="button">Delivery</button>
+        </div>
+        <button class="btn-locate" id="btn-locate" type="button" title="Find jobs near me">
+          📍 Near Me
+        </button>
+      </div>
+      <div class="location-bar" id="location-bar" style="display:none">
+        <span id="location-label">📍 Showing jobs near <strong id="location-name"></strong></span>
+        <label style="margin-left:16px;font-size:13px;">
+          Radius:
+          <select id="radius-select" style="margin-left:4px;padding:3px 8px;border-radius:6px;border:1px solid #a5f3fc;font-size:13px;">
+            <option value="5">5 km</option>
+            <option value="10" selected>10 km</option>
+            <option value="25">25 km</option>
+            <option value="50">50 km</option>
+          </select>
+        </label>
+        <button id="btn-clear-location" style="margin-left:12px;background:none;border:none;color:#dc2626;cursor:pointer;font-size:13px;">✕ Clear</button>
+      </div>
+      <!-- Container for the jobs empty content and layout. -->
+      <div class="jobs-empty" id="jobs-empty" style="display:none">No jobs found. Try a different keyword or filter.</div>
+      <!-- Container for the jobs loading content and layout. -->
+      <div class="jobs-loading" id="jobs-loading" style="text-align:center;padding:2rem;color:#888;">Loading jobs...</div>
+
+      <!-- Container for the jobs grid content and layout. -->
+      <div class="jobs-grid" id="jobs-grid"></div>
+    </div>
+  </section>
+
+  <!-- Shared footer is injected here by includes.js. -->
+  <div id="site-footer"></div>
+
+  <!-- Loads translation support for multilingual users. -->
+  <script src="js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+  <!-- Loads the JavaScript file that controls this page: js/jobs.js. -->
+  <script type="module" src="js/jobs.js"></script>
+</body>
+</html>

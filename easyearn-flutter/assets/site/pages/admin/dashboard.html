@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the dashboard page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="admin-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/charts-mobile.css?v=20260930a">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=4">
+  <link rel="stylesheet" href="../../css/admin-phone.css?v=2">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="admin-shell admin-dashboard-shell">
+
+    <!-- Section for the admin hero area of this page. -->
+    <section class="admin-hero">
+      <!-- Container for the admin hero copy content and layout. -->
+      <div class="admin-hero-copy">
+        <div class="admin-badge">Admin Dashboard</div>
+        <h1>Welcome back, <span id="admin-dashboard-welcome-name">Admin</span></h1>
+        <p>Monitor users, reports, verifications, and platform health from one workspace.</p>
+        <!-- Container for the admin hero actions content and layout. -->
+        <div class="admin-hero-actions">
+          <a href="reports.html" class="btn-primary">Open Reports</a>
+          <a href="verifications.html" class="btn-outline">Review Verifications</a>
+        </div>
+      </div>
+      <aside class="admin-hero-side">
+        <div class="admin-badge">Control Center</div>
+        <h2>Keep the platform queue moving.</h2>
+        <p>Use this dashboard to catch active safety work, employer checks, and listing activity before they become blockers.</p>
+        <ul class="admin-checklist">
+          <li>Review reports and payment disputes</li>
+          <li>Approve employer verification requests</li>
+          <li>Promote Gig Workers Act 2025 compliance awareness</li>
+          <li>Watch user, job, and moderation trends</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- 4 stat metric cards -->
+    <section class="admin-grid four">
+      <article class="admin-card admin-metric">
+        <span class="admin-stat-label">Users</span>
+        <strong id="admin-dashboard-users-count">0</strong>
+        <p id="admin-dashboard-users-note">No metrics connected yet.</p>
+      </article>
+      <article class="admin-card admin-metric">
+        <span class="admin-stat-label">Reports</span>
+        <strong id="admin-dashboard-reports-count">0</strong>
+        <p id="admin-dashboard-reports-note">No active reports yet.</p>
+      </article>
+      <article class="admin-card admin-metric">
+        <span class="admin-stat-label">Verifications</span>
+        <strong id="admin-dashboard-verifications-count">0</strong>
+        <p id="admin-dashboard-verifications-note">No pending employer checks yet.</p>
+      </article>
+      <article class="admin-card admin-metric">
+        <span class="admin-stat-label">Jobs</span>
+        <strong id="admin-dashboard-flagged-jobs-count">0</strong>
+        <p id="admin-dashboard-flagged-jobs-note">No flagged jobs yet.</p>
+      </article>
+    </section>
+
+    <!-- Main content row -->
+    <section class="admin-grid two">
+
+      <!-- Moderation Queue -->
+      <article class="admin-card">
+        <!-- Container for the admin section head content and layout. -->
+        <div class="admin-section-head">
+          <div>
+            <div class="admin-badge">Moderation Queue</div>
+            <h2>What admin will manage</h2>
+            <p>These cards wire to report, verification, and safety collections.</p>
+          </div>
+        </div>
+        <!-- Container for the admin list content and layout. -->
+        <div class="admin-list">
+          <article class="admin-item">
+            <strong>User report review</strong>
+            <p id="admin-dashboard-report-summary">Handle flagged employers, suspicious listings, and abuse reports.</p>
+            <div class="admin-item-meta">
+              <span id="admin-dashboard-report-priority-pill">Priority: -</span>
+              <span id="admin-dashboard-report-status-pill">Status: Empty</span>
+            </div>
+          </article>
+          <article class="admin-item">
+            <strong>Employer verification</strong>
+            <p>Review business info and approval state for trust badges.</p>
+            <div class="admin-item-meta">
+              <span id="admin-dashboard-verification-pending-pill">Pending: 0</span>
+              <span id="admin-dashboard-verification-approved-pill">Approved: 0</span>
+            </div>
+          </article>
+          <article class="admin-item">
+            <strong>Platform oversight</strong>
+            <p>Watch role growth, listing quality, and moderation workload.</p>
+            <div class="admin-item-meta">
+              <span>Analytics ready</span><span>Future collection view</span>
+            </div>
+          </article>
+        </div>
+      </article>
+
+      <!-- Trend charts card -->
+      <article class="admin-card">
+        <!-- Container for the admin section head content and layout. -->
+        <div class="admin-section-head">
+          <div>
+            <div class="admin-badge">Trend View</div>
+            <h2>Platform activity</h2>
+            <p>Activity, moderation cases, and verification volume over time.</p>
+          </div>
+          <a href="analytics.html" class="btn-outline">Open Analytics</a>
+        </div>
+
+        <!-- Line chart (small) on top, pie chart below -->
+        <div class="admin-chart-stack">
+
+          <!-- Line chart — compact but properly proportioned -->
+          <div class="admin-chart admin-chart-sm">
+            <canvas id="admin-dashboard-line-canvas" style="width:100%;max-height:160px;"></canvas>
+          </div>
+
+          <!-- Pie chart — horizontal row layout -->
+          <div class="admin-chart admin-pie-chart admin-pie-full">
+            <div class="admin-pie-wrap">
+              <canvas id="admin-dashboard-donut-canvas" style="max-width:160px;max-height:160px;"></canvas>
+            </div>
+            <div class="admin-pie-legend">
+              <span><span class="admin-legend-label"><i class="admin-legend-dot users"></i>Users</span><strong id="admin-dashboard-users-share">0%</strong></span>
+              <span><span class="admin-legend-label"><i class="admin-legend-dot reports"></i>Reports</span><strong id="admin-dashboard-reports-share">0%</strong></span>
+              <span><span class="admin-legend-label"><i class="admin-legend-dot verifications"></i>Verifications</span><strong id="admin-dashboard-verifications-share">0%</strong></span>
+              <span><span class="admin-legend-label"><i class="admin-legend-dot jobs"></i>Jobs</span><strong id="admin-dashboard-jobs-share">0%</strong></span>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-admin.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: https://cdn.jsdelivr.net/npm/chart.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/admin-dashboard.js?v=20260930d -->
+  <script type="module" src="../../js/admin-dashboard.js?v=20260930d"></script>
+</body>
+</html>

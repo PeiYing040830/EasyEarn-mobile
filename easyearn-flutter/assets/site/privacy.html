@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the privacy page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Privacy & Policies</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="css/privacy.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="flutter-public-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Header area introduces the page and usually contains the main page title. -->
+  <header class="page-hero privacy-hero">
+    <!-- Container for the privacy hero bg content and layout. -->
+    <div class="privacy-hero-bg" aria-hidden="true">
+      <!-- Container for the privacy hero slide content and layout. -->
+      <div class="privacy-hero-slide is-active" style="background-image: url('images/barista.png');"></div>
+      <!-- Container for the privacy hero slide content and layout. -->
+      <div class="privacy-hero-slide" style="background-image: url('images/waiter.jpg');"></div>
+      <!-- Container for the privacy hero slide content and layout. -->
+      <div class="privacy-hero-slide" style="background-image: url('images/cleaner.jpeg');"></div>
+    </div>
+    <!-- Container for the privacy hero overlay content and layout. -->
+    <div class="privacy-hero-overlay" aria-hidden="true"></div>
+    <!-- Container for the page hero inner content and layout. -->
+    <div class="page-hero-inner">
+      <!-- Container for the hero badge content and layout. -->
+      <div class="hero-badge">Privacy & Policies</div>
+      <h1>Your data, protected</h1>
+      <p>EasyEarn follows PDPA 2010 and applies security best practices to protect personal data.</p>
+    </div>
+  </header>
+
+  <div class="pub-page-body">
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="pdpa">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">PDPA</div>
+        <h2>Personal Data Protection Act (PDPA) 2010</h2>
+        <p>We collect data only for legitimate purposes and protect it with role-based access control.</p>
+      </div>
+      <!-- Container for the policy grid content and layout. -->
+      <div class="policy-grid">
+        <!-- Container for the policy card content and layout. -->
+        <div class="policy-card"><h3>Data Collected</h3><ul class="clean-list"><li>Account details: name, email, role</li><li>Profile data: skills, work history</li><li>Job data: postings, applications, status</li></ul></div>
+        <!-- Container for the policy card content and layout. -->
+        <div class="policy-card"><h3>How We Use Data</h3><ul class="clean-list"><li>Match job seekers with employers</li><li>Provide application tracking</li><li>Generate resumes and analytics</li></ul></div>
+        <!-- Container for the policy card content and layout. -->
+        <div class="policy-card"><h3>Data Protection</h3><ul class="clean-list"><li>HTTPS encryption for transmission</li><li>Supabase authentication and Row Level Security policies</li><li>Role-Based Access Control (RBAC)</li></ul></div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card" id="terms">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Terms</div>
+        <h2>Terms of Service (Summary)</h2>
+        <p>By using EasyEarn, you agree to follow platform rules and community guidelines.</p>
+      </div>
+      <!-- Container for the policy list content and layout. -->
+      <div class="policy-list">
+        <div class="policy-line">Provide accurate information during registration.</div>
+        <div class="policy-line">Employers must clearly state job details and payment terms.</div>
+        <div class="policy-line">Job seekers must follow agreed schedules and job requirements.</div>
+        <div class="policy-line">Reports of fraud or misconduct will be investigated by Admin.</div>
+      </div>
+    </div>
+
+    <!-- Container for the pub section card content and layout. -->
+    <div class="pub-section-card">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Security</div>
+        <h2>Technical Security Measures</h2>
+        <p>Aligned with the Computer Crimes Act 1997 and Consumer Protection Act 1999.</p>
+      </div>
+      <!-- Container for the security grid content and layout. -->
+      <div class="security-grid">
+        <!-- Container for the security card content and layout. -->
+        <div class="security-card"><h3>Authentication & Access</h3><ul class="clean-list"><li>Supabase Authentication</li><li>Token-based sessions</li><li>Role-based access control</li></ul></div>
+        <!-- Container for the security card content and layout. -->
+        <div class="security-card"><h3>Data & Platform Integrity</h3><ul class="clean-list"><li>HTTPS encryption</li><li>Row Level Security (RLS) policies</li><li>Admin monitoring and audit logs</li></ul></div>
+      </div>
+    </div>
+
+  </div><!-- end pub-page-body -->
+
+  <!-- Shared footer is injected here by includes.js. -->
+  <div id="site-footer"></div>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+  <!-- Loads the JavaScript file that controls this page: js/privacy.js. -->
+  <script src="js/privacy.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the login page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Login / Register</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/style.css?v=20260627d">
+  <style>
+    /* ── Tab switcher ── */
+    .auth-tabs {
+      display: flex;
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 4px;
+      margin-top: 16px;
+      margin-bottom: 28px;
+      gap: 4px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: transparent;
+      color: #64748b;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .auth-tab.active {
+      background: #ffffff;
+      color: #0891b2;
+      box-shadow: 0 2px 8px rgba(8, 145, 178, 0.14);
+    }
+
+    .auth-tab:hover:not(.active) {
+      color: #0891b2;
+    }
+
+    /* ── Panel visibility ── */
+    .auth-panel { display: none; }
+    .auth-panel.active { display: block; }
+
+    /* ── Heading per panel ── */
+    .auth-heading { margin-bottom: 20px; }
+    .auth-heading h1 { font-size: 24px; color: #0891b2; margin-bottom: 2px; }
+    .auth-heading p  { font-size: 13px; color: #64748b; }
+
+    /* dark mode tabs */
+    body.theme-dark .auth-tabs { background: #1f2937; }
+    body.theme-dark .auth-tab { color: #9ca3af; }
+    body.theme-dark .auth-tab.active { background: #111827; color: #67e8f9; box-shadow: 0 2px 8px rgba(6,182,212,0.14); }
+    body.theme-dark .auth-tab:hover:not(.active),
+    body.theme-dark .auth-tab:focus-visible:not(.active) {
+      background: rgba(8, 145, 178, 0.14);
+      color: #a5f3fc;
+      box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.18);
+    }
+    body.theme-dark .auth-heading h1 { color: #67e8f9; }
+    body.theme-dark .auth-heading p  { color: #9ca3af; }
+
+    body.theme-dark #login-loading-overlay {
+      background: rgba(11, 18, 32, 0.96) !important;
+      backdrop-filter: blur(10px);
+    }
+
+    body.theme-dark .login-loading-pattern {
+      opacity: 0.28 !important;
+      filter: saturate(0.9) brightness(0.75);
+    }
+
+    body.theme-dark .login-loading-title {
+      color: #67e8f9 !important;
+    }
+
+    body.theme-dark .login-loading-copy {
+      color: #cbd5e1 !important;
+    }
+
+    body.theme-dark .login-loading-track {
+      background: #164e63 !important;
+    }
+
+    body.theme-dark #login-loading-percent {
+      color: #67e8f9 !important;
+    }
+
+    /* Welcome overlay mascot. logo.gif replaces the cute character with the app mascot. */
+    .growth-mascot {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      margin-bottom: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255,255,255,.92) 0 45%, rgba(236,253,245,.72) 64%, rgba(34,197,94,.16) 100%);
+      box-shadow:
+        0 22px 44px rgba(8, 145, 178, 0.18),
+        inset 0 0 0 1px rgba(34, 197, 94, 0.16);
+      animation: logoMascotFloat 2.8s ease-in-out infinite;
+      overflow: hidden;
+    }
+
+    /* Soft highlight layer over the mascot circle. It is decorative only. */
+    .growth-mascot::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,255,255,.45), transparent 48%);
+      pointer-events: none;
+    }
+
+    /* object-fit: contain keeps the GIF inside the circle without cropping it. */
+    .growth-mascot img {
+      width: 218px;
+      height: 218px;
+      object-fit: contain;
+      border-radius: 50%;
+      transform: none;
+      filter: drop-shadow(0 12px 18px rgba(15, 118, 110, 0.16));
+    }
+
+    @keyframes logoMascotFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.02); }
+    }
+
+    /* wider box for register tab */
+    .auth-box { transition: max-width 0.25s ease; }
+    .auth-box.wide { max-width: 480px; }
+
+    .registration-privacy-notice {
+      margin: 16px 0;
+      padding: 12px 14px;
+      border: 1px solid #bae6fd;
+      border-radius: 10px;
+      background: #f0f9ff;
+      color: #334155;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .registration-privacy-notice a { color: #075985; text-decoration: underline; }
+    .registration-policy-links { text-align: center; margin-top: 8px; }
+    .registration-consent { display: flex; align-items: flex-start; gap: 10px; }
+    #register-privacy-consent { width: 18px; height: 18px; flex: 0 0 18px; margin: 3px 0 0; accent-color: #0891b2; cursor: pointer; }
+    .registration-consent label { margin: 0; font-weight: 400; cursor: pointer; }
+    .registration-privacy-notice a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+    body.theme-dark .registration-privacy-notice { background: #0f172a; border-color: #334155; color: #e2e8f0; }
+    body.theme-dark .registration-privacy-notice a { color: #7dd3fc; }
+
+    /* select styling */
+    .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+    }
+    .form-group select:focus { border-color: #0891b2; }
+    body.theme-dark .form-group select {
+      background: #1f2937;
+      border-color: #374151;
+      color: #f8fafc;
+    }
+  </style>
+  <link rel="stylesheet" href="css/mobile-app.css?v=6">
+</head>
+<body class="flutter-public-page auth-bg-page">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <div class="auth-container">
+    <div class="auth-box" id="auth-box">
+
+      <!-- Tab switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Login</button>
+        <button class="auth-tab"        id="tab-register" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <div id="error-msg" class="error-msg" style="display:none;"></div>
+
+      <!-- ── LOGIN PANEL ── -->
+      <div class="auth-panel active" id="panel-login">
+        <div class="auth-heading">
+          <h1>Welcome back</h1>
+          <p>Sign in to your EasyEarn account</p>
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="Enter your email">
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-field">
+            <input type="password" id="login-password" placeholder="Enter your password">
+            <button class="password-toggle" type="button" data-toggle-target="login-password" aria-label="Show password">👀</button>
+          </div>
+        </div>
+        <button class="btn-primary" id="login-btn">Login</button>
+        <p class="link-text"><a href="forgot-password.html">Forgot password?</a></p>
+        <p class="link-text">No account? <a href="#" onclick="switchTab('register'); return false;">Register here</a></p>
+      </div>
+
+      <!-- ── REGISTER PANEL ── -->
+      <div class="auth-panel" id="panel-register">
+        <div class="auth-heading">
+          <h1>Create account</h1>
+          <p>Join EasyEarn and start earning</p>
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Enter your full name">
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-field">
+            <input type="password" id="password" placeholder="Min 6 characters + one of !@#$%^">
+            <button class="password-toggle" type="button" data-toggle-target="password" aria-label="Show password">👀</button>
+          </div>
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <div class="password-field">
+            <input type="password" id="confirm-password" placeholder="Re-enter your password">
+            <button class="password-toggle" type="button" data-toggle-target="confirm-password" aria-label="Show password">👀</button>
+          </div>
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group">
+          <label>I am a...</label>
+          <div class="role-selector">
+            <!-- Container for the role card content and layout. -->
+            <div class="role-card selected" id="role-seeker" onclick="selectRole('seeker')">
+              <span class="role-icon">💼</span>
+              <span>Job Seeker</span>
+            </div>
+            <!-- Container for the role card content and layout. -->
+            <div class="role-card" id="role-employer" onclick="selectRole('employer')">
+              <span class="role-icon">👨‍💼</span>
+              <span>Employer</span>
+            </div>
+            <div class="role-card" id="role-admin" onclick="selectRole('admin')">
+              <span class="role-icon">🔒</span>
+              <span>Admin</span>
+            </div>
+            <!-- Container for the role card content and layout. -->
+          </div>
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group admin-code" id="employer-code-group">
+          <label>Employer Secure Code</label>
+          <div class="password-field">
+            <input type="password" id="employer-code" placeholder="Enter employer secure code">
+            <button class="password-toggle" type="button" data-toggle-target="employer-code" aria-label="Show secure code">👀</button>
+          </div>
+        </div>
+        <!-- Container for the form group content and layout. -->
+        <div class="form-group admin-code" id="admin-code-group">
+          <label>Admin Secure Code</label>
+          <div class="password-field">
+            <input type="password" id="admin-code" placeholder="Enter admin secure code" autocomplete="off">
+            <button class="password-toggle" type="button" data-toggle-target="admin-code" aria-label="Show secure code">👀</button>
+          </div>
+        </div>
+        <div class="registration-privacy-notice" id="registration-privacy-notice">
+          <div class="registration-consent">
+            <input type="checkbox" id="register-privacy-consent" required aria-describedby="registration-data-use">
+            <label for="register-privacy-consent">I agree to the collection and use of my account and profile data for EasyEarn services, and accept the Privacy Policy and Terms of Service.</label>
+          </div>
+          <p id="registration-data-use">Data is stored using Supabase. Relevant information is shared with employers or applicants for job applications and platform services, as described in our privacy policy.</p>
+          <div class="registration-policy-links">
+            <a href="privacy.html">Privacy Policy</a>
+            · <a href="terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <button class="btn-primary" id="register-btn" aria-describedby="registration-privacy-notice">Create Account</button>
+        <p class="link-text">Already have an account? <a href="#" onclick="switchTab('login'); return false;">Login here</a></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Welcome loading overlay (shown after successful login, before redirect) ── -->
+  <div id="login-loading-overlay" style="
+    display:none; position:fixed; inset:0; z-index:9999;
+    background:rgba(238,249,252,0.94); backdrop-filter:blur(8px);
+    align-items:center; justify-content:center; flex-direction:column;
+    overflow:hidden;
+  ">
+    <!-- loading.gif is a decorative pattern layer behind the mascot and text. -->
+    <div class="login-loading-pattern" aria-hidden="true" style="
+      position:absolute; inset:0;
+      background-image:url('images/loading.gif');
+      background-repeat:repeat;
+      background-position:center;
+      background-size:432px 240px;
+      opacity:.62;
+      pointer-events:none;
+    "></div>
+    <!-- This content layer is above the loading.gif pattern. -->
+    <div style="position:relative; z-index:1; display:flex; align-items:center;
+      justify-content:center; flex-direction:column;">
+      <div class="growth-mascot" aria-hidden="true">
+        <img src="images/logo.gif" alt="">
+      </div>
+      <p class="login-loading-title" style="margin-top:0; font-family:'Manrope',sans-serif;
+        font-weight:700; font-size:18px; color:#0e7490;">
+        Welcome back!
+      </p>
+      <p class="login-loading-copy" style="margin-top:4px; margin-bottom:18px; font-family:'Manrope',sans-serif;
+        font-weight:500; font-size:13px; color:#475569;">
+        Getting your dashboard ready...
+      </p>
+      <div class="login-loading-track" style="width:200px; height:6px; border-radius:99px;
+        background:#cffafe; overflow:hidden;">
+        <div id="login-loading-bar" style="
+          width:0%; height:100%; border-radius:99px;
+          background:linear-gradient(90deg, #0891b2, #22d3ee);
+        "></div>
+      </div>
+      <p id="login-loading-percent" style="margin-top:8px; font-family:'Manrope',sans-serif;
+        font-weight:600; font-size:12px; color:#0891b2;">
+        0%
+      </p>
+    </div>
+  </div>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    // Called by js/auth.js after a successful login/register, before redirecting
+    window.showWelcomeOverlay = function(redirectUrl) {
+      const DURATION = 3800;
+      document.getElementById('login-loading-overlay').style.display = 'flex';
+      const bar = document.getElementById('login-loading-bar');
+      const percentLabel = document.getElementById('login-loading-percent');
+
+      const start = performance.now();
+      function tick(now) {
+        const pct = Math.min(100, Math.round(((now - start) / DURATION) * 100));
+        bar.style.width = pct + '%';
+        percentLabel.textContent = pct + '%';
+        if (pct < 100) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, DURATION);
+    };
+  </script>
+
+
+  <!-- Loads translation support for multilingual users. -->
+  <script src="js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    // ── Tab switching ──
+    function switchTab(tab) {
+      const box = document.getElementById('auth-box');
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('panel-' + tab).classList.add('active');
+      box.classList.toggle('wide', tab === 'register');
+      const errorMessage = document.getElementById('error-msg');
+      if (errorMessage) {
+        errorMessage.textContent = '';
+        errorMessage.style.display = 'none';
+      }
+      // update URL without reload
+      const url = new URL(window.location);
+      url.searchParams.set('tab', tab);
+      history.replaceState(null, '', url);
+    }
+
+    // Read ?tab= on load
+    const initTab = new URLSearchParams(window.location.search).get('tab');
+    if (initTab === 'register') switchTab('register');
+  </script>
+
+  <!-- Loads the JavaScript file that controls this page: js/auth.js. -->
+  <script type="module" src="js/auth.js?v=20261002b"></script>
+</body>
+</html>

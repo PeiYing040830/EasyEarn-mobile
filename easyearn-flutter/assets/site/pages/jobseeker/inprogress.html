@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the inprogress page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - In Progress</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002b">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+
+  <!-- Main area contains the primary page content. -->
+  <main class="inprogress-shell" aria-labelledby="inprogress-title">
+    <!-- Section for the inprogress panel area of this page. -->
+    <section class="inprogress-panel">
+      <div class="inprogress-media" aria-hidden="true">
+        <img src="../../images/inprogress.png" alt="" onerror="this.onerror=null;this.src='../../images/logout.png';">
+      </div>
+
+      <!-- Container for the inprogress content content and layout. -->
+      <div class="inprogress-content">
+        <span class="inprogress-kicker">In Progress</span>
+        <h1 id="inprogress-title">Your EasyEarn workspace is almost ready.</h1>
+        <p>
+          Keep your profile moving while this section is being prepared. You can continue with messages,
+          resume updates, and verified work history from here.
+        </p>
+
+        <div class="inprogress-actions" aria-label="Job seeker shortcuts">
+          <a class="btn-primary" href="messages.html">Open Messages</a>
+          <a class="btn-outline" href="resume.html">Open Resume</a>
+          <a class="btn-outline" href="work-history.html">Open Work History</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the chatbot page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <!-- Basic page setup for character encoding and responsive layout -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Browser tab title for the chatbot page -->
+  <title>EasyEarn - Chatbot</title>
+
+  <!-- EasyEarn favicon shown in the browser tab -->
+  <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+
+  <!-- Chatbot page stylesheet -->
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared site header is loaded here by includes.js -->
+  <div id="site-header"></div>
+
+  <!-- Hero section introducing the EasyEarn chatbot page -->
+  <header class="page-hero chatbot-hero">
+    <!-- Rotating background images used for the chatbot hero banner -->
+    <div class="chatbot-hero-bg" aria-hidden="true">
+      <!-- First hero background image, active when the page loads -->
+      <div class="chatbot-hero-slide is-active" style="background-image: url('images/barista.png');"></div>
+
+      <!-- Second hero background image -->
+      <div class="chatbot-hero-slide" style="background-image: url('images/waiter.jpg');"></div>
+
+      <!-- Third hero background image -->
+      <div class="chatbot-hero-slide" style="background-image: url('images/cleaner.jpeg');"></div>
+    </div>
+
+    <!-- Dark overlay improves text readability on top of hero images -->
+    <div class="chatbot-hero-overlay" aria-hidden="true"></div>
+
+    <!-- Main hero text content -->
+    <div class="page-hero-inner">
+      <!-- Small label showing the current page category -->
+      <div class="hero-badge">Chatbot</div>
+
+      <!-- Main page heading -->
+      <h1>EasyEarn Assistant</h1>
+
+      <!-- Short description explaining what the chatbot can help with -->
+      <p>Ask about jobs, hiring tools, applications, verification, and platform features anytime.</p>
+    </div>
+  </header>
+
+  <!-- Main content section containing the chatbot interface -->
+  <section class="section">
+    <!-- Inner wrapper keeps the chatbot aligned with the site layout -->
+    <div class="section-inner">
+      <!-- Chatbot card container -->
+      <div class="chatbot-shell">
+        <!-- Chatbot top bar with name, avatar, status, and category pill -->
+        <div class="chatbot-header">
+          <!-- Assistant identity area -->
+          <div class="chatbot-title">
+            <!-- Text avatar for the EasyEarn Assistant -->
+            <div class="chatbot-avatar">EE</div>
+
+            <!-- Assistant name and availability status -->
+            <div>
+              <h2>EasyEarn Assistant</h2>
+              <span class="chatbot-status">Online - Typically replies in seconds</span>
+            </div>
+          </div>
+
+          <!-- Support label shown on the right side of the chatbot header -->
+          <span class="chatbot-pill">Support</span>
+        </div>
+
+        <!-- Chat messages are displayed here and updated by chatbot.js -->
+        <div class="chatbot-body" id="chatbot-body">
+          <!-- Default welcome message from the chatbot -->
+          <div class="chat-message bot">
+            <!-- Container for the chat bubble content and layout. -->
+            <div class="chat-bubble">Hi! I'm EasyEarn Assistant. I can help with registration, jobs, applications, employer workflow, and reports. What do you need today?</div>
+          </div>
+        </div>
+
+        <!-- Input area where users type and send chatbot questions -->
+        <div class="chatbot-footer">
+          <!-- User question input field -->
+          <input id="chatbot-input" type="text" placeholder="Type your question...">
+
+          <!-- Send button handled by chatbot.js -->
+          <button id="chatbot-send" type="button">Send</button>
+        </div>
+
+        <!-- Quick action buttons let users ask common questions faster -->
+        <div class="chatbot-quick" id="chatbot-quick">
+          <!-- Quick question about account registration -->
+          <button type="button" data-quick="How do I register?">Register</button>
+
+          <!-- Quick question about uploading a resume -->
+          <button type="button" data-quick="How do I upload resume?">Upload Resume</button>
+
+          <!-- Quick question for employers who want to create a job post -->
+          <button type="button" data-quick="How do employers post a job?">Post a job</button>
+
+          <!-- Quick question for reporting scams or suspicious activity -->
+          <button type="button" data-quick="I want to report a scam">Report</button>
+        </div>
+      </div>
+
+      <!-- Helper text reminding users what topics the assistant supports -->
+      <p class="chatbot-hint">You are chatting with the EasyEarn Assistant. Ask about registration, jobs, applications, employer workflow, or reports.</p>
+    </div>
+  </section>
+
+  <!-- Shared site footer is loaded here by includes.js -->
+  <div id="site-footer"></div>
+
+  <!-- Translation script for multilingual support -->
+  <script src="js/translate.js" defer></script>
+
+  <!-- Script that loads shared header and footer content -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+
+  <!-- Chatbot behavior script, including messages and quick replies -->
+  <script type="module" src="js/chatbot.js?v=20260829a"></script>
+</body>
+</html>

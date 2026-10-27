@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the work history page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Work History</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="jobseeker-pages.css?v=20261002b">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="jobseeker-shell work-history-shell">
+    <!-- Section for the history hero panel area of this page. -->
+    <section class="history-hero-panel">
+      <!-- Container for the jobseeker header content and layout. -->
+      <div class="jobseeker-header history-hero-copy">
+        <!-- Container for the hero badge content and layout. -->
+        <div class="hero-badge">Work History</div>
+        <h1>Completed Jobs</h1>
+        <p>Save completed gigs here so your earnings, resume, and job history stay consistent.</p>
+      </div>
+      <aside class="history-hero-aside">
+        <span class="history-hero-kicker">Resume Ready</span>
+        <h2>Every finished gig strengthens your profile.</h2>
+        <p>Keep your work record updated so employers can see proof of experience, ratings, and earnings at a glance.</p>
+        <a href="resume.html" class="btn-outline">Open Resume</a>
+      </aside>
+    </section>
+
+    <!-- Section for the jobseeker grid area of this page. -->
+    <section class="jobseeker-grid history-summary-grid history-metric-grid">
+      <article class="jobseeker-card metric-card history-metric-card" style="border-top:3px solid #22c55e;">
+        <span class="history-metric-icon">JG</span>
+        <span class="application-stat-label">Completed Jobs</span>
+        <h3 id="history-total-jobs">0</h3>
+        <p id="history-total-jobs-copy">No completed jobs saved yet.</p>
+      </article>
+      <article class="jobseeker-card metric-card history-metric-card" style="border-top:3px solid #6366f1;">
+        <span class="history-metric-icon">RM</span>
+        <span class="application-stat-label">Total Earnings</span>
+        <h3 id="history-total-earnings">RM0</h3>
+        <p id="history-total-earnings-copy">Add finished gigs to track income.</p>
+      </article>
+      <article class="jobseeker-card metric-card history-metric-card" style="border-top:3px solid #f59e0b;">
+        <span class="history-metric-icon">CT</span>
+        <span class="application-stat-label">Top Category</span>
+        <h3 id="history-top-category">N/A</h3>
+        <p id="history-top-category-copy">Your strongest category will appear here.</p>
+      </article>
+    </section>
+
+    <!-- Section for the jobseeker grid area of this page. -->
+    <section class="jobseeker-grid history-layout-grid">
+      <article class="jobseeker-card chart-card history-editor-card">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Add Completed Gig</div>
+            <h2>Save work record</h2>
+            <p>Each saved record can later appear in your resume and earnings dashboard.</p>
+          </div>
+        </div>
+
+        <!-- Form where users enter and submit work history details. -->
+        <form id="work-history-form" class="profile-form">
+          <!-- Container for the profile form grid content and layout. -->
+          <div class="profile-form-grid">
+            <label class="profile-field">
+              <span>Job title</span>
+              <input id="history-job-title" name="jobTitle" type="text" placeholder="Event Crew">
+            </label>
+            <label class="profile-field">
+              <span>Company</span>
+              <input id="history-company" name="company" type="text" placeholder="BrightSpark Events">
+            </label>
+            <label class="profile-field">
+              <span>Category</span>
+              <input id="history-category" name="category" type="text" placeholder="Events">
+            </label>
+            <label class="profile-field">
+              <span>Location</span>
+              <input id="history-location" name="location" type="text" placeholder="Kuala Lumpur">
+            </label>
+            <label class="profile-field">
+              <span>Completed date</span>
+              <input id="history-completed-date" name="completedDate" type="date">
+            </label>
+            <label class="profile-field">
+              <span>Total earnings</span>
+              <input id="history-earnings" name="earnings" type="number" min="0" step="0.01" placeholder="18">
+            </label>
+            <label class="profile-field">
+              <span>Rating</span>
+              <input id="history-rating" name="rating" type="number" min="0" max="5" step="0.1" placeholder="4.8">
+            </label>
+            <label class="profile-field">
+              <span>Work period</span>
+              <input id="history-period" name="period" type="text" placeholder="Jan 2026 or Nov 2025 - Dec 2025">
+            </label>
+            <label class="profile-field profile-field-full">
+              <span>Highlights</span>
+              <textarea id="history-highlights" name="highlights" rows="4" placeholder="Supported registration and crowd flow&#10;Handled POS payments and customer questions"></textarea>
+              <small>Use one line per highlight.</small>
+            </label>
+          </div>
+
+          <!-- Container for the profile actions row content and layout. -->
+          <div class="profile-actions-row history-form-actions action-with-status">
+            <button type="submit" class="btn-primary" id="save-work-history-btn">Save Work Record</button>
+            <p id="work-history-status" class="profile-inline-status action-status-message">Save result will appear here.</p>
+          </div>
+        </form>
+      </article>
+
+      <article class="jobseeker-card chart-card history-insight-card">
+        <!-- Container for the section heading row content and layout. -->
+        <div class="section-heading-row">
+          <div>
+            <!-- Container for the hero badge content and layout. -->
+            <div class="hero-badge">Resume Status</div>
+            <h2>Keep resume ready</h2>
+            <p>Saved work records here feed directly into your resume preview and future PDF export.</p>
+          </div>
+        </div>
+        <!-- Container for the distribution list content and layout. -->
+        <div class="distribution-list">
+          <div class="distribution-row history-progress-row">
+            <span class="history-progress-label">Saved records</span>
+            <div class="distribution-track"><span id="history-saved-track" style="width: 0%;"></span></div>
+            <strong class="history-progress-value" id="history-saved-count">0</strong>
+          </div>
+          <div class="distribution-row history-progress-row">
+            <span class="history-progress-label">Resume ready</span>
+            <div class="distribution-track"><span id="history-resume-track" style="width: 0%;"></span></div>
+            <strong class="history-progress-value" id="history-resume-status">No</strong>
+          </div>
+        </div>
+        <!-- Container for the history resume card content and layout. -->
+        <div class="history-resume-card">
+          <!-- Container for the history resume copy content and layout. -->
+          <div class="history-resume-copy">
+            <p>Your resume page reads from your saved profile and work_history table, so you only need to maintain one source of truth.</p>
+            <small>Save completed gigs here and your resume preview will stay up to date automatically.</small>
+          </div>
+          <a href="resume.html" class="btn-primary history-resume-btn">Open Resume</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- Section for the jobseeker card area of this page. -->
+    <section class="jobseeker-card history-records-card">
+      <!-- Container for the section heading row content and layout. -->
+      <div class="section-heading-row">
+        <div>
+          <!-- Container for the hero badge content and layout. -->
+          <div class="hero-badge">Completed Gigs</div>
+          <h2>Recent work record</h2>
+          <p>These entries are loaded from your Supabase work_history table.</p>
+        </div>
+      </div>
+      <!-- Container for the jobseeker list content and layout. -->
+      <div class="jobseeker-list history-list" id="history-list">
+        <!-- Container for the jobseeker item content and layout. -->
+        <div class="jobseeker-item history-item">
+          <div>
+            <strong>No work history yet</strong>
+            <p>Saved records will show up here.</p>
+            <p>Add your first completed gig using the form above.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rate Employer Modal -->
+  <div id="rate-employer-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:16px;padding:32px;max-width:420px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.18);position:relative;">
+      <button id="rate-modal-close" type="button" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#888;">✕</button>
+      <div style="margin-bottom:6px;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;color:#16a34a;text-transform:uppercase;">Rate Employer</div>
+      <h3 id="rate-modal-title" style="margin:0 0 4px;font-size:1.15rem;font-weight:700;color:#111;">W&X Bakery</h3>
+      <p id="rate-modal-job" style="margin:0 0 20px;font-size:0.88rem;color:#555;"></p>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:8px;">Your rating</p>
+        <div id="rate-star-row" style="display:flex;gap:8px;font-size:2rem;cursor:pointer;">
+          <span data-star="1">☆</span>
+          <span data-star="2">☆</span>
+          <span data-star="3">☆</span>
+          <span data-star="4">☆</span>
+          <span data-star="5">☆</span>
+        </div>
+        <p id="rate-star-label" style="font-size:0.82rem;color:#888;margin-top:6px;">Click a star to rate</p>
+      </div>
+
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:18px;">
+        Review (optional)
+        <textarea id="rate-review-text" rows="3" placeholder="How was working with this employer?" style="padding:10px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;resize:vertical;font-family:inherit;"></textarea>
+      </label>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;align-items:center;">
+        <p id="rate-modal-status" style="font-size:0.82rem;color:#888;flex:1;margin:0;"></p>
+        <button type="button" id="rate-modal-cancel" style="padding:9px 18px;border:1px solid #d1d5db;border-radius:8px;background:#fff;cursor:pointer;font-size:0.9rem;">Cancel</button>
+        <button type="button" id="rate-modal-submit" style="padding:9px 20px;border:none;border-radius:8px;background:#16a34a;color:#fff;font-weight:600;cursor:pointer;font-size:0.9rem;">Submit Rating</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-jobseeker.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261025a" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/jobseeker-work-history.js?v=20260802a. -->
+  <script type="module" src="../../js/jobseeker-work-history.js?v=20261001a"></script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the manage jobs page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Manage Jobs</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="employer-pages.css?v=20261002b">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="employer-shell">
+    <!-- Section for the employer page header area of this page. -->
+    <section class="employer-page-header">
+      <div class="employer-badge">Manage Jobs</div>
+      <h1>Create, update, and track your listings</h1>
+      <p>Use one workspace to publish new jobs, edit active listings, and monitor application flow.</p>
+    </section>
+
+    <!-- Section for the employer grid area of this page. -->
+    <section class="employer-grid four">
+      <article class="employer-card employer-metric" style="border-top:3px solid #22c55e;"><span class="employer-stat-label">Published</span><strong id="jobs-published-count">0</strong><p id="jobs-published-note">No live jobs yet.</p></article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #f59e0b;"><span class="employer-stat-label">Drafts / Review</span><strong id="jobs-draft-count">0</strong><p id="jobs-draft-note">No jobs waiting for review.</p></article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #94a3b8;"><span class="employer-stat-label">Expired</span><strong id="jobs-expired-count">0</strong><p id="jobs-expired-note">No expired jobs.</p></article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #f43f5e;"><span class="employer-stat-label">Closed / Removed</span><strong id="jobs-closed-count">0</strong><p id="jobs-closed-note">No closed jobs yet.</p></article>
+    </section>
+
+    <!-- Section for the employer grid area of this page. -->
+    <section class="employer-grid split employer-manage-workspace">
+      <article class="employer-card" id="job-form-section">
+        <!-- Container for the employer section head content and layout. -->
+        <div class="employer-section-head employer-section-head-stack">
+          <div>
+            <div class="employer-badge">Job Form</div>
+            <h2>Create or edit a listing</h2>
+            <p>Fill in the details below to publish a new job or update an existing one from the list.</p>
+          </div>
+        </div>
+        <!-- Form where users enter and submit post job details. -->
+        <form id="post-job-form">
+          <!-- Container for the employer form grid content and layout. -->
+          <div class="employer-form-grid">
+            <label class="employer-field"><span>Job title</span><input id="job-title" type="text" placeholder="Event Crew"></label>
+            <label class="employer-field"><span>Category</span><select id="job-category">
+                          <option value="">-- Select Category --</option>
+                          <option>Event Support</option>
+                          <option>Food and Beverage</option>
+                          <option>Retail</option>
+                          <option>Delivery / Logistics</option>
+                          <option>Education / Tutor</option>
+                          <option>Admin / Clerical</option>
+                          <option>Cleaning / Maintenance</option>
+                          <option>Photography / Media</option>
+                          <option>Promoter / Sales</option>
+                          <option>IT / Tech Support</option>
+                          <option>Beauty / Makeup / Hair</option>
+                          <option>Creative / Design / Drawing</option>
+                          <option>Hospitality / Hotel</option>
+                          <option>Warehouse / Storeroom</option>
+                          <option>Security / Guard</option>
+                          <option>Healthcare / Caregiver</option>
+                          <option>Construction / Labourer</option>
+                          <option>Others</option>
+                        </select></label>
+            <!-- ── Enhanced Location Field ── -->
+            <div class="employer-field full" id="location-field-group">
+              <span>Job Location <span style="font-weight:400;color:#92400e;font-size:12px;">— be specific so job seekers can find you</span></span>
+              <div class="employer-location-controls" style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:start;">
+                <select id="job-location-state" style="min-height:48px;padding:12px 14px;border-radius:14px;border:1px solid #e4d5c6;background:#fffaf3;color:#0f172a;outline:none;font-size:14px;">
+                  <option value="">Select state…</option>
+                  <option>Kuala Lumpur</option>
+                  <option>Selangor</option>
+                  <option>Penang</option>
+                  <option>Johor</option>
+                  <option>Perak</option>
+                  <option>Sabah</option>
+                  <option>Sarawak</option>
+                  <option>Negeri Sembilan</option>
+                  <option>Melaka</option>
+                  <option>Kedah</option>
+                  <option>Kelantan</option>
+                  <option>Terengganu</option>
+                  <option>Pahang</option>
+                  <option>Perlis</option>
+                  <option>Putrajaya</option>
+                  <option>Labuan</option>
+                </select>
+                <input id="job-location-area" type="text" placeholder="e.g. Petaling Jaya, Bukit Bintang…" style="min-height:48px;padding:12px 14px;border-radius:14px;border:1px solid #e4d5c6;background:#fffaf3;color:#0f172a;outline:none;font-size:14px;">
+                <button type="button" id="btn-detect-location" title="Detect my location" style="min-height:48px;padding:0 14px;border-radius:14px;border:none;background:#d97706;color:#fff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 0.2s;">📍 Auto</button>
+              </div>
+              <!-- Hidden combined field that actually gets saved -->
+              <input id="job-location" type="hidden">
+              <div id="location-preview" style="display:none;margin-top:6px;font-size:12px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:7px 12px;">
+                📍 Will be saved as: <strong id="location-preview-text"></strong>
+              </div>
+            </div>
+            <label class="employer-field"><span>Pay rate</span><input id="job-pay-rate" type="text" placeholder="RM14/hour"></label>
+            <label class="employer-field"><span>Openings</span><input id="job-openings" type="number" min="1" step="1" value="1" placeholder="1"></label>
+            <label class="employer-field"><span>Schedule</span><select id="job-schedule"><option>Part-time</option><option>Shift-based</option><option>Weekend</option><option>Flexible</option></select></label>
+            <label class="employer-field"><span>Expiry date</span><input id="job-expiry-date" type="date"></label>
+            <div class="employer-field full" id="skills-field-group">
+              <span>Required skills / requirements <small id="skills-counter" style="font-weight:400;color:#92400e;">(0 / 5)</small></span>
+              <div id="skills-tag-input" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:48px;padding:10px 12px;border-radius:14px;border:1px solid #e4d5c6;background:#fffaf3;cursor:text;" onclick="document.getElementById('skills-text-input').focus()">
+                <input id="skills-text-input" type="text" placeholder="Type a skill, press Enter or comma…" style="flex:1;min-width:140px;border:none;outline:none;background:transparent;font-size:14px;color:#0f172a;padding:2px 4px;">
+              </div>
+              <p style="margin-top:6px;font-size:12px;color:#78716c;">Add up to 5 skills. Press <kbd style="background:#f3f4f6;border:1px solid #d1d5db;border-radius:4px;padding:1px 5px;font-size:11px;">Enter</kbd> or <kbd style="background:#f3f4f6;border:1px solid #d1d5db;border-radius:4px;padding:1px 5px;font-size:11px;">,</kbd> after each skill.</p>
+              <!-- hidden field keeps comma-separated value for employer-post-job.js -->
+              <input id="job-requirements" type="hidden">
+            </div>
+            <style>
+              .skill-chip { display:inline-flex;align-items:center;gap:6px;background:#fef3c7;border:1px solid #fbbf24;border-radius:20px;padding:4px 10px;font-size:13px;color:#92400e;font-weight:500; }
+              .skill-chip button { background:none;border:none;cursor:pointer;color:#b45309;font-size:15px;line-height:1;padding:0; }
+              #skills-tag-input:focus-within { border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,0.15); }
+            </style>
+            <!-- Inline script runs page-specific JavaScript behavior. -->
+            <script>
+              (function () {
+                const MAX = 5;
+                const container = document.getElementById('skills-tag-input');
+                const textInput = document.getElementById('skills-text-input');
+                const hidden    = document.getElementById('job-requirements');
+                const counter   = document.getElementById('skills-counter');
+                let tags = [];
+
+                function syncHidden() {
+                  hidden.value = tags.join(', ');
+                  counter.textContent = `(${tags.length} / ${MAX})`;
+                }
+
+                function renderChips() {
+                  container.querySelectorAll('.skill-chip').forEach(el => el.remove());
+                  tags.forEach((tag, i) => {
+                    const chip = document.createElement('span');
+                    chip.className = 'skill-chip';
+                    chip.innerHTML = `${tag} <button type="button" aria-label="Remove ${tag}" data-i="${i}">×</button>`;
+                    chip.querySelector('button').addEventListener('click', () => { tags.splice(i, 1); renderChips(); syncHidden(); });
+                    container.insertBefore(chip, textInput);
+                  });
+                  textInput.placeholder = tags.length >= MAX ? '' : 'Type a skill, press Enter or comma…';
+                  textInput.disabled = tags.length >= MAX;
+                  syncHidden();
+                }
+
+                function addTag(raw) {
+                  const val = raw.trim().replace(/,+$/, '').trim();
+                  if (!val || tags.length >= MAX || tags.map(t => t.toLowerCase()).includes(val.toLowerCase())) return;
+                  tags.push(val);
+                  renderChips();
+                }
+
+                textInput.addEventListener('keydown', e => {
+                  if ((e.key === 'Enter' || e.key === ',') && textInput.value.trim()) {
+                    e.preventDefault();
+                    addTag(textInput.value);
+                    textInput.value = '';
+                  }
+                  if (e.key === 'Backspace' && !textInput.value && tags.length) {
+                    tags.pop();
+                    renderChips();
+                  }
+                });
+
+                textInput.addEventListener('blur', () => {
+                  if (textInput.value.trim()) { addTag(textInput.value); textInput.value = ''; }
+                });
+
+                // Expose setSkillTags so employer-post-job.js can hydrate on edit
+                window.setSkillTags = function (arr) {
+                  tags = (arr || []).slice(0, MAX);
+                  renderChips();
+                };
+
+                renderChips();
+              })();
+            </script>
+            <label class="employer-field full"><span>Job description</span><textarea id="job-description" placeholder="Describe the role, duties, timing, and expectations clearly."></textarea></label>
+          </div>
+          <!-- Container for the employer form actions content and layout. -->
+          <div class="employer-form-actions employer-form-actions-tight employer-action-with-status">
+            <button class="btn-primary" id="publish-job-btn" type="submit">Publish Job</button>
+            <button class="btn-outline" id="save-draft-btn" type="button">Save Draft</button>
+            <p class="employer-inline-status employer-inline-status-spaced action-status-message" id="post-job-status">Save result will appear here.</p>
+          </div>
+        </form>
+      </article>
+
+      <article class="employer-card">
+        <!-- Container for the employer section head content and layout. -->
+        <div class="employer-section-head employer-section-head-stack">
+          <div>
+            <div class="employer-badge">Publishing Notes</div>
+            <h2>What makes a strong listing</h2>
+            <p>A clear, specific post helps the right job seekers match with you faster.</p>
+          </div>
+        </div>
+        <div class="employer-note-stack">
+          <div class="employer-note-score">
+            <div>
+              <span class="employer-stat-label">Listing quality</span>
+              <strong>72%</strong>
+            </div>
+            <p>Adding clear duties, exact location, and timing helps reduce mismatched applications.</p>
+            <!-- Container for the employer status track content and layout. -->
+            <div class="employer-status-track"><span style="width: 72%;"></span></div>
+          </div>
+          <div class="employer-item">
+            <strong>Checklist before publish</strong>
+            <ul class="employer-checklist">
+              <li>Use a clear role title</li>
+              <li>State exact pay and location</li>
+              <li>Explain shift timing and duration</li>
+              <li>Add realistic requirements</li>
+              <li>Set enough openings for the team size</li>
+            </ul>
+          </div>
+          <div class="employer-item">
+            <strong>Quick tip</strong>
+            <p>For recurring event roles, one listing with the right openings count is cleaner than posting the same role multiple times.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Section for the employer card area of this page. -->
+    <section class="employer-card">
+      <!-- Container for the employer section head content and layout. -->
+      <div class="employer-section-head">
+        <div>
+          <div class="employer-badge">Listings</div>
+          <h2>Your job list</h2>
+          <p>Review each listing, update details, and manage its current moderation state from one place.</p>
+        </div>
+        <a href="#job-form-section" class="btn-outline">Create Another Job</a>
+      </div>
+      <p class="employer-inline-status" id="manage-jobs-status">Loading your job listings...</p>
+      <!-- Container for the employer list content and layout. -->
+      <div class="employer-list" id="manage-jobs-list">
+        <article class="employer-item">
+          <strong>No job listings yet</strong>
+          <p>Use the job form above to create your first listing.</p>
+          <div class="employer-item-meta"><span>Status: -</span><span>Applicants: 0</span><span>Expiry: -</span></div>
+          <!-- Container for the employer card actions content and layout. -->
+          <div class="employer-card-actions"><a href="#job-form-section" class="btn-outline">Create first job</a></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-employer.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/employer-post-job.js?v=20260802a. -->
+  <script type="module" src="../../js/employer-post-job.js?v=20260802a"></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/employer-manage-jobs.js?v=20260802a. -->
+  <script type="module" src="../../js/employer-manage-jobs.js?v=20260802a"></script>
+
+  <!-- ── Location field logic ─────────────────────────────────────────── -->
+  <script>
+  (function () {
+    const stateEl   = document.getElementById('job-location-state');
+    const areaEl    = document.getElementById('job-location-area');
+    const hiddenEl  = document.getElementById('job-location');
+    const preview   = document.getElementById('location-preview');
+    const previewTx = document.getElementById('location-preview-text');
+    const btnDetect = document.getElementById('btn-detect-location');
+
+    // Build and sync the combined location value
+    function syncLocation() {
+      const state = (stateEl?.value || '').trim();
+      const area  = (areaEl?.value || '').trim();
+      let combined = '';
+      if (area && state)       combined = `${area}, ${state}`;
+      else if (area)           combined = area;
+      else if (state)          combined = state;
+      if (hiddenEl) hiddenEl.value = combined;
+      if (preview && previewTx) {
+        if (combined) { previewTx.textContent = combined; preview.style.display = 'block'; }
+        else            preview.style.display = 'none';
+      }
+    }
+
+    stateEl?.addEventListener('change', syncLocation);
+    areaEl?.addEventListener('input', syncLocation);
+
+    // 📍 Auto-detect: reverse geocode with Nominatim
+    btnDetect?.addEventListener('click', () => {
+      if (!navigator.geolocation) { alert('Geolocation not supported by your browser.'); return; }
+      btnDetect.disabled = true;
+      btnDetect.textContent = '⏳…';
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        try {
+          const res  = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`,
+            { headers: { 'Accept-Language': 'en' } }
+          );
+          const data = await res.json();
+          const addr = data.address || {};
+
+          // Try to match detected state to our dropdown options
+          const detectedState = addr.state || addr.county || '';
+          const detectedArea  = addr.suburb || addr.city_district || addr.neighbourhood
+                              || addr.city  || addr.town || '';
+
+          // Match state dropdown
+          if (stateEl && detectedState) {
+            const opts = [...stateEl.options];
+            const match = opts.find(o =>
+              o.value && detectedState.toLowerCase().includes(o.value.toLowerCase())
+            );
+            if (match) stateEl.value = match.value;
+          }
+
+          // Fill area
+          if (areaEl && detectedArea) areaEl.value = detectedArea;
+
+          syncLocation();
+        } catch (e) {
+          alert('Could not detect location. Please fill in manually.');
+        }
+        btnDetect.disabled = false;
+        btnDetect.textContent = '📍 Auto';
+      }, () => {
+        alert('Location permission denied. Please fill in manually.');
+        btnDetect.disabled = false;
+        btnDetect.textContent = '📍 Auto';
+      }, { timeout: 8000 });
+    });
+
+    // ── Hydration: when edit mode loads a job, split stored location back into fields
+    // employer-post-job.js calls fillForm({ location: "Petaling Jaya, Selangor" })
+    // We intercept that by watching the hidden field
+    const observer = new MutationObserver(() => {
+      const val = hiddenEl?.value || '';
+      if (!val) return;
+      // Split "Area, State" or just "State"
+      const parts = val.split(',').map(s => s.trim());
+      if (parts.length >= 2) {
+        const possibleState = parts[parts.length - 1];
+        const possibleArea  = parts.slice(0, parts.length - 1).join(', ');
+        // Try to match state
+        if (stateEl) {
+          const opts  = [...stateEl.options];
+          const match = opts.find(o => o.value && o.value.toLowerCase() === possibleState.toLowerCase());
+          if (match) { stateEl.value = match.value; areaEl && (areaEl.value = possibleArea); }
+          else { areaEl && (areaEl.value = val); }
+        }
+      } else {
+        // Just a state or city, try state dropdown first
+        if (stateEl) {
+          const opts  = [...stateEl.options];
+          const match = opts.find(o => o.value && o.value.toLowerCase() === val.toLowerCase());
+          if (match) stateEl.value = match.value;
+          else areaEl && (areaEl.value = val);
+        }
+      }
+      syncLocation();
+    });
+    if (hiddenEl) observer.observe(hiddenEl, { attributes: true, attributeFilter: ['value'] });
+
+    // Also patch: intercept direct .value = ... assignments on the hidden field
+    if (hiddenEl) {
+      const origDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+      Object.defineProperty(hiddenEl, 'value', {
+        get() { return origDescriptor.get.call(this); },
+        set(v) {
+          origDescriptor.set.call(this, v);
+          // Only trigger hydration if external code sets it (edit mode)
+          if (v && document.readyState === 'complete') observer.takeRecords();
+        }
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

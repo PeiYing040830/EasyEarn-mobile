@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the prototype page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn Local Prototype</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="css/prototype.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Header area introduces the page and usually contains the main page title. -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="images/logo.png" alt="EasyEarn logo">
+      <span>EasyEarn</span>
+    </div>
+    <nav>
+      <button class="nav-btn active" data-page="home">Home</button>
+      <button class="nav-btn" data-page="auth">Sign Up / Login</button>
+      <button class="nav-btn" data-page="jobseeker">Job Seeker</button>
+      <button class="nav-btn" data-page="employer">Employer</button>
+      <button class="nav-btn" data-page="admin">Admin</button>
+      <select id="language-demo">
+        <option value="en">English</option>
+        <option value="ms">Bahasa Melayu</option>
+        <option value="zh">Mandarin</option>
+        <option value="ta">Tamil</option>
+      </select>
+      <button id="reset-demo-btn" type="button">Reset Demo</button>
+    </nav>
+  </header>
+
+  <!-- Main area contains the primary page content. -->
+  <main>
+    <!-- Section for the page area of this page. -->
+    <section class="page active" id="home">
+      <!-- Container for the page hero content and layout. -->
+      <div class="page-hero">
+        <span class="hero-label">Local Prototype</span>
+        <h1>EasyEarn LocalStorage Prototype</h1>
+        <p>This is a simplified complete flow. It does not connect to Supabase; demo state is saved in localStorage.</p>
+        <p class="session-pill" id="session-summary">Not logged in</p>
+      </div>
+
+      <!-- Container for the cards content and layout. -->
+      <div class="cards">
+        <article>
+          <h2>Sign Up / Login</h2>
+          <p>Create a local demo account first, then login to unlock the role dashboard.</p>
+          <button class="primary go-page" data-page="auth">Start Sign Up</button>
+        </article>
+        <article>
+          <h2>Job Seeker</h2>
+          <p>Browse approved jobs, upload resume, apply, track status, and view work history.</p>
+          <button class="primary go-page" data-page="jobseeker">View Job Seeker Flow</button>
+        </article>
+        <article>
+          <h2>Employer</h2>
+          <p>Submit verification, post a job, review applicant, and complete work.</p>
+          <button class="primary go-page" data-page="employer">View Employer Flow</button>
+        </article>
+        <article>
+          <h2>Admin</h2>
+          <p>Approve employer verification and job post before job seekers can apply.</p>
+          <button class="primary go-page" data-page="admin">View Admin Flow</button>
+        </article>
+      </div>
+
+      <!-- Section for the objective map area of this page. -->
+      <section class="objective-map">
+        <h2>Prototype Objective Coverage</h2>
+        <!-- Container for the cards content and layout. -->
+        <div class="cards objective-cards">
+          <article>
+            <h2>Objective 1</h2>
+            <p>Multi-user portal based on the real EasyEarn roles: Job Seeker, Employer, and Admin.</p>
+            <strong>CRUD: Register user, edit profile, create/update/delete job post</strong>
+          </article>
+          <article>
+            <h2>Objective 3</h2>
+            <p>Verifiable worker identity using application status, completed work history, and generated resume identity.</p>
+            <strong>Flow: Apply -> Accepted -> Completed -> Work History</strong>
+          </article>
+          <article>
+            <h2>Objective 4</h2>
+            <p>Multilingual accessibility mock using a language selector saved in localStorage.</p>
+            <strong id="language-demo-text">Language demo: English interface selected.</strong>
+          </article>
+        </div>
+      </section>
+
+      <!-- Section for the system map area of this page. -->
+      <section class="system-map">
+        <h2>Based on Existing EasyEarn System</h2>
+        <p>This prototype uses localStorage, but the screens follow the same modules and data flow as the Supabase system.</p>
+        <!-- Container for the map grid content and layout. -->
+        <div class="map-grid">
+          <div><strong>users</strong><span>registration, login, role, seeker profile, employer verification</span></div>
+          <div><strong>job_listings</strong><span>employer job CRUD, admin approval, public job browsing</span></div>
+          <div><strong>applications</strong><span>job seeker apply, employer review, accept, complete</span></div>
+          <div><strong>saved_jobs</strong><span>save and remove bookmarked job</span></div>
+          <div><strong>work_history</strong><span>completed work record for digital identity</span></div>
+          <div><strong>prototype scope</strong><span>reports, ratings, payments, analytics, and chatbot are excluded from this basic version</span></div>
+        </div>
+      </section>
+
+      <!-- Section for the flow summary area of this page. -->
+      <section class="flow-summary">
+        <h2>Simple Demo Flow</h2>
+        <div class="timeline flow-timeline">
+          <span class="done">1. Sign Up/Login</span>
+          <span id="flow-verification">2. Employer verified</span>
+          <span id="flow-job">3. Job approved</span>
+          <span id="flow-apply">4. Job seeker applies</span>
+          <span id="flow-accept">5. Employer accepts</span>
+          <span id="flow-work">6. Work history saved</span>
+        </div>
+      </section>
+    </section>
+
+    <!-- Section for the page area of this page. -->
+    <section class="page" id="auth">
+      <!-- Container for the page hero content and layout. -->
+      <div class="page-hero compact">
+        <span class="hero-label">Step 1</span>
+      <h1>Sign Up / Login Prototype</h1>
+      <p>Sign up stores a demo account in localStorage. Login is required before role pages can be opened.</p>
+      </div>
+
+      <!-- Container for the auth grid content and layout. -->
+      <div class="auth-grid">
+        <article class="auth-card">
+          <h2>Sign Up</h2>
+          <label>
+            Full name
+            <input id="register-name" value="Len Pei Ying">
+          </label>
+          <label>
+            Email
+            <input id="register-email" type="email" value="peiying@example.com">
+          </label>
+          <label>
+            Password
+            <input id="register-password" type="password" value="123456">
+          </label>
+          <label>
+            Role
+            <select id="register-role">
+              <option value="jobseeker">Job Seeker</option>
+              <option value="employer">Employer</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+          <button class="primary" id="register-demo-btn" type="button">Sign Up</button>
+        </article>
+
+        <article class="auth-card">
+          <h2>Login</h2>
+          <label>
+            Email
+            <input id="login-email" type="email" value="peiying@example.com">
+          </label>
+          <label>
+            Password
+            <input id="login-password" type="password" value="123456">
+          </label>
+          <button class="primary" id="login-demo-btn" type="button">Login</button>
+          <button id="logout-demo-btn" type="button">Logout</button>
+          <p id="auth-message">Sign up first, then login with the same email and password.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section for the page area of this page. -->
+    <section class="page" id="jobseeker">
+      <!-- Container for the page hero content and layout. -->
+      <div class="page-hero compact">
+        <span class="hero-label">Job Seeker</span>
+        <h1>Job Seeker Prototype</h1>
+      </div>
+
+      <div class="layout">
+        <aside class="side-menu">
+          <button class="sub-btn active" data-panel="seeker-dashboard">Dashboard</button>
+          <button class="sub-btn" data-panel="seeker-profile">Profile</button>
+          <button class="sub-btn" data-panel="seeker-jobs">Browse Jobs</button>
+          <button class="sub-btn" data-panel="seeker-applications">Applications</button>
+          <button class="sub-btn" data-panel="seeker-saved">Saved Jobs</button>
+          <button class="sub-btn" data-panel="seeker-work-history">Work History</button>
+        </aside>
+
+        <div class="screen">
+          <!-- Container for the panel content and layout. -->
+          <div class="panel active" id="seeker-dashboard">
+            <h2>Dashboard</h2>
+            <!-- Container for the stats content and layout. -->
+            <div class="stats">
+              <span>Profile: 90%</span>
+              <span id="seeker-application-stat">Applications: 0</span>
+              <span id="seeker-saved-stat">Saved Jobs: 0</span>
+              <span id="seeker-work-stat">Work History: 0</span>
+            </div>
+            <p>Recommended jobs are shown after admin approves the employer and job listing. This dashboard mirrors the real Job Seeker dashboard, but stores demo records locally.</p>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="seeker-profile">
+            <h2>Profile Update</h2>
+            <p class="module-note">System mapping: users table fields for seeker profile and digital identity.</p>
+            <label>Headline<input id="profile-headline-input" value="Student looking for part-time cashier roles"></label>
+            <label>Skills<input id="profile-skills-input" value="Cashier, Customer Service, Communication"></label>
+            <label>Availability<input id="profile-availability-input" value="Saturday, Sunday"></label>
+            <p id="profile-save-status">Profile not updated yet.</p>
+            <button class="primary" id="save-profile-btn" type="button">Save Profile</button>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="seeker-jobs">
+            <h2>Browse Jobs</h2>
+            <!-- Container for the filter row content and layout. -->
+            <div class="filter-row">
+              <input placeholder="Search job">
+              <select><option>Food and Beverage</option></select>
+              <select><option>Ipoh</option></select>
+            </div>
+            <article class="job-box" id="seeker-job-card">
+              <strong id="seeker-job-title">Cashier</strong>
+              <p><span id="seeker-job-company">W&X Bakery</span> &middot; Bercham, Perak &middot; <span id="seeker-job-pay">RM10/hour</span></p>
+              <p id="seeker-job-description">Part-time cashier needed for weekend shift.</p>
+              <span class="badge" id="seeker-verified-badge">Verification pending</span>
+              <p id="job-availability-note">Waiting for admin job approval.</p>
+              <button class="primary" id="apply-btn">Apply</button>
+              <button id="save-job-btn" type="button">Save Job</button>
+            </article>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="seeker-applications">
+            <h2>Applications</h2>
+            <article class="job-box">
+              <strong id="application-status-title">Cashier - Not Applied</strong>
+              <p id="application-resume-text">Resume not uploaded yet.</p>
+              <div class="timeline">
+                <span id="step-submitted">Submitted</span>
+                <span id="step-reviewed">Reviewed</span>
+                <span id="step-accepted">Accepted</span>
+                <span id="step-work">Work History</span>
+              </div>
+              <button id="cancel-btn">Cancel Apply</button>
+            </article>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="seeker-saved">
+            <h2>Saved Jobs</h2>
+            <p class="module-note">System mapping: saved_jobs table stores bookmarked jobs by seeker_id and job_id.</p>
+            <article class="job-box">
+              <strong id="saved-job-title">No saved job yet</strong>
+              <p id="saved-job-detail">Save an approved job from Browse Jobs to show it here.</p>
+              <button id="remove-saved-job-btn" type="button">Remove Saved Job</button>
+            </article>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="seeker-work-history">
+            <h2>Work History</h2>
+            <p class="module-note">System mapping: work_history table becomes evidence for the worker identity/resume.</p>
+            <!-- Container for the resume preview content and layout. -->
+            <div class="resume-preview">
+              <h3>Cashier</h3>
+              <p>Employer: W&X Bakery</p>
+              <p id="profile-identity-line">Profile: not updated yet</p>
+              <p id="work-history-status">Status: Not created yet</p>
+              <p id="work-history-earnings">Earnings: -</p>
+              <p id="identity-resume-status">Identity resume: Not generated</p>
+            </div>
+            <button class="primary" id="generate-resume-btn" type="button">Generate Identity Resume</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section for the page area of this page. -->
+    <section class="page" id="employer">
+      <!-- Container for the page hero content and layout. -->
+      <div class="page-hero compact">
+        <span class="hero-label">Employer</span>
+        <h1>Employer Prototype</h1>
+      </div>
+
+      <div class="layout">
+        <aside class="side-menu">
+          <button class="sub-btn active" data-panel="employer-dashboard">Dashboard</button>
+          <button class="sub-btn" data-panel="employer-verification">Verification</button>
+          <button class="sub-btn" data-panel="employer-post">Post Job</button>
+          <button class="sub-btn" data-panel="employer-applicants">Applicants</button>
+        </aside>
+
+        <div class="screen">
+          <!-- Container for the panel content and layout. -->
+          <div class="panel active" id="employer-dashboard">
+            <h2>Dashboard</h2>
+            <!-- Container for the stats content and layout. -->
+            <div class="stats">
+              <span id="employer-job-stat">Posted Jobs: 0</span>
+              <span id="employer-applicant-stat">Applicants: 0</span>
+              <span id="employer-verification-stat">Verification: Not submitted</span>
+            </div>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="employer-verification">
+            <h2>Employer Verification</h2>
+            <input placeholder="SSM Number" value="202401012345">
+            <input placeholder="Business Address" value="Ipoh, Perak">
+            <input type="file">
+            <p id="employer-verification-status">Status: Not submitted</p>
+            <button class="primary" id="submit-verification-btn">Submit Verification</button>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="employer-post">
+            <h2>Post Job</h2>
+            <p class="module-note">System mapping: job_listings table with employer_id, status, approved_by, and approved_at.</p>
+            <label>Job title<input id="job-title-input" value="Cashier"></label>
+            <label>Category<input id="job-category-input" value="Food and Beverage"></label>
+            <label>Pay<input id="job-pay-input" value="RM10/hour"></label>
+            <label>Description<textarea id="job-description-input">Part-time cashier needed for weekend shift.</textarea></label>
+            <p id="employer-job-status">Status: Draft</p>
+            <div class="crud-actions">
+              <button class="primary" id="create-job-btn">Create Job</button>
+              <button id="update-job-btn">Update Job</button>
+              <button id="delete-job-btn">Delete Job</button>
+              <button class="primary" id="submit-job-btn">Submit Job Post</button>
+            </div>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="employer-applicants">
+            <h2>Applicants</h2>
+            <p class="module-note">System mapping: applications table status changes from pending to reviewed, accepted, and completed.</p>
+            <article class="job-box" id="applicant-card">
+              <strong>Len Pei Ying</strong>
+              <p>Applied for Cashier &middot; Resume uploaded</p>
+              <p id="application-record-line">Application record: not created</p>
+              <p id="applicant-status">Status: No application yet</p>
+              <button id="review-applicant-btn">Reviewed</button>
+              <button class="primary" id="accept-applicant-btn">Accept</button>
+              <button>Reject</button>
+              <button id="complete-work-btn">Complete Work</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section for the page area of this page. -->
+    <section class="page" id="admin">
+      <!-- Container for the page hero content and layout. -->
+      <div class="page-hero compact">
+        <span class="hero-label">Admin</span>
+        <h1>Admin Prototype</h1>
+      </div>
+
+      <div class="layout">
+        <aside class="side-menu">
+          <button class="sub-btn active" data-panel="admin-dashboard">Dashboard</button>
+          <button class="sub-btn" data-panel="admin-verification">Employer Verification</button>
+          <button class="sub-btn" data-panel="admin-jobs">Job Approval</button>
+        </aside>
+
+        <div class="screen">
+          <!-- Container for the panel content and layout. -->
+          <div class="panel active" id="admin-dashboard">
+            <h2>Dashboard</h2>
+            <!-- Container for the stats content and layout. -->
+            <div class="stats">
+              <span>Users: 4</span>
+              <span id="admin-job-stat">Jobs Pending: 0</span>
+              <span id="admin-verification-stat">Verifications Pending: 0</span>
+            </div>
+            <p class="module-note">Admin scope in this basic prototype only covers employer verification and job approval. Reports and analytics stay in the full system.</p>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="admin-verification">
+            <h2>Employer Verification Review</h2>
+            <article class="job-box">
+              <strong>W&X Bakery</strong>
+              <p>SSM: 202401012345</p>
+              <p>Documents uploaded: Yes</p>
+              <p id="admin-verification-status">Status: Waiting for employer submission</p>
+              <button class="primary" id="approve-verification-btn">Approve</button>
+              <button>Reject</button>
+            </article>
+          </div>
+
+          <!-- Container for the panel content and layout. -->
+          <div class="panel" id="admin-jobs">
+            <h2>Job Approval</h2>
+            <article class="job-box">
+              <strong>Cashier</strong>
+              <p>Employer: W&X Bakery</p>
+              <p id="admin-job-preview">Job: Cashier, RM10/hour</p>
+              <p id="admin-job-status">Status: Waiting for employer job post</p>
+              <button class="primary" id="approve-job-btn">Approve Job</button>
+              <button>Reject Job</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Loads the JavaScript file that controls this page: js/prototype.js. -->
+  <script src="js/prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the ratings page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - My Ratings</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="employer-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="employer-shell">
+    <!-- Section for the employer page header area of this page. -->
+    <section class="employer-page-header">
+      <div class="employer-badge">Ratings &amp; Reviews</div>
+      <h1>Your Employer Reputation</h1>
+      <p>Ratings left by job seekers after completed jobs.</p>
+    </section>
+
+    <!-- Section for the employer grid area of this page. -->
+    <section class="employer-grid three">
+      <article class="employer-card employer-metric" style="border-top:3px solid #f59e0b;">
+        <span class="employer-stat-label">Average Rating</span>
+        <strong id="avg-rating">—</strong>
+        <p id="avg-rating-sub">Loading…</p>
+      </article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #3b82f6;">
+        <span class="employer-stat-label">Total Reviews</span>
+        <strong id="total-reviews">—</strong>
+        <p id="total-reviews-sub">Loading…</p>
+      </article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #22c55e;">
+        <span class="employer-stat-label">5-Star Reviews</span>
+        <strong id="five-star">—</strong>
+        <p id="five-star-sub">Loading…</p>
+      </article>
+    </section>
+
+    <!-- Section for the employer card area of this page. -->
+    <section class="employer-card" style="margin-bottom:1.5rem">
+      <!-- Container for the employer section head content and layout. -->
+      <div class="employer-section-head">
+        <div>
+          <div class="employer-badge">Breakdown</div>
+          <h2>Rating Distribution</h2>
+        </div>
+      </div>
+      <div id="star-breakdown" style="padding:1rem 0">
+        <p style="color:var(--text-muted)">Loading…</p>
+      </div>
+    </section>
+
+    <!-- Section for the employer card area of this page. -->
+    <section class="employer-card">
+      <!-- Container for the employer section head content and layout. -->
+      <div class="employer-section-head">
+        <div>
+          <div class="employer-badge">Feedback</div>
+          <h2>All Reviews</h2>
+        </div>
+      </div>
+      <!-- Container for the employer list content and layout. -->
+      <div class="employer-list" id="reviews-list">
+        <p style="color:var(--text-muted);padding:1rem">Loading reviews…</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-employer.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/employer-ratings.js. -->
+  <script type="module" src="../../js/employer-ratings.js"></script>
+</body>
+</html>

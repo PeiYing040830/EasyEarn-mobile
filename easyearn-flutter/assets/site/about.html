@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the about page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <!-- Sets the document character format so the browser can display text correctly. -->
+  <meta charset="UTF-8">
+  <!-- Makes the About page resize properly on phones, tablets, and desktop screens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Text shown on the browser tab. -->
+  <title>EasyEarn - About</title>
+  <!-- Small EasyEarn logo shown beside the browser tab title. -->
+  <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+  <!-- Loads the styling for this About page. -->
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/mobile-app.css?v=4">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body class="flutter-public-page">
+  <!-- Placeholder where includes.js inserts the shared website header/navigation. -->
+  <div id="site-header"></div>
+
+  <!-- Main hero banner at the top of the About page. -->
+  <header class="page-hero about-hero">
+    <!-- Background image slideshow. The slides are changed by js/about.js. -->
+    <div class="about-hero-bg" aria-hidden="true">
+      <!-- First slide starts active because it has the is-active class. -->
+      <div class="about-hero-slide is-active" style="background-image: url('images/cashier.png');"></div>
+      <!-- Extra hero slides used by the automatic slideshow. -->
+      <div class="about-hero-slide" style="background-image: url('images/freelancermakup.jpeg');"></div>
+      <!-- Container for the about hero slide content and layout. -->
+      <div class="about-hero-slide" style="background-image: url('images/freelancedrawing.jpeg');"></div>
+      <!-- Container for the about hero slide content and layout. -->
+      <div class="about-hero-slide" style="background-image: url('images/promoter.jpeg');"></div>
+    </div>
+    <!-- Dark overlay layer so the white hero text is easier to read. -->
+    <div class="about-hero-overlay" aria-hidden="true"></div>
+    <!-- Text content displayed above the hero background. -->
+    <div class="page-hero-inner">
+      <!-- Small label showing this page is about the EasyEarn project. -->
+      <div class="hero-badge">About EasyEarn</div>
+      <!-- Main About page headline. -->
+      <h1>FYP1 + FYP2 Project with Real-World Impact</h1>
+      <!-- Short project summary shown under the headline. -->
+      <p>EasyEarn is a Final Year Project that tackles Malaysia's gig economy gap with a secure, structured, and multilingual job matching portal.</p>
+    </div>
+  </header>
+
+  <!-- Page body: groups the About page sections into separate content cards. -->
+  <div class="about-page-body">
+
+    <!-- Mission & Vision section explains the problem, users, and project direction. -->
+    <div class="about-section-card">
+      <!-- Section title area for the mission and vision block. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Our Purpose</div>
+        <h2>Mission & Vision</h2>
+        <p>Building a trusted, accessible platform that connects job seekers and employers across Malaysia — beyond major cities.</p>
+      </div>
+      <!-- Split grid displays several information cards in one section. -->
+      <div class="split-grid">
+        <!-- Mission card: explains the safety and trust problem EasyEarn solves. -->
+        <div class="split-card about-info-card">
+          <!-- Container for the about card icon content and layout. -->
+          <div class="about-card-icon">🎯</div>
+          <h3>Project Mission</h3>
+          <p>Many gig workers rely on unstructured social media, which creates scam risks and weak verification. EasyEarn adds verified listings, structured applications, and trusted work records.</p>
+        </div>
+        <!-- Target users card: lists who can benefit from the platform. -->
+        <div class="split-card about-info-card">
+          <!-- Container for the about card icon content and layout. -->
+          <div class="about-card-icon">👥</div>
+          <h3>Who It Serves</h3>
+          <p>University students, housewives, unemployed individuals, SMEs, and individual hirers who need flexible work and fast hiring.</p>
+        </div>
+        <!-- Vision card: uses full grid width to highlight the long-term goal. -->
+        <div class="split-card about-info-card" style="grid-column: 1 / -1;">
+          <!-- Container for the about card icon content and layout. -->
+          <div class="about-card-icon">🌏</div>
+          <h3>Project Vision</h3>
+          <p>To establish a trusted, inclusive, and policy‑aligned gig job platform that improves visibility of short‑term opportunities, strengthens employer accountability, and expands safe access to flexible work across urban and non‑urban regions of Malaysia.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap section shows how the project is planned and developed. -->
+    <div class="about-section-card">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Development</div>
+        <h2>FYP1 + FYP2 Roadmap</h2>
+        <p>FYP1 focuses on planning, design, and prototype. FYP2 delivers full development in iterative sprints.</p>
+      </div>
+      <!-- Three-step roadmap layout for FYP1, FYP2, and final evaluation. -->
+      <div class="steps-grid">
+        <!-- First roadmap step: planning, design, and prototype work. -->
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>FYP1: Plan & Design</h3>
+          <p>Problem analysis, requirements, UI/UX wireframes, system architecture, and prototype validation.</p>
+        </div>
+        <!-- Second roadmap step: development is completed through Agile sprints. -->
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>FYP2: Build in Sprints</h3>
+          <p>Agile sprints for authentication, job posting, safety & trust, work history, and admin analytics.</p>
+        </div>
+        <!-- Third roadmap step: testing and evaluation confirm the project works. -->
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Deliver & Evaluate</h3>
+          <p>Testing, deployment, and evaluation against success criteria and security policies.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Highlights section contains the clickable card stack controlled by js/about.js. -->
+    <div class="about-section-card">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Highlights</div>
+        <h2>One Page, One Key Benefit</h2>
+        <p>Tap the card to flip through three key benefits of EasyEarn—designed for safer hiring, faster matching, and a trusted work history that grows with every job.</p>
+      </div>
+      <!-- Clicking this container rotates the three benefit cards. -->
+      <div class="stacking-cards" id="stacking-cards">
+        <!-- Front card: shows the verified listings benefit first. -->
+        <article class="stacking-card is-front">
+          <!-- Container for the stacking card media content and layout. -->
+          <div class="stacking-card-media">
+            <img src="images/verifiedlisting.png" alt="Verified listings">
+          </div>
+          <!-- Container for the stacking card body content and layout. -->
+          <div class="stacking-card-body">
+            <h3>Verified Listings, Safer Hiring</h3>
+            <p>Replace unstructured social posts with verified job listings, clearer role details, and built‑in trust signals that reduce scams and misunderstandings.</p>
+          </div>
+        </article>
+        <!-- Middle card: shows the fast matching benefit. -->
+        <article class="stacking-card is-middle">
+          <!-- Container for the stacking card media content and layout. -->
+          <div class="stacking-card-media">
+            <img src="images/fastmatching.png" alt="Fast matching">
+          </div>
+          <!-- Container for the stacking card body content and layout. -->
+          <div class="stacking-card-body">
+            <h3>Fast Matching for Short‑Term Jobs</h3>
+            <p>Quick filters by location and category help job seekers find nearby work fast, while employers reach the right candidates without long hiring delays.</p>
+          </div>
+        </article>
+        <!-- Back card: shows the work history and trust benefit. -->
+        <article class="stacking-card is-back">
+          <!-- Container for the stacking card media content and layout. -->
+          <div class="stacking-card-media">
+            <img src="images/workhistory.png" alt="Work history">
+          </div>
+          <!-- Container for the stacking card body content and layout. -->
+          <div class="stacking-card-body">
+            <h3>Work History That Builds Trust</h3>
+            <p>Auto‑resume, ratings, and verified work history help both sides build credibility and make smarter, faster hiring decisions.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Technology section lists the tools and features used to build EasyEarn. -->
+    <div class="about-section-card">
+      <!-- Container for the section title content and layout. -->
+      <div class="section-title">
+        <!-- Container for the section tag content and layout. -->
+        <div class="section-tag">Technology</div>
+        <h2>Tools & Technologies</h2>
+        <p>Selected tools and add-on features based on the approved proposal.</p>
+      </div>
+      <!-- Feature grid showing frontend, backend, analytics, resume, language, and design tools. -->
+      <div class="features-grid">
+        <!-- Core stack card: shows the main frontend technologies. -->
+        <div class="feat-card">
+          <div class="feat-icon">🧩</div>
+          <h3>Core Stack</h3>
+          <p>HTML, CSS, JavaScript with responsive UI and structured components.</p>
+        </div>
+        <!-- Backend card: shows database, authentication, storage, and hosting tools. -->
+        <div class="feat-card">
+          <div class="feat-icon">🔐</div>
+          <h3>Backend & Hosting</h3>
+          <p>Supabase Auth, Postgres database, Storage, and GitHub Pages deployment.</p>
+        </div>
+        <!-- Analytics card: shows the dashboard charting tool. -->
+        <div class="feat-card">
+          <div class="feat-icon">📊</div>
+          <h3>Analytics</h3>
+          <p>Chart.js for dashboards and platform performance insights.</p>
+        </div>
+        <!-- Auto resume card: shows the PDF resume generation tool. -->
+        <div class="feat-card">
+          <div class="feat-icon">📄</div>
+          <h3>Auto Resume</h3>
+          <p>jsPDF to generate downloadable resumes from work history.</p>
+        </div>
+        <!-- Multilingual card: shows language support for different users. -->
+        <div class="feat-card">
+          <div class="feat-icon">🌐</div>
+          <h3>Multilingual</h3>
+          <p>Google Translate integration for Bahasa Malaysia, Mandarin, Tamil, and more.</p>
+        </div>
+        <!-- Design add-ons card: shows extra UI, chatbot, and onboarding tools. -->
+        <div class="feat-card">
+          <div class="feat-icon">🎨</div>
+          <h3>Design Add‑Ons</h3>
+          <p>UI/UX wireframes using Canva, plus chatbot support and clean onboarding flows.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end about-page-body -->
+
+  <!-- Call-to-action section links visitors to account creation and help. -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="cta-badge">Get Started</div>
+      <h2>Try the EasyEarn prototype</h2>
+      <p>Explore the FYP build and see how the platform connects flexible work with trusted hiring.</p>
+      <!-- Buttons for creating an account or learning more. -->
+      <div class="cta-btns">
+        <a href="login.html?tab=register" class="btn-cta-white">Create Account</a>
+        <a href="help.html" class="btn-cta-outline">Learn More</a>
+      </div>
+    </div>
+  </section>
+  <!-- Placeholder where includes.js inserts the shared website footer. -->
+  <div id="site-footer"></div>
+
+  <!-- Translation script for multilingual support. -->
+  <script src="js/translate.js" defer></script>
+  <!-- Script that loads the shared header and footer. -->
+  <script src="js/includes.js?v=20260930b" defer></script>
+  <!-- About page script for the card stack and hero slideshow. -->
+  <script src="js/about.js" defer></script>
+</body>
+</html>

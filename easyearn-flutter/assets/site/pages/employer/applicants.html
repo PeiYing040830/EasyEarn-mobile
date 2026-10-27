@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the applicants page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Applicants</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="employer-pages.css?v=20261003a">
+  <link rel="stylesheet" href="../../css/charts-mobile.css?v=20260930a">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<!-- Body section contains everything the user can see or interact with. -->
+<body>
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="employer-shell employer-applicants-page">
+    <!-- Section for the employer page header area of this page. -->
+    <section class="employer-page-header">
+      <div class="employer-badge">Applicants</div>
+      <h1>Review applicants and next steps</h1>
+      <p>Accept candidates, schedule interviews, send messages, and confirm job completion.</p>
+    </section>
+
+    <!-- Section for the employer grid area of this page. -->
+    <section class="employer-grid four">
+      <article class="employer-card employer-metric" style="border-top:3px solid #7a4f38;"><span class="employer-stat-label">Applied</span><strong id="employer-applicants-applied-count">0</strong><p id="employer-applicants-applied-note">No applicants yet.</p></article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #f59e0b;"><span class="employer-stat-label">Reviewed</span><strong id="employer-applicants-reviewed-count">0</strong><p id="employer-applicants-reviewed-note">No reviewed applicants yet.</p></article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #22c55e;"><span class="employer-stat-label">Accepted</span><strong id="employer-applicants-accepted-count">0</strong><p id="employer-applicants-accepted-note">No accepted candidates yet.</p></article>
+      <article class="employer-card employer-metric" style="border-top:3px solid #f43f5e;"><span class="employer-stat-label">Rejected</span><strong id="employer-applicants-rejected-count">0</strong><p id="employer-applicants-rejected-note">No rejected candidates yet.</p></article>
+    </section>
+
+    <!-- Section for the employer card area of this page. -->
+    <section class="employer-card">
+      <!-- Container for the employer section head content and layout. -->
+      <div class="employer-section-head">
+        <div>
+          <div class="employer-badge">Trend View</div>
+          <h2>Applicant activity trend</h2>
+          <p>Review each candidate here, open their application details, and send the next-step message directly from this page.</p>
+        </div>
+      </div>
+      <div class="employer-chart-duo employer-chart-duo-side">
+        <div class="employer-chart">
+          <canvas id="employer-applicants-line-canvas" style="width:100%;height:220px;"></canvas>
+        </div>
+        <div class="employer-chart employer-pie-chart">
+          <div class="employer-pie-wrap">
+            <canvas id="employer-applicants-donut-canvas" style="width:160px;height:160px;"></canvas>
+          </div>
+          <div class="employer-pie-legend">
+            <span><span class="employer-legend-label"><i class="employer-legend-dot posted"></i>Applied</span><strong id="employer-applicants-applied-share">0%</strong></span>
+            <span><span class="employer-legend-label"><i class="employer-legend-dot reviewed"></i>Reviewed</span><strong id="employer-applicants-reviewed-share">0%</strong></span>
+            <span><span class="employer-legend-label"><i class="employer-legend-dot interviewed"></i>Accepted</span><strong id="employer-applicants-accepted-share">0%</strong></span>
+            <span><span class="employer-legend-label"><i class="employer-legend-dot completed"></i>Rejected</span><strong id="employer-applicants-rejected-share">0%</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section for the employer card area of this page. -->
+    <section class="employer-card">
+      <!-- Container for the employer section head content and layout. -->
+      <div class="employer-section-head">
+        <div>
+          <div class="employer-badge">Applicant Queue</div>
+          <h2>Applications received for your jobs</h2>
+          <p>Accept candidates, schedule interviews, confirm completion when the job is done.</p>
+        </div>
+      </div>
+      <!-- Container for the employer list content and layout. -->
+      <div id="employer-applicants-list" class="employer-list">
+        <article class="employer-item">
+          <strong>Loading applicants...</strong>
+          <p>Please wait while your application queue is loaded.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interview Scheduling Modal -->
+  <div id="interview-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:16px; padding:32px; max-width:480px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+      <h2 style="margin-bottom:4px;">📅 Schedule Interview</h2>
+      <p style="color:#64748b; margin-bottom:6px;">Applicant: <strong id="int-applicant-name"></strong></p>
+      <p style="color:#64748b; margin-bottom:20px;">Role: <strong id="int-job-title"></strong></p>
+
+      <input type="hidden" id="int-application-id">
+
+      <div style="display:grid; gap:14px;">
+        <label style="display:flex; flex-direction:column; gap:6px; font-size:14px; font-weight:600;">
+          Interview Date &amp; Time
+          <input id="int-date" type="datetime-local" style="padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-size:14px;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:6px; font-size:14px; font-weight:600;">
+          Location / Platform
+          <input id="int-location" type="text" placeholder="e.g. Google Meet, Wisma ABC Level 3" style="padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-size:14px;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:6px; font-size:14px; font-weight:600;">
+          Notes for Applicant
+          <textarea id="int-notes" rows="3" placeholder="e.g. Please bring your IC and resume." style="padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-size:14px; resize:vertical;"></textarea>
+        </label>
+      </div>
+
+      <p id="int-modal-status" style="margin-top:12px; color:#ef4444; min-height:18px; font-size:13px;"></p>
+
+      <div style="display:flex; gap:10px; margin-top:20px; justify-content:flex-end;">
+        <button type="button" id="int-cancel-btn" class="btn-outline">Cancel</button>
+        <button type="button" id="int-save-btn" class="btn-primary">Save Interview</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="complete-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:16px; padding:32px; max-width:480px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+      <h2 style="margin-bottom:4px;">Confirm Work and Payment</h2>
+      <p style="color:#64748b; margin-bottom:6px;">Applicant: <strong id="complete-applicant-name"></strong></p>
+      <p style="color:#64748b; margin-bottom:20px;">Role: <strong id="complete-job-title"></strong></p>
+
+      <input type="hidden" id="complete-application-id">
+      <input type="hidden" id="complete-seeker-id">
+      <input type="hidden" id="complete-job-id">
+
+      <div style="display:grid; gap:14px;">
+        <label style="display:flex; flex-direction:column; gap:6px; font-size:14px; font-weight:600;">
+          Completed Date
+          <input id="complete-date" type="date" style="padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-size:14px;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:6px; font-size:14px; font-weight:600;">
+          Final Earnings (RM)
+          <input id="complete-earnings" type="number" min="0.01" step="0.01" required placeholder="e.g. 108" style="padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-size:14px;">
+        </label>
+      </div>
+
+      <p id="complete-modal-status" style="margin-top:12px; color:#ef4444; min-height:18px; font-size:13px;"></p>
+
+      <div style="display:flex; gap:10px; margin-top:20px; justify-content:flex-end;">
+        <button type="button" id="complete-cancel-btn" class="btn-outline">Cancel</button>
+        <button type="button" id="complete-save-btn" class="btn-primary">Confirm Work / Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-employer.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: https://cdn.jsdelivr.net/npm/chart.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/employer-applicants.js?v=20260905a. -->
+  <script type="module" src="../../js/employer-applicants.js?v=20260905a"></script>
+</body>
+</html>

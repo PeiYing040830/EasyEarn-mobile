@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- EasyEarn file note: Builds the messages page layout and connects it to shared styles/scripts. -->
+<html lang="en">
+<!-- Head section stores page settings, title, icons, and stylesheet links. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyEarn - Messages</title>
+    <link rel="icon" type="image/png" href="/easyearn/images/logo.png?v=20260829b">
+<link rel="stylesheet" href="../../css/landing.css">
+  <link rel="stylesheet" href="employer-pages.css?v=20260829e">
+  <link rel="stylesheet" href="../../css/mobile-app.css?v=7">
+</head>
+<body data-messages-role="employer" data-header-path="../../partials/header-employer.html">
+  <!-- Shared header/navigation is injected here by includes.js. -->
+  <div id="site-header"></div>
+  <!-- Main area contains the primary page content. -->
+  <main class="employer-shell messages-shell">
+    <!-- Section for the employer page header area of this page. -->
+    <section class="employer-page-header">
+      <div class="employer-badge">Messages</div>
+      <h1>Chat with job seekers</h1>
+      <p>Use this page to continue applicant conversations, confirm next steps, and keep hiring updates organized.</p>
+    </section>
+
+    <!-- Section for the messages layout area of this page. -->
+    <section class="messages-layout">
+      <aside class="employer-card messages-sidebar">
+        <!-- Container for the employer section head content and layout. -->
+        <div class="employer-section-head">
+          <div>
+            <div class="employer-badge">Inbox</div>
+            <h2>Your conversations</h2>
+          </div>
+        </div>
+        <!-- Container for the messages thread list content and layout. -->
+        <select id="messages-thread-select" class="messages-thread-select" aria-label="Your conversations" disabled>
+          <option value="">Loading conversations...</option>
+        </select>
+        <div id="messages-thread-list" class="messages-thread-list">
+          <article class="employer-item">
+            <strong>Loading messages...</strong>
+            <p>Please wait while your conversations are loaded.</p>
+          </article>
+        </div>
+      </aside>
+
+      <!-- Section for the employer card area of this page. -->
+      <section class="employer-card messages-panel">
+        <!-- Container for the employer section head content and layout. -->
+        <div class="employer-section-head">
+          <div>
+            <div class="employer-badge">Thread</div>
+            <h2 id="messages-thread-title">Select a conversation</h2>
+            <p id="messages-thread-subtitle">Open a thread from the left to read or send messages.</p>
+          </div>
+        </div>
+        <!-- Container for the messages thread body content and layout. -->
+        <div id="messages-thread-body" class="messages-thread-body">
+          <article class="employer-item">
+            <strong>No conversation selected</strong>
+            <p>Choose a thread from the inbox, or start from Applicants.</p>
+          </article>
+        </div>
+        <!-- Form where users enter and submit messages details. -->
+        <form id="messages-form" class="messages-form">
+          <label for="messages-input">Message</label>
+          <textarea id="messages-input" rows="4" placeholder="Type your message here..." disabled></textarea>
+          <!-- Container for the messages form actions content and layout. -->
+          <div class="messages-form-actions">
+            <button id="messages-send-btn" type="submit" class="btn-primary" disabled>Send Message</button>
+          </div>
+          <p id="messages-status" class="messages-status">Open a thread to start chatting.</p>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <!-- Inline script runs page-specific JavaScript behavior. -->
+  <script>
+    window.EASYEARN_BASE_PATH = '../../';
+    window.EASYEARN_HEADER_PATH = '../../partials/header-employer.html';
+  </script>
+  <!-- Loads translation support for multilingual users. -->
+  <script src="../../js/translate.js" defer></script>
+  <!-- Loads shared header and footer partials. -->
+  <script src="../../js/includes.js?v=20261002d" defer></script>
+  <!-- Loads the JavaScript file that controls this page: ../../js/messages-page.js?v=20260802b. -->
+  <script type="module" src="../../js/messages-page.js?v=20260802b"></script>
+</body>
+</html>
