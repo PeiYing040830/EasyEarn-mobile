@@ -1,6 +1,6 @@
 # EasyEarn Flutter
 
-Current Android mobile implementation of EasyEarn, using Flutter and a bundled WebView site. The existing Expo project at repository root is retained separately.
+Android mobile implementation of EasyEarn, using Flutter and a bundled WebView site. The unused Expo prototype has been removed.
 
 ## Run
 
