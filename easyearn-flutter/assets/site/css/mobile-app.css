@@ -1609,3 +1609,39 @@ body.flutter-public-page :is(.section-title,.page-hero-inner,.hero-inner,.cta-se
   body .jobseeker-shell .history-hero-panel > .jobseeker-header p { font-size: 14px !important; line-height: 1.5 !important; }
   body .messages-shell .messages-bubble [data-download-image] { width: auto !important; min-height: 36px; padding: 8px 12px; justify-self: start; }
 }
+
+/* Bound Chart.js responsive parents on Android to prevent resize growth loops. */
+@media (max-width: 768px) {
+  body .analytics-shell .admin-chart:not(.admin-pie-chart) {
+    height: 242px !important;
+    min-height: 242px !important;
+    max-height: 242px !important;
+    overflow: hidden;
+  }
+  body .analytics-shell .admin-chart:not(.admin-pie-chart) canvas {
+    height: 220px !important;
+    max-height: 220px !important;
+    width: 100% !important;
+  }
+  body .analytics-shell .admin-pie-wrap {
+    position: relative;
+    width: 180px; height: 180px; min-height: 180px; max-height: 180px;
+    justify-self: center;
+  }
+  body .analytics-shell .admin-pie-wrap canvas { width: 180px !important; height: 180px !important; }
+}
+
+/* Keep Analytics data rows readable without stretching the entire phone page. */
+@media (max-width: 768px) {
+  body .analytics-shell .admin-table-wrap { max-height: 480px; overflow: auto; }
+  body .analytics-shell .admin-data-table {
+    width: 900px !important; min-width: 900px !important; max-width: none !important;
+    table-layout: fixed;
+  }
+  body .analytics-shell .admin-data-table th:nth-child(1) { width: 100px; }
+  body .analytics-shell .admin-data-table th:nth-child(2) { width: 220px; }
+  body .analytics-shell .admin-data-table th:nth-child(3) { width: 130px; }
+  body .analytics-shell .admin-data-table th:nth-child(4) { width: 120px; }
+  body .analytics-shell .admin-data-table th:nth-child(5) { width: 330px; }
+  body .analytics-shell .admin-table-details { max-height: 120px; overflow: auto; }
+}
